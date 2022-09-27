@@ -1,6 +1,17 @@
 from database.database import *
 
 class Material(db.Model):
+    __tablename__ = "material"
+
+    id = db.Column(Integer, primary_key=True)
+    localizacao = Column(String(100), nullable=False)
+    qtd = db.Column(SmallInteger, nullable=False)
+    volume = Column(SmallInteger, nullable=False)
+    material = Column(String(100), nullable=False)
+    tamanho = Column(SmallInteger, nullable=False)
+    tipo_material = Column(ForeignKey('tipo_material.id'), nullable=False)
+    lugar = Column(String(100), nullable=False)
+
     def __init__(self, id:int, localizacao:str, qtd:int, volume:float, material:str, tamanho:float, tipo_material:object, lugar:str):
         self.id = id
         self.localizacao = localizacao

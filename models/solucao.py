@@ -1,6 +1,16 @@
 from database.database import *
 
 class Solucao(db.Model):
+    __tablename__ = "solucao"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    nome = Column(String(100), nullable=False)
+    autor = Column(String(100), nullable=False)
+    formula_quimica = Column(ForeignKey('formula_quimica.formula'), nullable=False)
+    estado_materia = Column(Enum, nullable=False)
+    densidade = Column(Numeric, nullable=False)
+    concentracao = Column(Numeric, nullable=False)
+
     def __init__(self, id:int, nome:str, autor:str, formula_quimica:object, estado_materia:str, densidade:float, concentracao:float, reagentes:list):
         self.id = id
         self.nome = nome

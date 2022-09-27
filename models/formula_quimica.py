@@ -1,7 +1,9 @@
 from database.database import *
 
 class FormulaQuimica(db.Model):
-    formula = Column(String(50), primary_key=True)
+    __tablename__ = "formula_quimica"
+
+    formula = Column(String(30), primary_key=True)
 
     def __init__(self, formula:str):
         self.formula = formula

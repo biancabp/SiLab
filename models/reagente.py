@@ -1,6 +1,14 @@
 from database.database import *
 
 class Reagente(db.Model):
+    __tablename__ = "reagente"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    nome = Column(String(50), nullable=False)
+    estado_materia = Column(Enum, nullable=False)
+    densidade = Column(Numeric, nullable=False)
+    formula_quimica = Column(ForeignKey('formula_quimica.formula'), nullable=False)
+
     def __init__(self, id:int, nome:str, estado_materia:str, densidade:float, formula_quimica:object):
         self.id = id
         self.nome = nome

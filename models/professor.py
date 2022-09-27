@@ -1,7 +1,13 @@
 from usuario import Usuario
-from database.database import db
+from database.database import db, Column, ForeignKey
 
 class Professor(Usuario):
+    matricula = Column(ForeignKey("usuario.matricula"), primary_key=True)
+
+    def __init__(self, matricula, nome):
+        super(Professor, self).__init__(matricula, nome)
+        
+
     def cadastrar(self):
         db.session.add(self)
         db.session.commit()

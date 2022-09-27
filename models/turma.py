@@ -1,9 +1,11 @@
 from database.database import *
 
 class Turma(db.Model):
+    __tablename__ = "turma"
+    
     cod = Column(String(10), primary_key=True, autoincrement=False)
-    ano = Column(Integer)
-    turno = Column(String()) # pesquisar pelo tipo ENUM
+    ano = Column(SmallInteger)
+    turno = Column(String(Enum)) 
     curso = Column(String(50))
 
     def __init__(self, cod:str, ano:int, turno:str, curso:str):
