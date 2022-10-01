@@ -1,12 +1,12 @@
-from database.database import *
+from models.database.database import db, Column, String, SmallInteger, Enum, ForeignKey
 
 class Turma(db.Model):
     __tablename__ = "turma"
-    
-    cod = Column(String(10), primary_key=True, autoincrement=False)
+
+    cod = Column(String(10), primary_key=True)
     ano = Column(SmallInteger)
-    turno = Column(String(Enum)) 
-    curso = Column(String(50))
+    turno = Column(Enum) 
+    curso = Column(ForeignKey("curso.nome_curso"))
 
     def __init__(self, cod:str, ano:int, turno:str, curso:str):
         self.cod = cod

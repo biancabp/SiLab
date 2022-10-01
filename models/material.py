@@ -1,4 +1,4 @@
-from database.database import *
+from models.database.database import db, Column, String, Integer, SmallInteger, ForeignKey
 
 class Material(db.Model):
     __tablename__ = "material"

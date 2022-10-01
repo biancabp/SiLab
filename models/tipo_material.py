@@ -1,4 +1,4 @@
-from database.database import *
+from models.database.database import db, Column, String, Integer
 
 class TipoMaterial:
     __tablename__ = 'tipo_material'

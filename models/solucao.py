@@ -1,4 +1,4 @@
-from database.database import *
+from models.database.database import db, Column, String, Integer, Numeric, Enum, ForeignKey
 
 class Solucao(db.Model):
     __tablename__ = "solucao"

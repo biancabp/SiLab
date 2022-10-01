@@ -1,9 +1,9 @@
-from database.database import * 
+from models.database.database import db, Column, Integer, Numeric, ForeignKey
 
 class Frasco(db.Model):
     __tablename__ = "frasco"
 
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(Integer, primary_key=True)
     volume = Column(Numeric, nullable=False)
     reagente = Column(ForeignKey('reagente.id'), nullable=False)
 
