@@ -1,11 +1,13 @@
-from models.database.database import db, Column, Integer, Numeric, ForeignKey
+from models.database.database import db, Column, Integer, Numeric, ForeignKey, Date
 
 class Frasco(db.Model):
     __tablename__ = "frasco"
 
     id = db.Column(Integer, primary_key=True)
     volume = Column(Numeric, nullable=False)
-    reagente = Column(ForeignKey('reagente.id'), nullable=False)
+    reagente = Column(ForeignKey('reagente.id'))
+    data_validade_reagente = Column(Date)
+    massa_reagente = Column(Numeric)
 
     def __init__(self, id:int, volume:float, reagente: object):
         self.id = id

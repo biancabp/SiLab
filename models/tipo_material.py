@@ -1,6 +1,6 @@
 from models.database.database import db, Column, String, Integer
 
-class TipoMaterial:
+class TipoMaterial(db.Model):
     __tablename__ = 'tipo_material'
 
     id = Column(Integer, primary_key=True)
@@ -11,14 +11,17 @@ class TipoMaterial:
         self.nome = nome
 
     def cadastrar(self):
-        pass
+        db.session.add(self)
+        db.session.commit()
     
     @staticmethod
     def listar():
-        pass
+        lista_tipos_material = TipoMaterial.query.all()
+        return lista_tipos_material
 
     def editar(self):
         pass
 
     def deletar(self):
-        pass
+        db.session.delete(self)
+        db.session.commit()
