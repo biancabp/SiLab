@@ -1,6 +1,6 @@
 /*===== GOOGLE FONTS =====*/
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap");
-
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@200;300;400;500;600;800&display=swap');
 /*===== VARIABLES CSS =====*/
 :root{
     --header-height: 3rem;
@@ -34,8 +34,53 @@ body{
 }
 
 a{
-    text-decoration: none;
+    text-decoration: none !important;
 }
+
+table.blueTable {
+    font-family: 'Work Sans', sans-serif;
+    border: 1px solid #C2F7FF;
+    background-color: #FFFFFF;
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+  }
+  table.blueTable td, table.blueTable th {
+    padding: 3px 4px;
+  }
+  table.blueTable tbody td {
+    font-size: 16px;
+    color: #1F2024;
+  }
+  table.blueTable tr:nth-child(even) {
+    background: #F4F6FD;
+  }
+  table.blueTable thead {
+    background: #C2F7FF;
+  }
+  table.blueTable thead th {
+    font-size: 16px;
+    font-weight: bold;
+    color: #1B47A6;
+    border-left: 2px solid #D0E4F5;
+  }
+  table.blueTable thead th:first-child {
+    border-left: none;
+  }
+  
+  table.blueTable tfoot td {
+    font-size: 14px;
+  }
+  table.blueTable tfoot .links {
+    text-align: right;
+  }
+  table.blueTable tfoot .links a{
+    display: inline-block;
+    background: #1C6EA4;
+    color: #FFFFFF;
+    padding: 2px 8px;
+    border-radius: 5px;
+  }
 
 /*===== HEADER =====*/
 .header{
