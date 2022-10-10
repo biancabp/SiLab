@@ -9,8 +9,8 @@ class Professor(Usuario):
     __tablename__ = "professor"
     matricula = Column(ForeignKey("usuario.matricula"), primary_key=True)
 
-    def __init__(self, matricula:int, nome:str, senha:str):
-        super().__init__(matricula, nome, senha)
+    def __init__(self, matricula:int, nome:str, email:str, senha:str):
+        super().__init__(matricula, nome, email, senha)
 
     @staticmethod
     def listar() -> list:

@@ -15,14 +15,16 @@ class Usuario(db.Model):
 
     matricula = Column(Integer, primary_key=True, autoincrement=False)
     nome = Column(String(50), nullable=False)
+    email = Column(String(300))
     senha = Column(String(64), nullable=False)
 
-    def __init__(self, matricula:int, nome:str, senha:str):
+    def __init__(self, matricula:int, nome:str, email:str, senha:str):
         if(str(type(self)) == "<class '"+__name__+".Usuario'>"):
             raise AbstractClassError("'Usuario' é uma classe abstrata e não pode ser instânciada")
         
         self.matricula = matricula
         self.nome = nome
+        self.email = email
         self.senha = senha    
 
     def cadastrar(self):

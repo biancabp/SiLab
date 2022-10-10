@@ -1,7 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'nav-bar.html' %}
 
-<head>
+{% block head %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -9,114 +8,47 @@
     <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
 
     <!-- ===== CSS ===== -->
-    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/styles.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 
     <title>Sidebar menu responsive</title>
-</head>
+{% endblock %}
 
-<body id="body-pd">
-    <header class="header" id="header">
-        <div class="header__toggle">
-            <i class='bx bx-menu' id="header-toggle"></i>
-        </div>
-        <div class="perfis">
-            <div class="topnav">
-            </div>
-        </div>
-        </div>
-    </header>
-
-    <div class="l-navbar" id="nav-bar">
-        <nav class="nav">
-            <div>
-                <a href="#" class="nav__logo d-flex">
-                    <img src="/assets/img/Logo.svg" alt="">
-                    <span class="nav__logo-name">Si<span class="color-logo">Lab</span></span>
-                </a>
-
-                <div class="nav__list">
-                    <a href="#" class="nav__link">
-                        <i class='bx bxs-dashboard' ></i>
-                        <span class="nav__name">Dashboard</span>
-                    </a>
-
-                    <a href="#" class="nav__link">
-                        <i class='bx bxs-box'></i>
-                        <span class="nav__name">Materiais</span>
-                    </a>
-
-                    <a href="#" class="nav__link">
-                        <i class='bx bxs-vial'></i>
-                        <span class="nav__name">Reagentes</span>
-                    </a>
-
-                    <a href="#" class="nav__link">
-                        <i class='bx bxs-bong'></i>
-                        <span class="nav__name">Soluções</span>
-                    </a>
-
-                    <a href="#aulas.html" class="nav__link">
-                        <i class='bx bxs-graduation'></i>
-                        <span class="nav__name">Aulas</span>
-                    </a>
-
-                    <a href="#" class="nav__link">
-                        <i class='bx bxs-notepad'></i>
-                        <span class="nav__name">Roteiro</span>
-                    </a>
-
-                    <a href="#" class="nav__link">
-                        <i class='bx bxs-group'></i>
-                        <span class="nav__name">Turmas</span>
-                    </a>
-
-                    <a href="#" class="nav__link">
-                        <i class='bx bxs-cog' ></i>
-                        <span class="nav__name">Configurações</span>
-                    </a>
-                </div>
-            </div>
-
-            <a href="#" class="nav__link">
-                <i class='bx bx-log-out nav__icon'></i>
-                <span class="nav__name">Sair</span>
-            </a>
-        </nav>
-    </div>
-
+{% block body %}<body id="body-pd">{% endblock %}
+    
+{% block content %}
 
     <div class="container-fluid  text-center">
         <div class="row main">
-            <div class="col-md-4">
-                    <h1 class="pb-awe-40 h1-text">Aulas</h1>
-                <h3 class="h3-text">Registradas</h3>
+            <div class="col-md-2 offset-md-2">
+                <h1 class="h1-text-roteiro">Roteiros</h1>
+                <h3 class="h3-text">Registrados</h3>
             </div>
-            <div class="col-md-3 offset-md-5 main btn-space">
-                <button class="btn btn-primary" type="submit">Cadastrar aula</button>
+            <div class="col-md-5 offset-md-3 main btn-space">
+                <button class="btn btn-primary" type="submit">Cadastrar roteiro</button>
             </div>
         </div>
 
         <div class="row">
             <div class="container">
-                <div class="col-md-10 offset-md-1">
+                <div class="col-md-8 offset-md-2">
                     <table class="blueTable">
                         <thead>
                             <tr>
+                                <th>Aula</th>
                                 <th>Professor</th>
                                 <th>Turma</th>
-                                <th>Data</th>
-                                <th>Descrição</th>
+                                <th>Possível</th>
                                 <th>Ações</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td>Lorem ipsum</td>
+                                <td>Melissa Bianca</td>
                                 <td>0.0000.0M</td>
-                                <td>00/00/0000</td>
-                                <td>Lorem ipsum dolor sit amet ali.. </td>
+                                <td class="sim">Sim</td>
                                 <td class="icons">
                                     <i class='bx bx-search'></i>
                                     <i class='bx bx-edit-alt'></i>
@@ -125,9 +57,9 @@
                             </tr>
                             <tr>
                                 <td>Lorem ipsum</td>
+                                <td>Melissa Bianca</td>
                                 <td>0.0000.0M</td>
-                                <td>00/00/0000</td>
-                                <td>Lorem ipsum dolor sit amet ali.. </td>
+                                <td class="sim">Sim</td>
                                 <td class="icons">
                                     <i class='bx bx-search'></i>
                                     <i class='bx bx-edit-alt'></i>
@@ -136,9 +68,9 @@
                             </tr>
                             <tr>
                                 <td>Lorem ipsum</td>
+                                <td>Melissa Bianca</td>
                                 <td>0.0000.0M</td>
-                                <td>00/00/0000</td>
-                                <td>Lorem ipsum dolor sit amet ali.. </td>
+                                <td class="sim">Sim</td>
                                 <td class="icons">
                                     <i class='bx bx-search'></i>
                                     <i class='bx bx-edit-alt'></i>
@@ -147,9 +79,9 @@
                             </tr>
                             <tr>
                                 <td>Lorem ipsum</td>
+                                <td>Melissa Bianca</td>
                                 <td>0.0000.0M</td>
-                                <td>00/00/0000</td>
-                                <td>Lorem ipsum dolor sit amet ali.. </td>
+                                <td class="nao">Não</td>
                                 <td class="icons">
                                     <i class='bx bx-search'></i>
                                     <i class='bx bx-edit-alt'></i>
@@ -158,9 +90,9 @@
                             </tr>
                             <tr>
                                 <td>Lorem ipsum</td>
+                                <td>Melissa Bianca</td>
                                 <td>0.0000.0M</td>
-                                <td>00/00/0000</td>
-                                <td>Lorem ipsum dolor sit amet ali.. </td>
+                                <td class="sim">Sim</td>
                                 <td class="icons">
                                     <i class='bx bx-search'></i>
                                     <i class='bx bx-edit-alt'></i>
@@ -169,9 +101,9 @@
                             </tr>
                             <tr>
                                 <td>Lorem ipsum</td>
+                                <td>Melissa Bianca</td>
                                 <td>0.0000.0M</td>
-                                <td>00/00/0000</td>
-                                <td>Lorem ipsum dolor sit amet ali.. </td>
+                                <td class="nao">Não</td>
                                 <td class="icons">
                                     <i class='bx bx-search'></i>
                                     <i class='bx bx-edit-alt'></i>
@@ -180,9 +112,9 @@
                             </tr>
                             <tr>
                                 <td>Lorem ipsum</td>
+                                <td>Melissa Bianca</td>
                                 <td>0.0000.0M</td>
-                                <td>00/00/0000</td>
-                                <td>Lorem ipsum dolor sit amet ali.. </td>
+                                <td class="nao">Não</td>
                                 <td class="icons">
                                     <i class='bx bx-search'></i>
                                     <i class='bx bx-edit-alt'></i>
@@ -191,20 +123,9 @@
                             </tr>
                             <tr>
                                 <td>Lorem ipsum</td>
+                                <td>Melissa Bianca</td>
                                 <td>0.0000.0M</td>
-                                <td>00/00/0000</td>
-                                <td>Lorem ipsum dolor sit amet ali.. </td>
-                                <td class="icons">
-                                    <i class='bx bx-search'></i>
-                                    <i class='bx bx-edit-alt'></i>
-                                    <i class='bx bx-trash-alt'></i>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Lorem ipsum</td>
-                                <td>0.0000.0M</td>
-                                <td>00/00/0000</td>
-                                <td>Lorem ipsum dolor sit amet ali.. </td>
+                                <td class="sim">Sim</td>
                                 <td class="icons">
                                     <i class='bx bx-search'></i>
                                     <i class='bx bx-edit-alt'></i>
@@ -219,11 +140,9 @@
 
         </div>
         <!--===== MAIN JS =====-->
-        <script src="assets/js/main.js"></script>
+        <script src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
             crossorigin="anonymous"></script>
 
-</body>
-
-</html>
+{% endblock %}
