@@ -34,9 +34,10 @@ class Usuario(db.Model):
     def listar(self):
         pass
     
-    def editar(self, nova_matricula:int, novo_nome:str, nova_senha:str):
+    def editar(self, nova_matricula:int, novo_nome:str, novo_email:str, nova_senha:str):
         self.matricula = nova_matricula
         self.nome = novo_nome
+        self.email = novo_email
         self.senha = nova_senha
         db.session.add(self)
         db.session.commit()

@@ -19,8 +19,10 @@ class TipoMaterial(db.Model):
         lista_tipos_material = TipoMaterial.query.all()
         return lista_tipos_material
 
-    def editar(self):
-        pass
+    def editar(self, novo_nome:str):
+        self.nome = novo_nome
+        db.session.add(self)
+        db.session.commit()
 
     def deletar(self):
         db.session.delete(self)

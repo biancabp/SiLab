@@ -25,8 +25,14 @@ class Reagente(db.Model):
         lista_reagentes = Reagente.query.all()
         return lista_reagentes
 
-    def editar(self):
-        pass
+    def editar(self, novo_id:int, novo_nome:str, novo_estado_materia:str, nova_densidade:float, nova_formula_quimica:object):
+        self.id = novo_id
+        self.nome = novo_nome
+        self.estado_materia = novo_estado_materia
+        self.densidade = nova_densidade
+        self.formula_quimica = nova_formula_quimica.formula
+        db.session.add(self)
+        db.session.commit()
 
     def deletar(self):
         db.session.delete(self)

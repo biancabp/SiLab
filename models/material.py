@@ -31,8 +31,17 @@ class Material(db.Model):
         lista_materiais = Material.query.all()
         return lista_materiais
 
-    def editar(self):
-        pass
+    def editar(self, novo_id:int, nova_localizacao:str, nova_qtd:int, novo_volume:float, novo_material:str, novo_tamanho:float, novo_tipo_material:object, novo_lugar:str):
+        self.id = novo_id
+        self.localizacao = nova_localizacao
+        self.qtd = nova_qtd
+        self.volume = novo_volume
+        self.material = novo_material
+        self.tamanho = novo_tamanho
+        self.tipo_material = novo_tipo_material.nome
+        self.lugar = novo_lugar
+        db.session.add(self)
+        db.session.commit()
 
     def deletar(self):
         db.session.delete(self)

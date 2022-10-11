@@ -32,7 +32,16 @@ class Solucao(db.Model):
         return lista_solucoes
 
     def editar(self, novo_id:int, novo_nome:str, novo_autor:str, nova_formula_quimica:object, novo_estado_materia:str, nova_densidade:float, nova_concentracao:float, novos_reagentes:list):
-        pass
+        self.id = novo_id
+        self.nome = novo_nome
+        self.autor = novo_autor
+        self.formula_quimica = nova_formula_quimica
+        self.estado_materia = novo_estado_materia
+        self.densidade = nova_densidade
+        self.concentracao = nova_concentracao
+        self.reagentes = novos_reagentes
+        db.session.add(self)
+        db.session.commit()
 
     def deletar(self):
         db.session.delete(self)

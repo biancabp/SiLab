@@ -38,11 +38,17 @@ class Aula(db.Model):
         db.session.commit()
 
     @staticmethod
-    def listar() -> list:
+    def listar(tipo_filtro:str, valor_filtro:str) -> list:
         """
-        Realiza uma consulta no banco de dados que retorna todas as aulas registradas.
+        Realiza uma consulta no banco de dados que retorna as aulas registradas com base em um filtro.
+        Caso o nada seja passado para o parâmetro 'tipo_filtro' a função retorna uma lista com todas as aulas.
         """
-        lista_aulas = Aula.query.all()
+        if(tipo_filtro == "turma"):
+            lista_aulas = Aula.query.filter_by(turma=valor_filtro).all()
+        elif(tipo_filtro == "professor"):
+            lista_aulas = Aula.query.filter_by(professor=valor_filtro).all()
+        else:
+            lista_aulas = Aula.query.all()
         return lista_aulas
 
     def editar(self, nova_turma:object, nova_data:object, nova_descricao:str, novo_professor:object):
