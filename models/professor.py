@@ -3,7 +3,7 @@ from models.usuario import Usuario
 
 class Professor(Usuario):
     """
-    Representa a entidade 'professor' no banco de dados.
+    Representa a entidade ``professor`` no banco de dados. 
     """
 
     __tablename__ = "professor"

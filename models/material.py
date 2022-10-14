@@ -1,6 +1,9 @@
 from models.database.database import db, Column, String, Integer, SmallInteger, ForeignKey
 
 class Material(db.Model):
+    """
+    Representa a entidade ``material`` no banco de dados.
+    """
     __tablename__ = "material"
 
     id = db.Column(Integer, primary_key=True)

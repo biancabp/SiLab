@@ -2,7 +2,7 @@ from models.database.database import db, Column, String, Integer, Date, ForeignK
 
 class Aula(db.Model):
     """
-    Classe Aluno: Representa uma instância de aula no banco de dados. 
+    Representa a entidade ``aula`` no banco de dados. 
     """
     __tablename__ = "aula"
     
@@ -14,15 +14,15 @@ class Aula(db.Model):
 
     def __init__(self, id:int, turma:object, data:object, descricao:str, professor:object):
         """
-           id: Atributo numérico identificador 
+           ``id``: Atributo numérico identificador 
             
-           turma: Objeto da classe 'Turma' que está relacionado com a aula 
+           ``turma``: Objeto da classe 'Turma' que está relacionado com a aula 
 
-           data: Data em que a aula foi registrada
+           ``data``: Data em que a aula foi registrada
            
-           descricao: Um texto que descreve as atividades realizadas na aula 
+           ``descricao``: Um texto que descreve as atividades realizadas na aula 
 
-           professor: Objeto da classe 'Professor' que representa o professor que ministrou a aula.
+           ``professor``: Objeto da classe 'Professor' que representa o professor que ministrou a aula.
         """
         self.id = id
         self.turma = turma.cod
@@ -41,7 +41,7 @@ class Aula(db.Model):
     def listar(tipo_filtro:str, valor_filtro:str) -> list:
         """
         Realiza uma consulta no banco de dados que retorna as aulas registradas com base em um filtro.
-        Caso o nada seja passado para o parâmetro 'tipo_filtro' a função retorna uma lista com todas as aulas.
+        Caso o nada seja passado para o parâmetro ``tipo_filtro`` a função retorna uma lista com todas as aulas.
         """
         if(tipo_filtro == "turma"):
             lista_aulas = Aula.query.filter_by(turma=valor_filtro).all()

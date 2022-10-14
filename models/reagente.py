@@ -1,6 +1,9 @@
 from models.database.database import db, Column, String, Integer, Numeric, Enum, ForeignKey
 
 class Reagente(db.Model):
+    """
+    Representa a entidade ``regaente`` no banco de dados.
+    """
     __tablename__ = "reagente"
 
     id = Column(Integer, primary_key=True, autoincrement=True)
@@ -21,8 +24,13 @@ class Reagente(db.Model):
         db.session.commit()
 
     @staticmethod
-    def listar() -> list:
-        lista_reagentes = Reagente.query.all()
+    def listar(tipo_filtro:str, valor_filtro:str) -> list:
+        if(tipo_filtro == "estado-materia"):
+            lista_reagentes = Reagente.query.filter_by(estado_materia=valor_filtro).all()
+        elif(tipo_filtro == "nome"):
+            lista_reagentes = Reagente.query.filter(Reagente.nome.startswith(valor_filtro)).all()
+        else:
+            lista_reagentes = Reagente.query.all()
         return lista_reagentes
 
     def editar(self, novo_id:int, novo_nome:str, novo_estado_materia:str, nova_densidade:float, nova_formula_quimica:object):

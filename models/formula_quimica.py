@@ -2,7 +2,7 @@ from models.database.database import db, Column, String
 
 class FormulaQuimica(db.Model):
     """
-    Representa um registro da tabela 'formula_quimica' no banco de dados.
+    Representa um registro da entidade ``formula_quimica`` no banco de dados.
     """
     __tablename__ = "formula_quimica"
 
@@ -10,7 +10,7 @@ class FormulaQuimica(db.Model):
 
     def __init__(self, formula:str):
         """
-        formula: Uma string que representa uma fórmula química, ex: H2O.
+        ``formula``: Uma string que representa uma fórmula química, ex: H2O.
         """
         self.formula = formula
     
