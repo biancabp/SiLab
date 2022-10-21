@@ -1,4 +1,5 @@
 from models.database.database import db, Column, String, Integer, Date, ForeignKey
+from models.professor import Professor
 
 class Aula(db.Model):
     """
@@ -8,25 +9,25 @@ class Aula(db.Model):
     
     id = Column(Integer, primary_key=True, autoincrement=True)
     turma = Column(ForeignKey("turma.cod"))
-    data = Column(Date)
+    data_aula = Column(Date)
     descricao = Column(String(500))
     professor = Column(ForeignKey("professor.matricula"))
 
     def __init__(self, id:int, turma:object, data:object, descricao:str, professor:object):
         """
-           ``id``: Atributo numérico identificador 
+           ``id``: int | Atributo numérico identificador 
             
-           ``turma``: Objeto da classe 'Turma' que está relacionado com a aula 
+           ``turma``: object | Objeto da classe 'Turma' que está relacionado com a aula 
 
-           ``data``: Data em que a aula foi registrada
+           ``data``: object | Data em que a aula foi registrada
            
-           ``descricao``: Um texto que descreve as atividades realizadas na aula 
+           ``descricao``: object | Um texto que descreve as atividades realizadas na aula 
 
-           ``professor``: Objeto da classe 'Professor' que representa o professor que ministrou a aula.
+           ``professor``: object | Objeto da classe 'Professor' que representa o professor que ministrou a aula.
         """
         self.id = id
         self.turma = turma.cod
-        self.data = str(data)
+        self.data_aula = str(data)
         self.descricao = descricao
         self.professor = professor.matricula
     
@@ -44,11 +45,11 @@ class Aula(db.Model):
         Caso o nada seja passado para o parâmetro ``tipo_filtro`` a função retorna uma lista com todas as aulas.
         """
         if(tipo_filtro == "turma"):
-            lista_aulas = Aula.query.filter_by(turma=valor_filtro).all()
+            lista_aulas = db.session.query(Aula, Professor.nome).join(Professor, Aula.professor == Professor.matricula).filter_by(turma=valor_filtro).all()
         elif(tipo_filtro == "professor"):
-            lista_aulas = Aula.query.filter_by(professor=valor_filtro).all()
+            lista_aulas = db.session.query(Aula, Professor.nome).join(Professor, Aula.professor == Professor.matricula).filter_by(professor=valor_filtro).all()
         else:
-            lista_aulas = Aula.query.all()
+            lista_aulas = db.session.query(Aula, Professor.nome).join(Professor, Aula.professor == Professor.matricula).all()
         return lista_aulas
 
     def editar(self, nova_turma:object, nova_data:object, nova_descricao:str, novo_professor:object):
@@ -56,7 +57,7 @@ class Aula(db.Model):
         Edita os atributos da aula no banco de dados.
         """
         self.turma = nova_turma.cod
-        self.data = str(nova_data)
+        self.data_aula = str(nova_data)
         self.descricao = nova_descricao
         self.professor = novo_professor.matricula
         db.session.add(self)

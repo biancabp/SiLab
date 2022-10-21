@@ -1,4 +1,5 @@
 from models.database.database import db, Column, Integer, Numeric, ForeignKey, Date
+from models.many_to_many_relationships.solucao_usa_reagente import SolucaoUsaReagente
 from models.reagente import Reagente
 
 class Frasco(db.Model):
@@ -106,3 +107,24 @@ class Frasco(db.Model):
                 return False
         
         return True
+    
+    @staticmethod
+    def debitar_massa_reagente_frasco(db:object, solucao:object, frascos:tuple[object, float]):
+        """
+        Diminui a massa de reagente dos frascos usados para formar uma solução.
+
+        ``db``: object | variável passada por referência que permite construir transações no banco de dados.
+        ``solucao``: object | representa a solução formada pelos reagentes.
+        ``frascos``: tuple | representa os frascos de reagentes usados para formar a solução. 
+        """
+        for frasco_reagente, massa_reagente in frascos:
+            if(frasco_reagente.massa_reagente < massa_reagente):
+                db.session.rollback()
+                raise ValueError("Os frascos devem conter massa de reagentes suficiente")
+            
+            frasco_reagente.massa_reagente -= massa_reagente
+            db.session.add(frasco_reagente)
+
+            reagente = Reagente.query.filter(Reagente.id == frasco_reagente.reagente).first()                
+            relacionar_solucao_reagente = SolucaoUsaReagente(solucao, reagente, massa_reagente)
+            relacionar_solucao_reagente.relacionar(db)

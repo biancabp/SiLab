@@ -38,54 +38,16 @@
                             </tr>
                         </thead>
                         <tbody>
+                            {% for turma in turmas %}
                             <tr>
-                                <td>0.0000.0M</td>
-                                <td>00</td>
+                                <td>{{ turma.cod }}</td>
+                                <td>{{ turma.qtd_alunos }}</td>
                                 <td class="icons">
                                     <i class='bx bx-edit-alt'></i>
                                     <i class='bx bx-trash-alt'></i>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>0.0000.0M</td>
-                                <td>00</td>
-                                <td class="icons">
-                                    <i class='bx bx-edit-alt'></i>
-                                    <i class='bx bx-trash-alt'></i>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>0.0000.0M</td>
-                                <td>00</td>
-                                <td class="icons">
-                                    <i class='bx bx-edit-alt'></i>
-                                    <i class='bx bx-trash-alt'></i>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>0.0000.0M</td>
-                                <td>00</td>
-                                <td class="icons">
-                                    <i class='bx bx-edit-alt'></i>
-                                    <i class='bx bx-trash-alt'></i>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>0.0000.0M</td>
-                                <td>00</td>
-                                <td class="icons">
-                                    <i class='bx bx-edit-alt'></i>
-                                    <i class='bx bx-trash-alt'></i>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>0.0000.0M</td>
-                                <td>00</td>
-                                <td class="icons">
-                                    <i class='bx bx-edit-alt'></i>
-                                    <i class='bx bx-trash-alt'></i>
-                                </td>
-                            </tr>
+                            {% endfor %}
                         </tbody>
                     </table>
 

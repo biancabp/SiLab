@@ -43,105 +43,19 @@
                             </tr>
                         </thead>
                         <tbody>
+                            {% for aula in aulas %}
                             <tr>
-                                <td>Lorem ipsum</td>
-                                <td>0.0000.0M</td>
-                                <td>00/00/0000</td>
-                                <td>Lorem ipsum dolor sit amet ali.. </td>
+                                <td>{{ aula[1] }}</td>
+                                <td>{{ aula[0].turma }}</td>
+                                <td>{{ aula[0].dataa }}</td>
+                                <td>{{ aula[0].descricao }}</td>
                                 <td class="icons">
                                     <i class='bx bx-search'></i>
                                     <i class='bx bx-edit-alt'></i>
                                     <i class='bx bx-trash-alt'></i>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>Lorem ipsum</td>
-                                <td>0.0000.0M</td>
-                                <td>00/00/0000</td>
-                                <td>Lorem ipsum dolor sit amet ali.. </td>
-                                <td class="icons">
-                                    <i class='bx bx-search'></i>
-                                    <i class='bx bx-edit-alt'></i>
-                                    <i class='bx bx-trash-alt'></i>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Lorem ipsum</td>
-                                <td>0.0000.0M</td>
-                                <td>00/00/0000</td>
-                                <td>Lorem ipsum dolor sit amet ali.. </td>
-                                <td class="icons">
-                                    <i class='bx bx-search'></i>
-                                    <i class='bx bx-edit-alt'></i>
-                                    <i class='bx bx-trash-alt'></i>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Lorem ipsum</td>
-                                <td>0.0000.0M</td>
-                                <td>00/00/0000</td>
-                                <td>Lorem ipsum dolor sit amet ali.. </td>
-                                <td class="icons">
-                                    <i class='bx bx-search'></i>
-                                    <i class='bx bx-edit-alt'></i>
-                                    <i class='bx bx-trash-alt'></i>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Lorem ipsum</td>
-                                <td>0.0000.0M</td>
-                                <td>00/00/0000</td>
-                                <td>Lorem ipsum dolor sit amet ali.. </td>
-                                <td class="icons">
-                                    <i class='bx bx-search'></i>
-                                    <i class='bx bx-edit-alt'></i>
-                                    <i class='bx bx-trash-alt'></i>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Lorem ipsum</td>
-                                <td>0.0000.0M</td>
-                                <td>00/00/0000</td>
-                                <td>Lorem ipsum dolor sit amet ali.. </td>
-                                <td class="icons">
-                                    <i class='bx bx-search'></i>
-                                    <i class='bx bx-edit-alt'></i>
-                                    <i class='bx bx-trash-alt'></i>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Lorem ipsum</td>
-                                <td>0.0000.0M</td>
-                                <td>00/00/0000</td>
-                                <td>Lorem ipsum dolor sit amet ali.. </td>
-                                <td class="icons">
-                                    <i class='bx bx-search'></i>
-                                    <i class='bx bx-edit-alt'></i>
-                                    <i class='bx bx-trash-alt'></i>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Lorem ipsum</td>
-                                <td>0.0000.0M</td>
-                                <td>00/00/0000</td>
-                                <td>Lorem ipsum dolor sit amet ali.. </td>
-                                <td class="icons">
-                                    <i class='bx bx-search'></i>
-                                    <i class='bx bx-edit-alt'></i>
-                                    <i class='bx bx-trash-alt'></i>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Lorem ipsum</td>
-                                <td>0.0000.0M</td>
-                                <td>00/00/0000</td>
-                                <td>Lorem ipsum dolor sit amet ali.. </td>
-                                <td class="icons">
-                                    <i class='bx bx-search'></i>
-                                    <i class='bx bx-edit-alt'></i>
-                                    <i class='bx bx-trash-alt'></i>
-                                </td>
-                            </tr>
+                            {% endfor %}
                         </tbody>
                     </table>
 
