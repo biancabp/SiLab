@@ -1,10 +1,14 @@
 from models.database.database import db, Column, String, Integer, Numeric, Enum, ForeignKey
 from models.aula import Aula
 from models.frasco import Frasco
+from models.many_to_many_relationships.solucao_usa_reagente import SolucaoUsaReagente
 from sqlalchemy.exc import IntegrityError
 
 class Solucao(db.Model):
-    """Representa a entidade ``solução`` no banco de dados."""
+    """
+    Representa a entidade ``solução`` no banco de dados.
+    """
+
     __tablename__ = "solucao"
 
     id = Column(Integer, primary_key=True, autoincrement=True)
@@ -88,25 +92,41 @@ class Solucao(db.Model):
         
         return lista_solucoes
 
-    def editar(self, novo_id:int, novo_nome:str, novo_autor:str, nova_formula_quimica:object, novo_estado_materia:str, nova_massa:float, nova_densidade:float, novos_reagentes:list):
-        self.id = novo_id
+    def editar(self, novo_id:int, novo_nome:str, novo_autor:str, nova_aula:object, nova_formula_quimica:object, novo_estado_materia:str, nova_massa:float, nova_densidade:float, novos_reagentes:list):
         self.nome = novo_nome
         self.autor = novo_autor
+        self.aula = nova_aula.id
         self.formula_quimica = nova_formula_quimica
         self.estado_materia = novo_estado_materia
         self.massa = nova_massa
         self.densidade = nova_densidade
         self.reagentes = novos_reagentes
-        db.session.add(self)
-        db.session.commit()
+
+        try:
+            db.session.query(SolucaoUsaReagente).filter(SolucaoUsaReagente.solucao == self.id).delete()
+            self.id = novo_id
+            db.session.add(self)
+
+            for reagente, massa in self.novos_reagentes:
+                SolucaoUsaReagente(self, reagente, massa).relacionar(db)
+            
+            db.session.commit()
+
+        except IntegrityError:
+            db.session.rollback()
 
     def deletar(self):
         """
         Remove o registro da solução e de seus relacionamentos do banco de dados.
         """
-        db.session.delete(self)
-        db.session.commit()
-    
+        try:
+            db.session.query(SolucaoUsaReagente).filter(SolucaoUsaReagente.solucao == self.id).delete()
+            db.session.delete(self)
+            db.session.commit()
+        
+        except IntegrityError:
+            db.session.rollback()
+
     def __calcular_massa_total_solucao(self, frascos:tuple[object, float]):
         """
         Realiza o cálculo da massa total da solução somando a massa de todos os reagentes

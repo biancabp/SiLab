@@ -1,15 +1,16 @@
+from flask_login import UserMixin
 from models.database.database import db, Column, String, Integer
 from models.exceptions.exceptions import AbstractClassError
 
-class Usuario(db.Model):
+class Usuario(db.Model, UserMixin):
     """
-    Classe abstrata 'Usuario'
+    Classe abstrata ``Usuario``
 
-    Representa a entidade 'usuario' no banco de dados, ela é a classe base
-    para a especialização das entidades 'professor' e 'tutor', portanto esta classe
+    Representa a entidade ``usuario`` no banco de dados, ela é a classe base
+    para a especialização das entidades ``professor`` e ``tutor``, portanto esta classe
     não deve ser instânciada em nenhum momento durante a aplicação.
 
-    Caso tente instânciar esta classe uma exceção do tipo AbstractClassError será emitida.
+    Caso tente instânciar esta classe uma exceção do tipo ``AbstractClassError`` será emitida.
     """
     __tablename__ = "usuario"
 
@@ -45,3 +46,6 @@ class Usuario(db.Model):
     def deletar(self):
         db.session.delete(self)
         db.session.commit()
+    
+    def get_id(self):
+        return self.matricula

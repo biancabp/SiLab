@@ -39,14 +39,14 @@
                         </thead>
                         <tbody>
                             {% for turma in turmas %}
-                            <tr>
-                                <td>{{ turma.cod }}</td>
-                                <td>{{ turma.qtd_alunos }}</td>
-                                <td class="icons">
-                                    <i class='bx bx-edit-alt'></i>
-                                    <i class='bx bx-trash-alt'></i>
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td>{{ turma.cod }}</td>
+                                    <td>{{ turma.qtd_alunos }}</td>
+                                    <td class="icons">
+                                        <i class='bx bx-edit-alt'></i>
+                                        <i class='bx bx-trash-alt'></i>
+                                    </td>
+                                </tr>
                             {% endfor %}
                         </tbody>
                     </table>

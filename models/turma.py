@@ -8,7 +8,7 @@ class Turma(db.Model):
 
     cod = Column(String(10), primary_key=True)
     ano = Column(SmallInteger)
-    turno = Column(Enum) 
+    turno = Column(Enum('SÓLIDO', 'LÍQUIDO', 'GASOSO')) 
     curso = Column(ForeignKey("curso.nome_curso"))
     qtd_alunos = Column(SmallInteger)
 
@@ -27,13 +27,12 @@ class Turma(db.Model):
         db.session.commit()
 
     @staticmethod
-    def listar(tipo_filtro:str, valor_filtro:str) -> list:
+    def listar(tipo_filtro:str = None, valor_filtro:str = None) -> list:
         """
         Retorna uma lista das turmas registradas no banco de dados de acordo com o filtro e um valor.
 
         ``tipo_filtro``: uma string que determina por qual atributo a consulta deve ser filtrada,
-        as opções são: curso, turno, ano e cod. Caso este parâmetro seja passado com um valor diferente
-        dos especificados acima a função retorna uma lista com todos os professores registrados.
+        as opções são: curso, turno, ano e cod.
 
         ``valor_filtro``: uma string com o valor que será usado como argumento para realizar a busca.
         """
@@ -47,7 +46,7 @@ class Turma(db.Model):
             lista_turmas = Turma.query.filter_by(ano=valor_filtro).all()
         
         elif(tipo_filtro == "cod"):
-            lista_turmas = Turma.query.filter_by(cod=valor_filtro).all()
+            lista_turmas = Turma.query.get(valor_filtro)
 
         else:
             lista_turmas = Turma.query.all()

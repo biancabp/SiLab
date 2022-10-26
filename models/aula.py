@@ -39,7 +39,7 @@ class Aula(db.Model):
         db.session.commit()
 
     @staticmethod
-    def listar(tipo_filtro:str, valor_filtro:str) -> list:
+    def listar(tipo_filtro:str = None, valor_filtro:str = None) -> list:
         """
         Realiza uma consulta no banco de dados que retorna as aulas registradas com base em um filtro.
         Caso o nada seja passado para o parâmetro ``tipo_filtro`` a função retorna uma lista com todas as aulas.

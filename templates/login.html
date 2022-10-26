@@ -14,15 +14,15 @@
   <div class="containe"> 
     <div class="forms-container">
       <div class="signin-signup">
-        <form action="#" class="sign-in-form">
+        <form action="{{ url_for('usuario.autenticar_usuario') }}" method="POST" class="sign-in-form">
           <h2 class="title">Login</h2>
           <div class="input-field">
             <i class="fas fa-user"></i>
-            <input type="text" placeholder="Matricula" />
+            <input type="text" placeholder="Matricula" name="matricula"/>
           </div>
           <div class="input-field">
             <i class="fas fa-lock"></i>
-            <input type="password" placeholder="Senha" />
+            <input type="password" placeholder="Senha" name="senha"/>
           </div>
           <input type="submit" value="Acessar" class="btn solid" />
           
