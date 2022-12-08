@@ -26,3 +26,7 @@ def autenticar_usuario():
 def logout():
     logout_user()
     return "Usuário deslogado."
+
+@usuario_blueprint.route("/registrar-se")
+def registrar_usuario():
+    return render_template("cadastro.html")
