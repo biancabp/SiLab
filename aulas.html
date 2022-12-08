@@ -57,17 +57,17 @@
                         <span class="nav__name">Soluções</span>
                     </a>
 
-                    <a href="#aulas.html" class="nav__link">
+                    <a href="aulas.html" class="nav__link">
                         <i class='bx bxs-graduation'></i>
                         <span class="nav__name">Aulas</span>
                     </a>
 
-                    <a href="#" class="nav__link">
+                    <a href="roteiros.html" class="nav__link">
                         <i class='bx bxs-notepad'></i>
                         <span class="nav__name">Roteiro</span>
                     </a>
 
-                    <a href="#" class="nav__link">
+                    <a href="turmas.html" class="nav__link">
                         <i class='bx bxs-group'></i>
                         <span class="nav__name">Turmas</span>
                     </a>
@@ -94,7 +94,58 @@
                 <h3 class="h3-text">Registradas</h3>
             </div>
             <div class="col-md-3 offset-md-5 main btn-space">
-                <button class="btn btn-primary" type="submit">Cadastrar aula</button>
+
+                <button type="button" class="btn btn-primary fz-14" data-bs-toggle="modal"
+                data-bs-target="#exampleModal1">
+                Cadastrar aula
+            </button>
+
+            <!-- Modal -->
+
+
+        <div class="col-md-3">
+            <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Cadastrar aula</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="d-flex justify-content-between">
+                                    <div class="mb-3 me-awe-40">
+                                        <div class="form-group">
+                                            <label for="exampleFormControlSelect1">Roteiro</label>
+                                            <select class="form-control" id="exampleFormControlSelect1">
+                                              <option>1</option>
+                                              <option>2</option>
+                                              <option>3</option>
+                                              <option>4</option>
+                                              <option>5</option>
+                                            </select>
+                                          </div>
+                                        <label for="recipient-name" class="col-form-label">Data:</label>
+                                        <input type="datetime" class="form-control" id="recipient-date">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="message-text" class="col-form-label">Comentário:</label>
+                                        <textarea class="form-control" id="message-text"></textarea>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary"
+                                data-bs-dismiss="modal">Cancelar</button>
+                            <button type="button" class="btn btn-primary">Salvar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
             </div>
         </div>
 
@@ -118,8 +169,107 @@
                                 <td>00/00/0000</td>
                                 <td>Lorem ipsum dolor sit amet ali.. </td>
                                 <td class="icons">
-                                    <i class='bx bx-search'></i>
-                                    <i class='bx bx-edit-alt'></i>
+                                    <i class='bx bx-search' data-bs-toggle="modal" data-bs-target="#exampleModal3"></i>
+                                    <div class="modal fade" id="exampleModal3" tabindex="-1"
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Visualizar aula
+                                                </h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form>
+                                                    <div class="d-flex justify-content-between">
+                                                        <div class="mb-3 me-awe-40">
+                                                            <label for="recipient-name"
+                                                                class="col-form-label fw-bold">Professor:</label>
+                                                            <span>Lorem Ipsum</span>
+                                                            <div class="mb-3 me-awe-40">
+                                                                <label for="recipient-name"
+                                                                    class="col-form-label fw-bold">Data:</label>
+                                                                <span>XX/XX/XXXX</span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="mb-3">
+                                                            <label for="message-text"
+                                                                class="col-form-label fw-bold">Descrição</label>
+                                                            <span>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Molestias itaque amet aut, a, dolorum error, cupiditate corrupti sequi repudiandae nobis accusantium ipsam excepturi voluptates non. Officiis perferendis debitis explicabo recusandae?</span>
+                                                        </div>
+                                                    </div>
+
+                                                </form>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Fechar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                    <i class='bx bx-edit-alt' data-bs-toggle="modal" data-bs-target="#exampleModal2"></i>
+                                    <div class="modal fade" id="exampleModal2" tabindex="-1"
+                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Editar aula
+                                                    </h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form>
+                                                        <div class="d-flex justify-content-between">
+                                                            <div class="mb-3 me-awe-40">
+                                                                <label for="recipient-name"
+                                                                    class="col-form-label">Turma:</label>
+                                                                <input type="text" class="form-control"
+                                                                    id="recipient-name">
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label for="message-text"
+                                                                    class="col-form-label">Ano:</label>
+                                                                <input type="text" class="form-control"
+                                                                    id="recipient-name">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="d-flex justify-content-between">
+                                                            <div class="mb-3 me-awe-40">
+                                                                <label for="recipient-name"
+                                                                    class="col-form-label">Curso:</label>
+                                                                <input type="text" class="form-control"
+                                                                    id="recipient-name">
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label for="message-text"
+                                                                    class="col-form-label">Alunos:</label>
+                                                                <input type="text" class="form-control"
+                                                                    id="recipient-name">
+                                                            </div>
+
+
+                                                        </div>
+
+                                                        <div class="mb-3">
+                                                            <label for="message-text" class="col-form-label"
+                                                                aria-placeholder="Turno">Turno:</label>
+                                                            <input type="text" class="form-control" id="recipient-name">
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">Cancelar</button>
+                                                    <button type="button" class="btn btn-primary">Salvar</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <i class='bx bx-trash-alt'></i>
                                 </td>
                             </tr>
@@ -129,8 +279,107 @@
                                 <td>00/00/0000</td>
                                 <td>Lorem ipsum dolor sit amet ali.. </td>
                                 <td class="icons">
-                                    <i class='bx bx-search'></i>
-                                    <i class='bx bx-edit-alt'></i>
+                                    <i class='bx bx-search' data-bs-toggle="modal" data-bs-target="#exampleModal3"></i>
+                                    <div class="modal fade" id="exampleModal3" tabindex="-1"
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Visualizar aula
+                                                </h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form>
+                                                    <div class="d-flex justify-content-between">
+                                                        <div class="mb-3 me-awe-40">
+                                                            <label for="recipient-name"
+                                                                class="col-form-label fw-bold">Professor:</label>
+                                                            <span>Lorem Ipsum</span>
+                                                            <div class="mb-3 me-awe-40">
+                                                                <label for="recipient-name"
+                                                                    class="col-form-label fw-bold">Data:</label>
+                                                                <span>XX/XX/XXXX</span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="mb-3">
+                                                            <label for="message-text"
+                                                                class="col-form-label fw-bold">Descrição</label>
+                                                            <span>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Molestias itaque amet aut, a, dolorum error, cupiditate corrupti sequi repudiandae nobis accusantium ipsam excepturi voluptates non. Officiis perferendis debitis explicabo recusandae?</span>
+                                                        </div>
+                                                    </div>
+
+                                                </form>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Fechar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                    <i class='bx bx-edit-alt' data-bs-toggle="modal" data-bs-target="#exampleModal2"></i>
+                                    <div class="modal fade" id="exampleModal2" tabindex="-1"
+                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Editar aula
+                                                    </h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form>
+                                                        <div class="d-flex justify-content-between">
+                                                            <div class="mb-3 me-awe-40">
+                                                                <label for="recipient-name"
+                                                                    class="col-form-label">Turma:</label>
+                                                                <input type="text" class="form-control"
+                                                                    id="recipient-name">
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label for="message-text"
+                                                                    class="col-form-label">Ano:</label>
+                                                                <input type="text" class="form-control"
+                                                                    id="recipient-name">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="d-flex justify-content-between">
+                                                            <div class="mb-3 me-awe-40">
+                                                                <label for="recipient-name"
+                                                                    class="col-form-label">Curso:</label>
+                                                                <input type="text" class="form-control"
+                                                                    id="recipient-name">
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label for="message-text"
+                                                                    class="col-form-label">Alunos:</label>
+                                                                <input type="text" class="form-control"
+                                                                    id="recipient-name">
+                                                            </div>
+
+
+                                                        </div>
+
+                                                        <div class="mb-3">
+                                                            <label for="message-text" class="col-form-label"
+                                                                aria-placeholder="Turno">Turno:</label>
+                                                            <input type="text" class="form-control" id="recipient-name">
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">Cancelar</button>
+                                                    <button type="button" class="btn btn-primary">Salvar</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <i class='bx bx-trash-alt'></i>
                                 </td>
                             </tr>
@@ -140,8 +389,107 @@
                                 <td>00/00/0000</td>
                                 <td>Lorem ipsum dolor sit amet ali.. </td>
                                 <td class="icons">
-                                    <i class='bx bx-search'></i>
-                                    <i class='bx bx-edit-alt'></i>
+                                    <i class='bx bx-search' data-bs-toggle="modal" data-bs-target="#exampleModal3"></i>
+                                    <div class="modal fade" id="exampleModal3" tabindex="-1"
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Visualizar aula
+                                                </h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form>
+                                                    <div class="d-flex justify-content-between">
+                                                        <div class="mb-3 me-awe-40">
+                                                            <label for="recipient-name"
+                                                                class="col-form-label fw-bold">Professor:</label>
+                                                            <span>Lorem Ipsum</span>
+                                                            <div class="mb-3 me-awe-40">
+                                                                <label for="recipient-name"
+                                                                    class="col-form-label fw-bold">Data:</label>
+                                                                <span>XX/XX/XXXX</span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="mb-3">
+                                                            <label for="message-text"
+                                                                class="col-form-label fw-bold">Descrição</label>
+                                                            <span>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Molestias itaque amet aut, a, dolorum error, cupiditate corrupti sequi repudiandae nobis accusantium ipsam excepturi voluptates non. Officiis perferendis debitis explicabo recusandae?</span>
+                                                        </div>
+                                                    </div>
+
+                                                </form>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Fechar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                    <i class='bx bx-edit-alt' data-bs-toggle="modal" data-bs-target="#exampleModal2"></i>
+                                    <div class="modal fade" id="exampleModal2" tabindex="-1"
+                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Editar aula
+                                                    </h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form>
+                                                        <div class="d-flex justify-content-between">
+                                                            <div class="mb-3 me-awe-40">
+                                                                <label for="recipient-name"
+                                                                    class="col-form-label">Turma:</label>
+                                                                <input type="text" class="form-control"
+                                                                    id="recipient-name">
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label for="message-text"
+                                                                    class="col-form-label">Ano:</label>
+                                                                <input type="text" class="form-control"
+                                                                    id="recipient-name">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="d-flex justify-content-between">
+                                                            <div class="mb-3 me-awe-40">
+                                                                <label for="recipient-name"
+                                                                    class="col-form-label">Curso:</label>
+                                                                <input type="text" class="form-control"
+                                                                    id="recipient-name">
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label for="message-text"
+                                                                    class="col-form-label">Alunos:</label>
+                                                                <input type="text" class="form-control"
+                                                                    id="recipient-name">
+                                                            </div>
+
+
+                                                        </div>
+
+                                                        <div class="mb-3">
+                                                            <label for="message-text" class="col-form-label"
+                                                                aria-placeholder="Turno">Turno:</label>
+                                                            <input type="text" class="form-control" id="recipient-name">
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">Cancelar</button>
+                                                    <button type="button" class="btn btn-primary">Salvar</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <i class='bx bx-trash-alt'></i>
                                 </td>
                             </tr>
@@ -151,8 +499,107 @@
                                 <td>00/00/0000</td>
                                 <td>Lorem ipsum dolor sit amet ali.. </td>
                                 <td class="icons">
-                                    <i class='bx bx-search'></i>
-                                    <i class='bx bx-edit-alt'></i>
+                                    <i class='bx bx-search' data-bs-toggle="modal" data-bs-target="#exampleModal3"></i>
+                                    <div class="modal fade" id="exampleModal3" tabindex="-1"
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Visualizar aula
+                                                </h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form>
+                                                    <div class="d-flex justify-content-between">
+                                                        <div class="mb-3 me-awe-40">
+                                                            <label for="recipient-name"
+                                                                class="col-form-label fw-bold">Professor:</label>
+                                                            <span>Lorem Ipsum</span>
+                                                            <div class="mb-3 me-awe-40">
+                                                                <label for="recipient-name"
+                                                                    class="col-form-label fw-bold">Data:</label>
+                                                                <span>XX/XX/XXXX</span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="mb-3">
+                                                            <label for="message-text"
+                                                                class="col-form-label fw-bold">Descrição</label>
+                                                            <span>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Molestias itaque amet aut, a, dolorum error, cupiditate corrupti sequi repudiandae nobis accusantium ipsam excepturi voluptates non. Officiis perferendis debitis explicabo recusandae?</span>
+                                                        </div>
+                                                    </div>
+
+                                                </form>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Fechar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                    <i class='bx bx-edit-alt' data-bs-toggle="modal" data-bs-target="#exampleModal2"></i>
+                                    <div class="modal fade" id="exampleModal2" tabindex="-1"
+                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Editar aula
+                                                    </h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form>
+                                                        <div class="d-flex justify-content-between">
+                                                            <div class="mb-3 me-awe-40">
+                                                                <label for="recipient-name"
+                                                                    class="col-form-label">Turma:</label>
+                                                                <input type="text" class="form-control"
+                                                                    id="recipient-name">
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label for="message-text"
+                                                                    class="col-form-label">Ano:</label>
+                                                                <input type="text" class="form-control"
+                                                                    id="recipient-name">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="d-flex justify-content-between">
+                                                            <div class="mb-3 me-awe-40">
+                                                                <label for="recipient-name"
+                                                                    class="col-form-label">Curso:</label>
+                                                                <input type="text" class="form-control"
+                                                                    id="recipient-name">
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label for="message-text"
+                                                                    class="col-form-label">Alunos:</label>
+                                                                <input type="text" class="form-control"
+                                                                    id="recipient-name">
+                                                            </div>
+
+
+                                                        </div>
+
+                                                        <div class="mb-3">
+                                                            <label for="message-text" class="col-form-label"
+                                                                aria-placeholder="Turno">Turno:</label>
+                                                            <input type="text" class="form-control" id="recipient-name">
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">Cancelar</button>
+                                                    <button type="button" class="btn btn-primary">Salvar</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <i class='bx bx-trash-alt'></i>
                                 </td>
                             </tr>
@@ -162,8 +609,107 @@
                                 <td>00/00/0000</td>
                                 <td>Lorem ipsum dolor sit amet ali.. </td>
                                 <td class="icons">
-                                    <i class='bx bx-search'></i>
-                                    <i class='bx bx-edit-alt'></i>
+                                    <i class='bx bx-search' data-bs-toggle="modal" data-bs-target="#exampleModal3"></i>
+                                    <div class="modal fade" id="exampleModal3" tabindex="-1"
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Visualizar aula
+                                                </h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form>
+                                                    <div class="d-flex justify-content-between">
+                                                        <div class="mb-3 me-awe-40">
+                                                            <label for="recipient-name"
+                                                                class="col-form-label fw-bold">Professor:</label>
+                                                            <span>Lorem Ipsum</span>
+                                                            <div class="mb-3 me-awe-40">
+                                                                <label for="recipient-name"
+                                                                    class="col-form-label fw-bold">Data:</label>
+                                                                <span>XX/XX/XXXX</span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="mb-3">
+                                                            <label for="message-text"
+                                                                class="col-form-label fw-bold">Descrição</label>
+                                                            <span>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Molestias itaque amet aut, a, dolorum error, cupiditate corrupti sequi repudiandae nobis accusantium ipsam excepturi voluptates non. Officiis perferendis debitis explicabo recusandae?</span>
+                                                        </div>
+                                                    </div>
+
+                                                </form>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Fechar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                    <i class='bx bx-edit-alt' data-bs-toggle="modal" data-bs-target="#exampleModal2"></i>
+                                    <div class="modal fade" id="exampleModal2" tabindex="-1"
+                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Editar aula
+                                                    </h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form>
+                                                        <div class="d-flex justify-content-between">
+                                                            <div class="mb-3 me-awe-40">
+                                                                <label for="recipient-name"
+                                                                    class="col-form-label">Turma:</label>
+                                                                <input type="text" class="form-control"
+                                                                    id="recipient-name">
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label for="message-text"
+                                                                    class="col-form-label">Ano:</label>
+                                                                <input type="text" class="form-control"
+                                                                    id="recipient-name">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="d-flex justify-content-between">
+                                                            <div class="mb-3 me-awe-40">
+                                                                <label for="recipient-name"
+                                                                    class="col-form-label">Curso:</label>
+                                                                <input type="text" class="form-control"
+                                                                    id="recipient-name">
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label for="message-text"
+                                                                    class="col-form-label">Alunos:</label>
+                                                                <input type="text" class="form-control"
+                                                                    id="recipient-name">
+                                                            </div>
+
+
+                                                        </div>
+
+                                                        <div class="mb-3">
+                                                            <label for="message-text" class="col-form-label"
+                                                                aria-placeholder="Turno">Turno:</label>
+                                                            <input type="text" class="form-control" id="recipient-name">
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">Cancelar</button>
+                                                    <button type="button" class="btn btn-primary">Salvar</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <i class='bx bx-trash-alt'></i>
                                 </td>
                             </tr>
@@ -173,8 +719,107 @@
                                 <td>00/00/0000</td>
                                 <td>Lorem ipsum dolor sit amet ali.. </td>
                                 <td class="icons">
-                                    <i class='bx bx-search'></i>
-                                    <i class='bx bx-edit-alt'></i>
+                                    <i class='bx bx-search' data-bs-toggle="modal" data-bs-target="#exampleModal3"></i>
+                                    <div class="modal fade" id="exampleModal3" tabindex="-1"
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Visualizar aula
+                                                </h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form>
+                                                    <div class="d-flex justify-content-between">
+                                                        <div class="mb-3 me-awe-40">
+                                                            <label for="recipient-name"
+                                                                class="col-form-label fw-bold">Professor:</label>
+                                                            <span>Lorem Ipsum</span>
+                                                            <div class="mb-3 me-awe-40">
+                                                                <label for="recipient-name"
+                                                                    class="col-form-label fw-bold">Data:</label>
+                                                                <span>XX/XX/XXXX</span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="mb-3">
+                                                            <label for="message-text"
+                                                                class="col-form-label fw-bold">Descrição</label>
+                                                            <span>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Molestias itaque amet aut, a, dolorum error, cupiditate corrupti sequi repudiandae nobis accusantium ipsam excepturi voluptates non. Officiis perferendis debitis explicabo recusandae?</span>
+                                                        </div>
+                                                    </div>
+
+                                                </form>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Fechar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                    <i class='bx bx-edit-alt' data-bs-toggle="modal" data-bs-target="#exampleModal2"></i>
+                                    <div class="modal fade" id="exampleModal2" tabindex="-1"
+                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Editar aula
+                                                    </h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form>
+                                                        <div class="d-flex justify-content-between">
+                                                            <div class="mb-3 me-awe-40">
+                                                                <label for="recipient-name"
+                                                                    class="col-form-label">Turma:</label>
+                                                                <input type="text" class="form-control"
+                                                                    id="recipient-name">
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label for="message-text"
+                                                                    class="col-form-label">Ano:</label>
+                                                                <input type="text" class="form-control"
+                                                                    id="recipient-name">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="d-flex justify-content-between">
+                                                            <div class="mb-3 me-awe-40">
+                                                                <label for="recipient-name"
+                                                                    class="col-form-label">Curso:</label>
+                                                                <input type="text" class="form-control"
+                                                                    id="recipient-name">
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label for="message-text"
+                                                                    class="col-form-label">Alunos:</label>
+                                                                <input type="text" class="form-control"
+                                                                    id="recipient-name">
+                                                            </div>
+
+
+                                                        </div>
+
+                                                        <div class="mb-3">
+                                                            <label for="message-text" class="col-form-label"
+                                                                aria-placeholder="Turno">Turno:</label>
+                                                            <input type="text" class="form-control" id="recipient-name">
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">Cancelar</button>
+                                                    <button type="button" class="btn btn-primary">Salvar</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <i class='bx bx-trash-alt'></i>
                                 </td>
                             </tr>
@@ -184,8 +829,107 @@
                                 <td>00/00/0000</td>
                                 <td>Lorem ipsum dolor sit amet ali.. </td>
                                 <td class="icons">
-                                    <i class='bx bx-search'></i>
-                                    <i class='bx bx-edit-alt'></i>
+                                    <i class='bx bx-search' data-bs-toggle="modal" data-bs-target="#exampleModal3"></i>
+                                    <div class="modal fade" id="exampleModal3" tabindex="-1"
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Visualizar aula
+                                                </h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form>
+                                                    <div class="d-flex justify-content-between">
+                                                        <div class="mb-3 me-awe-40">
+                                                            <label for="recipient-name"
+                                                                class="col-form-label fw-bold">Professor:</label>
+                                                            <span>Lorem Ipsum</span>
+                                                            <div class="mb-3 me-awe-40">
+                                                                <label for="recipient-name"
+                                                                    class="col-form-label fw-bold">Data:</label>
+                                                                <span>XX/XX/XXXX</span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="mb-3">
+                                                            <label for="message-text"
+                                                                class="col-form-label fw-bold">Descrição</label>
+                                                            <span>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Molestias itaque amet aut, a, dolorum error, cupiditate corrupti sequi repudiandae nobis accusantium ipsam excepturi voluptates non. Officiis perferendis debitis explicabo recusandae?</span>
+                                                        </div>
+                                                    </div>
+
+                                                </form>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Fechar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                    <i class='bx bx-edit-alt' data-bs-toggle="modal" data-bs-target="#exampleModal2"></i>
+                                    <div class="modal fade" id="exampleModal2" tabindex="-1"
+                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Editar aula
+                                                    </h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form>
+                                                        <div class="d-flex justify-content-between">
+                                                            <div class="mb-3 me-awe-40">
+                                                                <label for="recipient-name"
+                                                                    class="col-form-label">Turma:</label>
+                                                                <input type="text" class="form-control"
+                                                                    id="recipient-name">
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label for="message-text"
+                                                                    class="col-form-label">Ano:</label>
+                                                                <input type="text" class="form-control"
+                                                                    id="recipient-name">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="d-flex justify-content-between">
+                                                            <div class="mb-3 me-awe-40">
+                                                                <label for="recipient-name"
+                                                                    class="col-form-label">Curso:</label>
+                                                                <input type="text" class="form-control"
+                                                                    id="recipient-name">
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label for="message-text"
+                                                                    class="col-form-label">Alunos:</label>
+                                                                <input type="text" class="form-control"
+                                                                    id="recipient-name">
+                                                            </div>
+
+
+                                                        </div>
+
+                                                        <div class="mb-3">
+                                                            <label for="message-text" class="col-form-label"
+                                                                aria-placeholder="Turno">Turno:</label>
+                                                            <input type="text" class="form-control" id="recipient-name">
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">Cancelar</button>
+                                                    <button type="button" class="btn btn-primary">Salvar</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <i class='bx bx-trash-alt'></i>
                                 </td>
                             </tr>
@@ -195,8 +939,107 @@
                                 <td>00/00/0000</td>
                                 <td>Lorem ipsum dolor sit amet ali.. </td>
                                 <td class="icons">
-                                    <i class='bx bx-search'></i>
-                                    <i class='bx bx-edit-alt'></i>
+                                    <i class='bx bx-search' data-bs-toggle="modal" data-bs-target="#exampleModal3"></i>
+                                    <div class="modal fade" id="exampleModal3" tabindex="-1"
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Visualizar aula
+                                                </h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form>
+                                                    <div class="d-flex justify-content-between">
+                                                        <div class="mb-3 me-awe-40">
+                                                            <label for="recipient-name"
+                                                                class="col-form-label fw-bold">Professor:</label>
+                                                            <span>Lorem Ipsum</span>
+                                                            <div class="mb-3 me-awe-40">
+                                                                <label for="recipient-name"
+                                                                    class="col-form-label fw-bold">Data:</label>
+                                                                <span>XX/XX/XXXX</span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="mb-3">
+                                                            <label for="message-text"
+                                                                class="col-form-label fw-bold">Descrição</label>
+                                                            <span>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Molestias itaque amet aut, a, dolorum error, cupiditate corrupti sequi repudiandae nobis accusantium ipsam excepturi voluptates non. Officiis perferendis debitis explicabo recusandae?</span>
+                                                        </div>
+                                                    </div>
+
+                                                </form>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Fechar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                    <i class='bx bx-edit-alt' data-bs-toggle="modal" data-bs-target="#exampleModal2"></i>
+                                    <div class="modal fade" id="exampleModal2" tabindex="-1"
+                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Editar aula
+                                                    </h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form>
+                                                        <div class="d-flex justify-content-between">
+                                                            <div class="mb-3 me-awe-40">
+                                                                <label for="recipient-name"
+                                                                    class="col-form-label">Turma:</label>
+                                                                <input type="text" class="form-control"
+                                                                    id="recipient-name">
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label for="message-text"
+                                                                    class="col-form-label">Ano:</label>
+                                                                <input type="text" class="form-control"
+                                                                    id="recipient-name">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="d-flex justify-content-between">
+                                                            <div class="mb-3 me-awe-40">
+                                                                <label for="recipient-name"
+                                                                    class="col-form-label">Curso:</label>
+                                                                <input type="text" class="form-control"
+                                                                    id="recipient-name">
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label for="message-text"
+                                                                    class="col-form-label">Alunos:</label>
+                                                                <input type="text" class="form-control"
+                                                                    id="recipient-name">
+                                                            </div>
+
+
+                                                        </div>
+
+                                                        <div class="mb-3">
+                                                            <label for="message-text" class="col-form-label"
+                                                                aria-placeholder="Turno">Turno:</label>
+                                                            <input type="text" class="form-control" id="recipient-name">
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">Cancelar</button>
+                                                    <button type="button" class="btn btn-primary">Salvar</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <i class='bx bx-trash-alt'></i>
                                 </td>
                             </tr>
@@ -206,8 +1049,107 @@
                                 <td>00/00/0000</td>
                                 <td>Lorem ipsum dolor sit amet ali.. </td>
                                 <td class="icons">
-                                    <i class='bx bx-search'></i>
-                                    <i class='bx bx-edit-alt'></i>
+                                    <i class='bx bx-search' data-bs-toggle="modal" data-bs-target="#exampleModal3"></i>
+                                    <div class="modal fade" id="exampleModal3" tabindex="-1"
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Visualizar aula
+                                                </h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form>
+                                                    <div class="d-flex justify-content-between">
+                                                        <div class="mb-3 me-awe-40">
+                                                            <label for="recipient-name"
+                                                                class="col-form-label fw-bold">Professor:</label>
+                                                            <span>Lorem Ipsum</span>
+                                                            <div class="mb-3 me-awe-40">
+                                                                <label for="recipient-name"
+                                                                    class="col-form-label fw-bold">Data:</label>
+                                                                <span>XX/XX/XXXX</span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="mb-3">
+                                                            <label for="message-text"
+                                                                class="col-form-label fw-bold">Descrição</label>
+                                                            <span>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Molestias itaque amet aut, a, dolorum error, cupiditate corrupti sequi repudiandae nobis accusantium ipsam excepturi voluptates non. Officiis perferendis debitis explicabo recusandae?</span>
+                                                        </div>
+                                                    </div>
+
+                                                </form>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Fechar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                    <i class='bx bx-edit-alt' data-bs-toggle="modal" data-bs-target="#exampleModal2"></i>
+                                    <div class="modal fade" id="exampleModal2" tabindex="-1"
+                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Editar aula
+                                                    </h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form>
+                                                        <div class="d-flex justify-content-between">
+                                                            <div class="mb-3 me-awe-40">
+                                                                <label for="recipient-name"
+                                                                    class="col-form-label">Turma:</label>
+                                                                <input type="text" class="form-control"
+                                                                    id="recipient-name">
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label for="message-text"
+                                                                    class="col-form-label">Ano:</label>
+                                                                <input type="text" class="form-control"
+                                                                    id="recipient-name">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="d-flex justify-content-between">
+                                                            <div class="mb-3 me-awe-40">
+                                                                <label for="recipient-name"
+                                                                    class="col-form-label">Curso:</label>
+                                                                <input type="text" class="form-control"
+                                                                    id="recipient-name">
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label for="message-text"
+                                                                    class="col-form-label">Alunos:</label>
+                                                                <input type="text" class="form-control"
+                                                                    id="recipient-name">
+                                                            </div>
+
+
+                                                        </div>
+
+                                                        <div class="mb-3">
+                                                            <label for="message-text" class="col-form-label"
+                                                                aria-placeholder="Turno">Turno:</label>
+                                                            <input type="text" class="form-control" id="recipient-name">
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">Cancelar</button>
+                                                    <button type="button" class="btn btn-primary">Salvar</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <i class='bx bx-trash-alt'></i>
                                 </td>
                             </tr>
