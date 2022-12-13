@@ -8,7 +8,7 @@ class Turma(db.Model):
 
     cod = Column(String(10), primary_key=True)
     ano = Column(SmallInteger)
-    turno = Column(Enum('SÓLIDO', 'LÍQUIDO', 'GASOSO')) 
+    turno = Column(Enum('Matutino', 'Vespertino', 'Noturno')) 
     curso = Column(ForeignKey("curso.nome_curso"))
     qtd_alunos = Column(SmallInteger)
 

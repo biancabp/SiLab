@@ -1,4 +1,4 @@
-from models.database.database import db, Column, String, Integer, Date, ForeignKey
+from models.database.database import db, Column, String, Integer, Date, ForeignKey, Enum
 from models.usuario import Usuario
 
 class Aula(db.Model):
@@ -10,11 +10,11 @@ class Aula(db.Model):
     id = Column(Integer, primary_key=True, autoincrement=True)
     turma = Column(ForeignKey("turma.cod"))
     data_aula = Column(Date)
-    descricao = Column(String(500))
+    roteiro = Column(String(500))
     professor = Column(ForeignKey("usuario.matricula"))
-    roteiro = Column(ForeignKey("roteiro.id"))
+    planejada_efetivada = Column(Enum('Planejada', 'Efetivada'))
 
-    def __init__(self, id:int, turma:object, data:object, descricao:str, professor:object):
+    def __init__(self, id:int, turma:object, data:object, roteiro:str, professor:object, planejada_efetivada:str):
         """
            ``id``: int | Atributo numérico identificador 
             
@@ -22,16 +22,20 @@ class Aula(db.Model):
 
            ``data``: object | Data em que a aula foi registrada
            
-           ``descricao``: object | Um texto que descreve as atividades realizadas na aula 
+           ``roteiro``: object | Um texto que descreve as atividades realizadas na aula 
 
            ``professor``: object | Objeto da classe 'Usuario' que representa o professor que ministrou a aula.
         """
+        if(planejada_efetivada != 'Planejada' or planejada_efetivada != 'Efetivada'):
+            return "Erro"
+
         self.id = id
         self.turma = turma.cod
         self.data_aula = str(data)
-        self.descricao = descricao
+        self.roteiro = roteiro
         self.professor = professor.matricula
-    
+        self.planejada_efetivada = planejada_efetivada
+
     def cadastrar(self):
         """
         Realiza a inserção da aula no banco de dados.
@@ -53,14 +57,15 @@ class Aula(db.Model):
             lista_aulas = db.session.query(Aula, Usuario.nome).join(Usuario, Aula.professor == Usuario.matricula).all()
         return lista_aulas
 
-    def editar(self, nova_turma:object, nova_data:object, nova_descricao:str, novo_professor:object):
+    def editar(self, nova_turma:object, nova_data:object, novo_roteiro:str, novo_professor:object, planejada_efetivada:str):
         """
         Edita os atributos da aula no banco de dados.
         """
         self.turma = nova_turma.cod
         self.data_aula = str(nova_data)
-        self.descricao = nova_descricao
+        self.roteiro = novo_roteiro
         self.professor = novo_professor.matricula
+        self.planejada_efetivada = planejada_efetivada
         db.session.add(self)
         db.session.commit()
 

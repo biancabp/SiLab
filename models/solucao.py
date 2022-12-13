@@ -1,7 +1,7 @@
 from models.database.database import db, Column, String, Integer, Numeric, Enum, ForeignKey
 from models.aula import Aula
-from models.frasco import Frasco
-from models.many_to_many_relationships.solucao_usa_reagente import SolucaoUsaReagente
+from models.reagente import Reagente
+from models.many_to_many_relationships.solucao.solucao_usa_reagente import SolucaoUsaReagente
 from sqlalchemy.exc import IntegrityError
 
 class Solucao(db.Model):
@@ -16,11 +16,11 @@ class Solucao(db.Model):
     autor = Column(String(100))
     aula = Column(ForeignKey("aula.id"))
     formula_quimica = Column(ForeignKey('formula_quimica.formula'))
-    estado_materia = Column(Enum)
+    estado_materia = Column(Enum('Sólido', 'Líquido', 'Gasoso'))
     massa = Column(Numeric)
     densidade = Column(Numeric)
 
-    def __init__(self, id:int, nome:str, autor:str, aula:object, formula_quimica:object, estado_materia:str, densidade:float, frascos:tuple[object, float], massa:float = None):
+    def __init__(self, id:int, nome:str, autor:str, aula:object, formula_quimica:object, estado_materia:str, densidade:float, Reagentes:tuple[object, float], massa:float = None):
         """
         ``id``: int | representa o identificador númerico da solução.
         
@@ -36,7 +36,7 @@ class Solucao(db.Model):
         
         ``densidade``: float | representa a densidade da solução, a unidade de medida é kg/m³ (quilograma por metro cúbico).
         
-        ``frascos``: tuple | contém objetos da classe ``Frasco`` que representam os regentes usados para formar a solução e a massa de reagente que foi usada.
+        ``Reagentes``: tuple | contém objetos da classe ``Reagente`` que representam os regentes usados para formar a solução e a massa de reagente que foi usada.
         
         ``massa``: float | representa a massa total da solução.
 
@@ -53,10 +53,10 @@ class Solucao(db.Model):
         self.formula_quimica = formula_quimica
         self.estado_materia = estado_materia
         self.densidade = densidade
-        self.frascos = frascos
+        self.Reagentes = Reagentes
         
         if(massa == None):
-            self.massa = self.__calcular_massa_total_solucao(self.frascos)
+            self.massa = self.__calcular_massa_total_solucao(self.Reagentes)
         else:
             self.massa = massa
     
@@ -66,7 +66,7 @@ class Solucao(db.Model):
         """
         try:
             db.session.add(self)
-            Frasco.debitar_massa_reagente_frasco(db, self, self.frascos)
+            Reagente.debitar_massa_reagente_Reagente(db, self, self.Reagentes)
             db.session.commit()
         
         except IntegrityError:
@@ -127,14 +127,14 @@ class Solucao(db.Model):
         except IntegrityError:
             db.session.rollback()
 
-    def __calcular_massa_total_solucao(self, frascos:tuple[object, float]):
+    def __calcular_massa_total_solucao(self, Reagentes:tuple[object, float]):
         """
         Realiza o cálculo da massa total da solução somando a massa de todos os reagentes
         que compõem a ela.
         """
         massa_total_solucao = 0.0
         
-        for frasco, massa in frascos:
+        for Reagente, massa in Reagentes:
             massa_total_solucao += massa
         
         return massa_total_solucao
