@@ -8,17 +8,19 @@ class AulaEquipamento:
     def __init__(self, aula:int, equipamento:int):
         self.aula = aula
         self.equipamento = equipamento
+        return self
     
-    def cadastrar(self):
+    def relacionar(self, db:object):
         db.session.add(self)
-        db.session.commit()
     
-    def listar(self):
-        pass
-
-    def editar(self):
-        pass
-
+    @staticmethod
+    def listar(aula:int) -> list:
+        """
+        Lista todos os equipamentos utilizados em uma aula
+        """
+        lista_equipamentos = AulaEquipamento.query.filter(aula=aula).all()
+        return lista_equipamentos
+        
     def deletar(self):
         db.session.delete(self)
         db.session.commit()

@@ -55,5 +55,6 @@ class Reagente(db.Model):
         db.session.commit()
 
     def deletar(self):
-        db.session.delete(self)
+        self.deletado = True
+        db.session.add(self)
         db.session.commit()

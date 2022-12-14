@@ -1,4 +1,5 @@
 from models.database.database import db, Column, String, Integer, Date, Numeric, ForeignKey
+from models.solucao import Solucao
 
 class UsoDiversoSolucao:
 
@@ -18,8 +19,11 @@ class UsoDiversoSolucao:
         db.session.add()
         db.session.commit()
     
-    def listar(self):
-        pass
+    @staticmethod
+    def listar(solucao:object) -> list:
+        lista_uso_diveros_solucao = Solucao.query.filter(Solucao.deletada).all()
+
+        return lista_uso_diveros_solucao
 
     def editar(self):
         pass

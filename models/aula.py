@@ -1,6 +1,10 @@
 from models.database.database import db, Column, String, Integer, Date, ForeignKey, Enum
 from models.usuario import Usuario
 
+from models.many_to_many_relationships.aula.aula_equipamento import AulaEquipamento
+from models.many_to_many_relationships.aula.aula_reagente import AulaReagente
+from models.many_to_many_relationships.aula.aula_solucao import AulaSolucao
+
 class Aula(db.Model):
     """
     Representa a entidade ``aula`` no banco de dados. 
@@ -14,7 +18,7 @@ class Aula(db.Model):
     professor = Column(ForeignKey("usuario.matricula"))
     planejada_efetivada = Column(Enum('Planejada', 'Efetivada'))
 
-    def __init__(self, id:int, turma:object, data:object, roteiro:str, professor:object, planejada_efetivada:str):
+    def __init__(self, turma:object, data:object, roteiro:str, professor:object, planejada_efetivada:str, equipamentos:list = None, reagentes:list = None, solucoes:list = None):
         """
            ``id``: int | Atributo numérico identificador 
             
@@ -25,23 +29,45 @@ class Aula(db.Model):
            ``roteiro``: object | Um texto que descreve as atividades realizadas na aula 
 
            ``professor``: object | Objeto da classe 'Usuario' que representa o professor que ministrou a aula.
-        """
-        if(planejada_efetivada != 'Planejada' or planejada_efetivada != 'Efetivada'):
-            return "Erro"
 
-        self.id = id
+           ``planejada_efetivada``: string | Informa se a aula se encontra em estágio de planejamento ou se foi executada.
+        """
+        if(planejada_efetivada != 'Planejada' and planejada_efetivada != 'Efetivada'):
+            raise ValueError("'planejada_efetivada' não pode ser diferente de 'Planejada' ou 'Efetivada'")
+
+        self.__verificar_tipo_usuario(professor)
+        
         self.turma = turma.cod
         self.data_aula = str(data)
         self.roteiro = roteiro
         self.professor = professor.matricula
         self.planejada_efetivada = planejada_efetivada
 
-    def cadastrar(self):
+        self.equipamentos = equipamentos
+        self.reagentes = reagentes
+        self.solucoes = solucoes
+
+    def cadastrar_aula_planejada(self):
         """
         Realiza a inserção da aula no banco de dados.
         """
-        db.session.add(self)
-        db.session.commit()
+        try:
+            db.session.add(self)
+            db.session.commit()
+            id_aula = [row[0] for row in db.session.execute("select LAST_INSERT_ID()")]
+            for equipamento in self.equipamentos:
+                AulaEquipamento(id_aula[0], equipamento.id).relacionar(db)
+            
+            for reagente in self.reagentes:
+                AulaReagente(id_aula[0], reagente.id, reagente.massa).relacionar(db)
+            
+            for solucao in self.solucoes:
+                AulaSolucao(id_aula[0], solucao.id, solucao.massa).relacionar(db)
+        except:
+            db.session.rollback()
+            db.session.delete(Aula.query.get(id_aula[0]))
+            db.session.commit()
+        
 
     @staticmethod
     def listar(tipo_filtro:str = None, valor_filtro:str = None) -> list:
@@ -73,5 +99,13 @@ class Aula(db.Model):
         """
         Remove o registro da aula do banco de dados.
         """
-        db.session.delete(self)
-        db.session.commit()
+        try:
+            Aula
+            db.session.delete(self)
+            db.session.commit()
+        except:
+            pass
+    
+    def __verificar_tipo_usuario(self, usuario:object):
+        if(usuario.tipo_usuario != 'Professor'):
+            raise ValueError("Somente professores podem registrar uma aula.")

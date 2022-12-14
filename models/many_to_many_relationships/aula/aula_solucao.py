@@ -12,16 +12,15 @@ class AulaSolucao:
         self.solucao = solucao
         self.massa = massa
         self.criada_utilizada = criada_utilizada
+        return self
     
-    def cadastrar(self):
+    def relacionar(self, db:object):
         db.session.add(self)
-        db.session.commit()
 
-    def listar(self):
-        pass
-
-    def editar(self):
-        pass
+    @staticmethod
+    def listar(aula:int) -> list:
+        lista_solucoes = AulaSolucao.query.filter(aula=aula).all()
+        return lista_solucoes
 
     def deletar(self):
         db.session.delete(self)

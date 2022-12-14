@@ -10,16 +10,15 @@ class AulaReagente:
         self.aula = aula
         self.reagente = reagente
         self.massa = massa
+        return self
     
-    def cadastrar(self):
+    def relacionar(self, db:object):
         db.session.add(self)
-        db.session.commit()
     
-    def listar(self):
-        pass
-
-    def editar(self):
-        pass
+    @staticmethod
+    def listar(aula:int):
+        lista_reagentes = AulaReagente.query.filter(aula=aula).all()
+        return lista_reagentes
 
     def deletar(self):
         db.session.delete(self)

@@ -17,10 +17,12 @@ class Solucao(db.Model):
     aula = Column(ForeignKey("aula.id"))
     formula_quimica = Column(ForeignKey('formula_quimica.formula'))
     estado_materia = Column(Enum('Sólido', 'Líquido', 'Gasoso'))
-    massa = Column(Numeric)
     densidade = Column(Numeric)
-
-    def __init__(self, id:int, nome:str, autor:str, aula:object, formula_quimica:object, estado_materia:str, densidade:float, Reagentes:tuple[object, float], massa:float = None):
+    massa = Column(Numeric)
+    concentracao = Column(Numeric)
+    deletado_planejado = Column(Enum('Deletado', 'Planejado'))
+    
+    def __init__(self, nome:str, autor:str, aula:object, formula_quimica:object, estado_materia:str, densidade:float, massa:float, concentracao:float, deletado_planejado:str, Reagentes:tuple[object, float]):
         """
         ``id``: int | representa o identificador númerico da solução.
         
@@ -36,29 +38,26 @@ class Solucao(db.Model):
         
         ``densidade``: float | representa a densidade da solução, a unidade de medida é kg/m³ (quilograma por metro cúbico).
         
-        ``Reagentes``: tuple | contém objetos da classe ``Reagente`` que representam os regentes usados para formar a solução e a massa de reagente que foi usada.
-        
         ``massa``: float | representa a massa total da solução.
 
-        obs: ``massa`` é um parâmetro opcional que é inicializado com ``None`` por padrão.
+        ``concentracao``: float | representa a quantidade de soluto por quantidade de solvente.
+
+        ``deletado_planejado``: string | informa se a solução se encontra em estado de planejamento para uma aula ou se foi deletada.
         
-        Caso este parâmetro seja omitido então o cálculo da massa da solução será realizado 
-        somando a massa dos reagentes usados para compor a solução. Caso ele seja especificado
-        então a massa da solução será correspondente ao valor especificado.
+        ``Reagentes``: tuple | contém objetos da classe ``Reagente`` que representam os regentes usados para formar a solução e a massa de reagente que foi usada.
+        
+        
         """
-        self.id = id
         self.nome = nome
         self.autor = autor
         self.aula = aula.id
         self.formula_quimica = formula_quimica
         self.estado_materia = estado_materia
         self.densidade = densidade
-        self.Reagentes = Reagentes
-        
-        if(massa == None):
-            self.massa = self.__calcular_massa_total_solucao(self.Reagentes)
-        else:
-            self.massa = massa
+        self.massa = massa
+        self.concentracao = concentracao
+        self.deletado_planejado = deletado_planejado
+        self.Reagentes = Reagentes        
     
     def cadastrar(self):
         """
@@ -126,15 +125,3 @@ class Solucao(db.Model):
         
         except IntegrityError:
             db.session.rollback()
-
-    def __calcular_massa_total_solucao(self, Reagentes:tuple[object, float]):
-        """
-        Realiza o cálculo da massa total da solução somando a massa de todos os reagentes
-        que compõem a ela.
-        """
-        massa_total_solucao = 0.0
-        
-        for Reagente, massa in Reagentes:
-            massa_total_solucao += massa
-        
-        return massa_total_solucao

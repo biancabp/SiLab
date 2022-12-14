@@ -13,7 +13,7 @@ class Usuario(db.Model, UserMixin):
     nome = Column(String(50), nullable=False)
     email = Column(String(300), nullable=False)
     senha = Column(String(64), nullable=False)
-    tipo_usuario = Column(Enum('PROFESSOR', 'TUTOR'), nullable=False)
+    tipo_usuario = Column(Enum('Professor', 'Tutor'), nullable=False)
 
     def __init__(self, matricula:int, nome:str, email:str, senha:str, tipo_usuario:str):
         self.matricula = matricula

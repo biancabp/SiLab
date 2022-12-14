@@ -1,6 +1,8 @@
 from models.database.database import db, Column, Numeric, ForeignKey
 from sqlalchemy.ext import IntegrityError
 
+from models.reagente import Reagente
+
 class SolucaoUsaReagente(db.Model):
     """
     Representa o relacionamento de cardinalidade muitos-para-muitos entre
@@ -31,3 +33,12 @@ class SolucaoUsaReagente(db.Model):
             return True
         except IntegrityError:
             return False
+    
+    @staticmethod
+    def listar(solucao:int) -> list:
+        lista_reagentes = Reagente.query.join(SolucaoUsaReagente, SolucaoUsaReagente.reagente == Reagente.id).filter(solucao==solucao).all()
+        return lista_reagentes
+    
+    def deletar(self):
+        db.session.delete(self)
+        db.session.commit()
