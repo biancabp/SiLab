@@ -5,21 +5,17 @@ from models.usuario import Usuario
 usuario_blueprint = Blueprint("usuario", __name__)
 
 @usuario_blueprint.route("/login", methods=["GET", "POST"])
-def pagina_login():
-    return render_template("login.html")
+def login():
+    if(len(request.form) == 0):
+        return render_template("login.html")
 
-@usuario_blueprint.route("/autenticar-usuario", methods=["GET", "POST"])
-def autenticar_usuario():
-    if(request.method == "POST"):
-        usuario = Usuario.query.get(int(request.form['matricula']))
-        
-        if(usuario == None or usuario.senha != request.form['senha']):
-            return "Usuário ou senha incorretos"
-        
-        login_user(usuario)
-        return "Usuário Logado!"    
+    usuario = Usuario.query.get(int(request.form['matricula']))
     
-    return "método inválido"
+    if(usuario == None or usuario.senha != request.form['senha']):
+        return "Usuário ou senha incorretos"
+    
+    login_user(usuario)
+    return "Usuário Logado!"    
 
 @usuario_blueprint.route("/logout")
 @login_required
@@ -27,17 +23,14 @@ def logout():
     logout_user()
     return "Usuário deslogado."
 
-@usuario_blueprint.route("/registrar-se")
+@usuario_blueprint.route("/registrar-se", methods=['GET', 'POST'])
 def registrar_usuario():
-    return render_template("cadastro.html")
+    if len(request.form) == 0:
+        return render_template("cadastro.html")
 
-@usuario_blueprint.route("/registrar-usuario", methods=["GET", "POST"])
-def validar_registro_novo_usuario():
-    if request.method != 'POST':
-        return "Erro"
     if request.form['senha'] != request.form['confirme-senha']:
         return "As senhas devem ser iguais."
     
-    professor = Usuario(int(request.form['matricula']), request.form['nome'], request.form['email'], request.form['senha'], request.form['tipo-usuario'])
-    professor.cadastrar()
+    usuario = Usuario(int(request.form['matricula']), request.form['nome'], request.form['email'], request.form['senha'], request.form['tipo-usuario'])
+    usuario.cadastrar()
     return "Usuario cadastrado"

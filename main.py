@@ -8,7 +8,6 @@ from routes.aula import aula_blueprint
 from routes.usuario import usuario_blueprint
 from routes.turma import turma_blueprint
 from models.usuario import Usuario
-#from models.professor import Professor
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
