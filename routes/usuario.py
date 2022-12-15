@@ -30,3 +30,14 @@ def logout():
 @usuario_blueprint.route("/registrar-se")
 def registrar_usuario():
     return render_template("cadastro.html")
+
+@usuario_blueprint.route("/registrar-usuario", methods=["GET", "POST"])
+def validar_registro_novo_usuario():
+    if request.method != 'POST':
+        return "Erro"
+    if request.form['senha'] != request.form['confirme-senha']:
+        return "As senhas devem ser iguais."
+    
+    professor = Usuario(int(request.form['matricula']), request.form['nome'], request.form['email'], request.form['senha'], request.form['tipo-usuario'])
+    professor.cadastrar()
+    return "Usuario cadastrado"
