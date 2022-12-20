@@ -1,0 +1,121 @@
+.unit {
+    border: 1px solid $fumaca-extra-dark;
+    border-radius: 5px;
+    color: $gray;
+    padding: 16px 36px 12px 36px;
+    position: relative;
+
+    h4 {
+        word-break: normal;
+        word-wrap: break-word;
+        display: block;
+        max-width: 90%;
+    }
+
+    //Botão de abrir e fechar accordion
+    .unit__btn {
+        background: none;
+        width: 30px;
+        height: 30px;
+        border: none;
+        background-image: url(/dist/image/icons/arrow-circle.svg);
+        background-repeat: no-repeat;
+        background-size: cover;
+        transform: rotate(90deg);
+        position: absolute;
+        bottom: 32px;
+        right: 32px;
+    }
+
+    //conteúdo da unidade que fica escondido
+    .unit__content {
+        display: none;
+    }
+}
+
+.unit.is-active {
+    padding: 34px 36px 34px 36px;
+    border: 1px solid $prata;
+    h2 {
+        color: $black-2;
+    }
+
+    h3 {
+        position: relative;
+        &::before {
+            content: "";
+            display: block;
+            width: 136px;
+            height: 3px;
+            background: $prata;
+            position: absolute;
+            top: -9px;
+        }
+        &::marker {
+            content: 1;
+        }
+    }
+
+    a {
+        color: $gray;
+    }
+
+    //conteúdo da unidade que aparece ao ficar ativo
+    .unit__content {
+        display: block;
+    }
+
+    //texto principal da unidade
+    //ele fica em parte escondido até apertar o botão
+    .unit__content__explanation .hiddenText {
+        display: none;
+    }
+    .unit__content__explanation.is-open .hiddenText {
+        display: inherit;
+    }
+    //botão que faz o resto do texto aparecer
+    .unit__btn__lerMais {
+        background: none;
+        border: none;
+        padding: 0;
+        text-decoration: underline;
+        opacity: 80%;
+    }
+    .unit__btn__lerMais.is-active {
+        img {
+            transform: rotate(180deg);
+        }
+    }
+
+    //estilização dos links da unidade
+    .unit__list__link {
+        span {
+            display: flex;
+            align-items: center;
+        }
+    }
+
+    //informações (numero de exercícios e conteúdo)
+    .unit__infos {
+        display: none;
+    }
+
+    //Botão de abrir e fechar accordion
+    .unit__btn {
+        transform: rotate(-90deg);
+        opacity: 50%;
+        bottom: 19px;
+    }
+}
+
+@media (max-width: 991.98px) {
+    .unit {
+        padding: 16px 16px 12px 16px;
+        .unit__btn {
+            right: 16px;
+        }
+    }
+    .unit.is-active {
+        padding: 16px 16px 56px 16px;
+    }
+}

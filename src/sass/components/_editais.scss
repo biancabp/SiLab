@@ -1,0 +1,67 @@
+.edital {
+  background: #ffffff;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+  padding: 32px 28px;
+
+  &.is-finished {
+    .edital__status,
+    .edital__titulo {
+      color: #4f4f4f;
+    }
+  }
+
+  .edital__titulo {
+    color: #2471b5;
+  }
+
+  .edital__status {
+    font-style: italic;
+    font-size: 16px;
+    color: #27ae60;
+  }
+
+  &.is-close {
+    .edital__detalhes {
+      display: none;
+    }
+    button img {
+      transform: rotate(0deg);
+    }
+  }
+
+  button {
+    all: unset;
+    cursor: pointer;
+    img {
+      transform: rotate(180deg);
+    }
+  }
+
+  .edital__arquivos {
+    list-style: none;
+    padding: 0;
+    .edital__arquivo {
+      position: relative;
+      padding-left: 32px;
+      &::before {
+        content: '';
+        display: block;
+        width: 8px;
+        height: 8px;
+        background-color: #c4c4c4;
+        border-radius: 50%;
+        position: absolute;
+        left: 0;
+        top: 30%;
+      }
+
+      &.is-finished {
+        font-weight: bold;
+        &::before {
+          background-color: #3a3a3c;
+        }
+      }
+    }
+  }
+}

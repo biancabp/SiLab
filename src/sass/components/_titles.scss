@@ -1,0 +1,29 @@
+.titulo__coluna-novidades {
+  background-color: #3ba8dc;
+  position: relative;
+  background-image: url(/dist/image/svg/mask-group-novidades.svg);
+  background-repeat: no-repeat;
+  background-position-x: 100%;
+  background-size: contain;
+  border-radius: 2.6839px;
+}
+
+.titulo__coluna-publicacoes {
+  background-color: #dc3bc1;
+  position: relative;
+  background-image: url(/dist/image/svg/mask-group-publicacoes.svg);
+  background-repeat: no-repeat;
+  background-position-x: 100%;
+  background-size: contain;
+  border-radius: 2.6839px;
+}
+
+.titulo__coluna-calendario {
+  background-color: #91dc3b;
+  position: relative;
+  background-image: url(/dist/image/svg/mask-group-calendario.svg);
+  background-repeat: no-repeat;
+  background-position-x: 100%;
+  background-size: contain;
+  border-radius: 2.6839px;
+}
