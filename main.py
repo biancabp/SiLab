@@ -8,13 +8,16 @@ from routes.aula import aula_blueprint
 from routes.usuario import usuario_blueprint
 from routes.turma import turma_blueprint
 from models.usuario import Usuario
+from models.curso import Curso
+from flask_migrate import Migrate
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config["SQLALCHEMY_DATABASE_URI"] = "mysql://root:123456789@localhost/silab"
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///meubanco.db"
 app.config["SECRET_KEY"] = token_hex()
 
 db.init_app(app)
+migrate = Migrate(app, db)
 login_manager = LoginManager()
 login_manager.init_app(app)
 

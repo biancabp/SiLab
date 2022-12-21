@@ -16,8 +16,7 @@ class Reagente(db.Model):
     formula_quimica = Column(ForeignKey('formula_quimica.formula'), nullable=False)
     deletado = Column(Boolean)
 
-    def __init__(self, id:int, nome:str, estado_materia:str, densidade:float, massa:float, volume:float, data_validade:object, formula_quimica:object, deletado:bool):
-        self.id = id
+    def __init__(self, nome:str, estado_materia:str, densidade:float, massa:float, volume:float, data_validade:object, formula_quimica:object, deletado:bool):
         self.nome = nome
         self.estado_materia = estado_materia
         self.densidade = densidade

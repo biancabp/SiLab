@@ -1,5 +1,6 @@
-from models.database.database import db, Column, String, Integer, Date, ForeignKey, Enum
+from models.database.database import db, Column, String, Integer, Date, ForeignKey, Enum, Boolean
 from models.usuario import Usuario
+from models.reagente import Reagente
 
 from models.many_to_many_relationships.aula.aula_equipamento import AulaEquipamento
 from models.many_to_many_relationships.aula.aula_reagente import AulaReagente
@@ -17,6 +18,7 @@ class Aula(db.Model):
     roteiro = Column(String(500))
     professor = Column(ForeignKey("usuario.matricula"))
     planejada_efetivada = Column(Enum('Planejada', 'Efetivada'))
+    deletada = Column(Boolean)
 
     def __init__(self, turma:object, data:object, roteiro:str, professor:object, planejada_efetivada:str, equipamentos:list = None, reagentes:list = None, solucoes:list = None):
         """
@@ -67,7 +69,16 @@ class Aula(db.Model):
             db.session.rollback()
             db.session.delete(Aula.query.get(id_aula[0]))
             db.session.commit()
-        
+    
+    def efetivar_aula(self):
+        if self.planejada_efetivada == 'Efetivada':
+            db.session.add(self)
+            reagentes_utilizados_aula = db.session.query(Reagente, AulaReagente).join(AulaReagente).filter(AulaReagente.aula == self.id).all()
+            for reagente, uso_reagente in reagentes_utilizados_aula:
+                reagente.massa -= uso_reagente.massa
+            db.session.commit()
+
+        raise ValueError("O campo 'planejada_efetivada' deve ser igual a 'Efetivada'")
 
     @staticmethod
     def listar(tipo_filtro:str = None, valor_filtro:str = None) -> list:
@@ -100,8 +111,8 @@ class Aula(db.Model):
         Remove o registro da aula do banco de dados.
         """
         try:
-            Aula
-            db.session.delete(self)
+            self.deletada = True
+            db.session.add(self)
             db.session.commit()
         except:
             pass

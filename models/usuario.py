@@ -58,7 +58,7 @@ class Usuario(db.Model, UserMixin):
 
         ``usuario``: object | Representa um usuário no banco de dados.
         """
-        if(Usuario.query.get(str(usuario.matricula)).tipo_usuario != 'PROFESSOR'):
+        if(Usuario.query.get(str(usuario.matricula)).tipo_usuario != 'Professor'):
             return False
         return True
     

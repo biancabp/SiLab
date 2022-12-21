@@ -16,7 +16,10 @@ class AulaReagente:
         db.session.add(self)
     
     @staticmethod
-    def listar(aula:int):
+    def listar(aula:int) -> list:
+        """
+        ``aula``: int | identificador numérico e chave primária de aula no banco de dados.
+        """
         lista_reagentes = AulaReagente.query.filter(aula=aula).all()
         return lista_reagentes
 

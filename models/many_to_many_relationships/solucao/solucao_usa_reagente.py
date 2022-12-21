@@ -42,3 +42,8 @@ class SolucaoUsaReagente(db.Model):
     def deletar(self):
         db.session.delete(self)
         db.session.commit()
+    
+    @staticmethod
+    def debitar_massa_reagente(reagentes:list):
+        for reagente in reagentes:
+            reagente.massa
