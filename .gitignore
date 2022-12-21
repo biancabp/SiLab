@@ -1,6 +1,10 @@
+<<<<<<< HEAD
 node_modules
 
 yarn.lock
 package-lock.json
 
 .vscode
+=======
+**/__pycache__
+>>>>>>> back-end

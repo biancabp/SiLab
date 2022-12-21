@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
+    <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/style.css') }}" />
+    <title>SiLab</title>
+  </head>
+
+  <body>
+
+    <div class="containe"> 
+      <div class="forms-container">
+        <div class="signin-signup">
+          <form action="{{ url_for('usuario.registrar_usuario') }}" method="POST" class="sign-in-form">
+            <h2 class="title">Cadastro</h2>
+            <div class="input-field">
+              <i class="fas fa-user"></i>
+              <input type="text" placeholder="Matricula" name="matricula" />
+            </div>
+            <div class="input-field">
+              <i class='bx bxs-envelope'></i>
+              <input type="text" placeholder="Nome" name="nome" />
+            </div>
+            <div class="input-field">
+              <i class='bx bxs-envelope'></i>
+              <input type="email" placeholder="Email" name="email" />
+            </div>
+            <div class="input-field">
+              <i class="fas fa-lock"></i>
+              <input type="password" placeholder="Senha" name="senha" />
+            </div>
+            <div class="input-field">
+              <i class="fas fa-lock"></i>
+              <input type="password" placeholder="Confirme Senha" name="confirme-senha" />
+            </div>
+            <div class="input-field">
+              <i class="fas fa-user"></i>
+              <select name="tipo-usuario">
+                <option value="Professor">Professor</option>
+                <option value="Tutor">Tutor</option>
+              </select>
+            </div>
+            <input type="submit" value="Cadastrar" class="btn solid" />
+            
+        </div>
+      </div>
+
+      <div class="panels-container">
+        <div class="panel left-panel">
+          <div class="content">
+            <h1>LOREM IPSUM</h1>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ullamcorper faucibus lacus, in aliquam elit
+              porttitor eget.
+            </p> 
+            <img src="{{ url_for('static', filename='assets/img/retangulo.svg') }}" class="image" alt="" />
+            <a href="">Lorem ipsum dolor</a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
+  </body>
+
+</html>
