@@ -26,7 +26,12 @@ class UsoDiversoReagente(db.Model):
         return usos_diversos_reagentes
 
     def editar(self, nova_data_uso, nova_massa, nova_descricao, novo_reagente):
-        pass
+        self.data_uso = nova_data_uso
+        self.massa = nova_massa
+        self.descricao = nova_descricao
+        self.reagente = novo_reagente
+        db.session.add(self)
+        db.session.commit()
 
     def deletar(self):
         db.session.delete(self)

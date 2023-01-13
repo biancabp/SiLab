@@ -30,7 +30,12 @@ class UsoDiversoSolucao(db.Model):
         return lista_uso_diveros_solucao
 
     def editar(self, nova_data_uso, nova_massa:float, nova_descricao:str, nova_solucao:int):
-        pass
+        self.data_uso = nova_data_uso
+        self.massa = nova_massa
+        self.descricao = nova_descricao
+        self.solucao = nova_solucao
+        db.session.add(self)
+        db.session.commit()
 
     def deletar(self):
         db.session.delete(self)
