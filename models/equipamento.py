@@ -10,18 +10,15 @@ class Equipamento(db.Model):
     localizacao = Column(String(100), nullable=False)
     qtd = db.Column(SmallInteger, nullable=False)
     volume = Column(SmallInteger, nullable=False)
-    equipamento = Column(String(100), nullable=False)
     tamanho = Column(SmallInteger, nullable=False)
     tipo_equipamento = Column(ForeignKey('tipo_equipamento.id'), nullable=False)
     lugar = Column(String(100), nullable=False)
     danificado = Column(Boolean)
 
-    def __init__(self, id:int, localizacao:str, qtd:int, volume:float, equipamento:str, tamanho:float, tipo_equipamento:object, lugar:str, danificado:bool):
-        self.id = id
+    def __init__(self, localizacao:str, qtd:int, volume:float, tamanho:float, tipo_equipamento:object, lugar:str, danificado:bool):
         self.localizacao = localizacao
         self.qtd = qtd
         self.volume = volume
-        self.equipamento = equipamento
         self.tamanho = tamanho
         self.tipo_equipamento = tipo_equipamento.id
         self.lugar = lugar
@@ -49,15 +46,13 @@ class Equipamento(db.Model):
             lista_equipamentos = Equipamento.query.filter(Equipamento.tipo_equipamento == valor_filtro.id).all()
         return lista_equipamentos
 
-    def editar(self, novo_id:int, nova_localizacao:str, nova_qtd:int, novo_volume:float, novo_equipamento:str, novo_tamanho:float, novo_tipo_equipamento:object, novo_lugar:str, danificado:bool):
+    def editar(self, nova_localizacao:str, nova_qtd:int, novo_volume:float, novo_tamanho:float, novo_tipo_equipamento:object, novo_lugar:str, danificado:bool):
         """
         Modifica o valor das propriedades do item no banco de dados.
         """
-        self.id = novo_id
         self.localizacao = nova_localizacao
         self.qtd = nova_qtd
         self.volume = novo_volume
-        self.equipamento = novo_equipamento
         self.tamanho = novo_tamanho
         self.tipo_equipamento = novo_tipo_equipamento.nome
         self.lugar = novo_lugar

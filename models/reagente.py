@@ -40,7 +40,7 @@ class Reagente(db.Model):
             lista_reagentes = Reagente.query.all()
         return lista_reagentes
 
-    def editar(self, novo_id:int, novo_nome:str, novo_estado_materia:str, nova_densidade:float, nova_massa:float, novo_volume:float, nova_data_validade:object, nova_formula_quimica:object, deletado:bool):
+    def editar(self, novo_id:int, novo_nome:str, novo_estado_materia:str, nova_densidade:float, nova_massa:float, novo_volume:float, nova_data_validade:object, nova_formula_quimica:object):
         self.id = novo_id
         self.nome = novo_nome
         self.estado_materia = novo_estado_materia
@@ -49,7 +49,6 @@ class Reagente(db.Model):
         self.volume = novo_volume
         self.data_validade = nova_data_validade
         self.formula_quimica = nova_formula_quimica.formula
-        self.deletado = deletado
         db.session.add(self)
         db.session.commit()
 

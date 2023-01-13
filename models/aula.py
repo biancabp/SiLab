@@ -22,7 +22,7 @@ class Aula(db.Model):
     planejada_efetivada = Column(Enum('Planejada', 'Efetivada'))
     deletada = Column(Boolean)
 
-    def __init__(self, turma:object, data:object, roteiro:str, professor:object, planejada_efetivada:str, equipamentos:list = None, reagentes:list = None, solucoes:list = None):
+    def __init__(self, turma:object, data:object, roteiro:str, professor:object, planejada_efetivada:str):
         """
            ``id``: int | Atributo numérico identificador 
             
@@ -132,6 +132,8 @@ class Aula(db.Model):
         """
         Edita os atributos da aula no banco de dados.
         """
+        if self.planejada_efetivada == 'Planejada':
+            pass
         self.turma = nova_turma.cod
         self.data_aula = str(nova_data)
         self.roteiro = novo_roteiro
@@ -154,5 +156,3 @@ class Aula(db.Model):
     def __verificar_tipo_usuario(self, usuario:object):
         if(usuario.tipo_usuario != 'Professor'):
             raise ValueError("Somente professores podem registrar uma aula.")
-    
-    #def __efetivar_aula()

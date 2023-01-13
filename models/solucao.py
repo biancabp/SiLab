@@ -132,8 +132,8 @@ class Solucao(db.Model):
         Remove o registro da solução e de seus relacionamentos do banco de dados.
         """
         try:
-            db.session.query(SolucaoUsaReagente).filter(SolucaoUsaReagente.solucao == self.id).delete()
-            db.session.delete(self)
+            self.deletado_planejado = 'Deletado'
+            db.session.add(self)
             db.session.commit()
         
         except IntegrityError:
