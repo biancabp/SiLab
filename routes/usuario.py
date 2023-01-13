@@ -7,7 +7,7 @@ usuario_blueprint = Blueprint("usuario", __name__)
 @usuario_blueprint.route("/login", methods=["GET", "POST"])
 def login():
     if(len(request.form) == 0):
-        return render_template("login.html")
+        return render_template("pages/login.html")
 
     usuario = Usuario.query.get(int(request.form['matricula']))
     
@@ -26,7 +26,7 @@ def logout():
 @usuario_blueprint.route("/registrar-se", methods=['GET', 'POST'])
 def registrar_usuario():
     if len(request.form) == 0:
-        return render_template("cadastro.html")
+        return render_template("pages/cadastro.html")
 
     if request.form['senha'] != request.form['confirme-senha']:
         return "As senhas devem ser iguais."

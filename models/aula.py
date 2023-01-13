@@ -1,10 +1,12 @@
 from models.database.database import db, Column, String, Integer, Date, ForeignKey, Enum, Boolean
 from models.usuario import Usuario
 from models.reagente import Reagente
+from models.solucao import Solucao
 
 from models.many_to_many_relationships.aula.aula_equipamento import AulaEquipamento
 from models.many_to_many_relationships.aula.aula_reagente import AulaReagente
 from models.many_to_many_relationships.aula.aula_solucao import AulaSolucao
+from models.many_to_many_relationships.solucao.solucao_usa_reagente import SolucaoUsaReagente
 
 class Aula(db.Model):
     """
@@ -45,11 +47,7 @@ class Aula(db.Model):
         self.professor = professor.matricula
         self.planejada_efetivada = planejada_efetivada
 
-        self.equipamentos = equipamentos
-        self.reagentes = reagentes
-        self.solucoes = solucoes
-
-    def cadastrar_aula_planejada(self):
+    def cadastrar_aula(self, equipamentos:list = None, reagentes:list = None, solucoes_criadas:list = None, solucoes_utilizadas:list = None, solucoes_criadas_utilizadas:list = None):
         """
         Realiza a inserção da aula no banco de dados.
         """
@@ -57,28 +55,64 @@ class Aula(db.Model):
             db.session.add(self)
             db.session.commit()
             id_aula = [row[0] for row in db.session.execute("select LAST_INSERT_ID()")]
-            for equipamento in self.equipamentos:
+            
+            for equipamento in equipamentos:
                 AulaEquipamento(id_aula[0], equipamento.id).relacionar(db)
             
-            for reagente in self.reagentes:
+            for reagente in reagentes:
                 AulaReagente(id_aula[0], reagente.id, reagente.massa).relacionar(db)
             
-            for solucao in self.solucoes:
-                AulaSolucao(id_aula[0], solucao.id, solucao.massa).relacionar(db)
+            for solucao, reagentes in solucoes_criadas:
+                nova_solucao = Solucao(solucao.nome, solucao.autor, solucao.formula_quimica, solucao.estado_materia, solucao.densidade, solucao.massa, solucao.concentracao, solucao.deleta_planejado)
+                id_nova_solucao = nova_solucao.cadastrar(reagentes, id_aula)
+                AulaSolucao(id_aula[0], id_nova_solucao, 'Criada', solucao.massa).relacionar(db)
+            
+            for solucao, massa in solucoes_utilizadas:
+                AulaSolucao(id_aula[0], solucao, 'Utilizada', massa).relacionar(db)
+
+            for solucao, reagentes in solucoes_criadas_utilizadas:
+                nova_solucao = Solucao(solucao[0].nome, solucao[0].autor, solucao[0].formula_quimica, solucao[0].estado_materia, solucao[0].densidade, solucao[0].massa, solucao[0].concentracao, solucao[0].deleta_planejado)
+                id_nova_solucao = nova_solucao.cadastrar(reagentes, id_aula)
+                AulaSolucao(id_aula[0], id_nova_solucao, 'Ambos', solucao.massa).relacionar(db)
+
+
+            if self.planejada_efetivada == "Efetivada":
+                Reagente.debitar_massa_reagente(db, reagentes)
+                Solucao.debitar_massa_solucoes(db, solucoes_utilizadas)
+
+                for solucao, reagentes in solucoes_utilizadas:
+                    Solucao.debitar_massa_solucoes(db, solucoes_criadas_utilizadas)
+                Solucao.debitar_massa_solucoes(db, solucoes_criadas_utilizadas)
+           
+            db.session.commit()
+
         except:
             db.session.rollback()
             db.session.delete(Aula.query.get(id_aula[0]))
             db.session.commit()
     
-    def efetivar_aula(self):
-        if self.planejada_efetivada == 'Efetivada':
-            db.session.add(self)
-            reagentes_utilizados_aula = db.session.query(Reagente, AulaReagente).join(AulaReagente).filter(AulaReagente.aula == self.id).all()
-            for reagente, uso_reagente in reagentes_utilizados_aula:
-                reagente.massa -= uso_reagente.massa
-            db.session.commit()
+    def efetivar_aula_planejada(self):
+        try:
+            if self.planejada_efetivada == 'Planejada':
+                self.planejada_efetivada = 'Efetivada'
+                db.session.add(self)
+                reagentes_utilizados_aula = db.session.query(Reagente, AulaReagente.massa).join(AulaReagente).filter(AulaReagente.aula == self.id).all()
+                solucoes_utilizadas_aula = db.session.query(Solucao, AulaSolucao.massa).join(AulaSolucao).filter(AulaSolucao.aula == self.id).all()
+                reagentes_solucoes = db.session.query(Reagente, SolucaoUsaReagente.massa).join(SolucaoUsaReagente).join(AulaSolucao).filter(AulaSolucao.aula == self.id).filter(AulaSolucao.criada_utilizada == 'Criada' or AulaSolucao.criada_utilizada == 'Ambos').all()
 
-        raise ValueError("O campo 'planejada_efetivada' deve ser igual a 'Efetivada'")
+                Reagente.debitar_massa_reagente(db, reagentes_utilizados_aula)
+                Reagente.debitar_massa_reagente(db, reagentes_solucoes)
+                Solucao.debitar_massa_solucoes(db, solucoes_utilizadas_aula)
+
+                solucoes = db.session.query(Solucao).join(AulaSolucao).filter(AulaSolucao.aula == self.id).filter(Solucao.deletado_planejado == 'Planejado').all()
+                for solucao in solucoes:
+                    solucao.deletado_planejado == None
+                    db.session.add(solucao)
+                db.session.commit()
+       
+        except Exception:
+            db.session.rollback()
+            raise ValueError("O campo 'planejada_efetivada' deve ser igual a 'Efetivada'")
 
     @staticmethod
     def listar(tipo_filtro:str = None, valor_filtro:str = None) -> list:
@@ -120,3 +154,5 @@ class Aula(db.Model):
     def __verificar_tipo_usuario(self, usuario:object):
         if(usuario.tipo_usuario != 'Professor'):
             raise ValueError("Somente professores podem registrar uma aula.")
+    
+    #def __efetivar_aula()

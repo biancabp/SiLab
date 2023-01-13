@@ -6,11 +6,10 @@ class AulaReagente:
     reagente = Column(ForeignKey('reagente.id'), primary_key=True)
     massa = Column(Numeric)
 
-    def __init__(self, aula:int, reagente:int, massa:float):
-        self.aula = aula
-        self.reagente = reagente
+    def __init__(self, aula:object, reagente:object, massa:float):
+        self.aula = aula.id
+        self.reagente = reagente.id
         self.massa = massa
-        return self
     
     def relacionar(self, db:object):
         db.session.add(self)

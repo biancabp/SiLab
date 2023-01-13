@@ -1,6 +1,7 @@
 from models.database.database import db, Column, String, Integer, Date, Numeric, ForeignKey
+from models.reagente import Reagente
 
-class UsoDiversoReagente:
+class UsoDiversoReagente(db.Model):
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     data_uso = Column(Date)
@@ -8,20 +9,23 @@ class UsoDiversoReagente:
     descricao = Column(String(200))
     reagente = Column(ForeignKey('reagente.id'))
 
-    def __init__(self, data_uso:object, massa:float, descricao:str, reagente:int):
+    def __init__(self, data_uso:object, massa:float, descricao:str, reagente:object):
         self.data_uso = data_uso
         self.massa = massa
         self.descricao = descricao
-        self.reagente = reagente
+        self.reagente = reagente.id
     
     def cadastrar(self):
         db.session.add()
+        Reagente.debitar_massa_reagente(db, [(self.reagente, self.massa)])
         db.session.commit()
     
-    def listar(self):
-        pass
+    @staticmethod
+    def listar():
+        usos_diversos_reagentes = UsoDiversoReagente.query.all()
+        return usos_diversos_reagentes
 
-    def editar(self):
+    def editar(self, nova_data_uso, nova_massa, nova_descricao, novo_reagente):
         pass
 
     def deletar(self):

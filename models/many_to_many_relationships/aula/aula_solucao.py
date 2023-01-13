@@ -7,12 +7,11 @@ class AulaSolucao:
     massa = Column(Numeric)
     criada_utilizada = Column(Enum('Criada', 'Utilizada'))
 
-    def __init__(self, aula:int, solucao:int, massa:float, criada_utilizada:str):
+    def __init__(self, aula:int, solucao:int, criada_utilizada:str, massa:float = None,):
         self.aula = aula
         self.solucao = solucao
         self.massa = massa
         self.criada_utilizada = criada_utilizada
-        return self
     
     def relacionar(self, db:object):
         db.session.add(self)
@@ -25,3 +24,4 @@ class AulaSolucao:
     def deletar(self):
         db.session.delete(self)
         db.session.commit()
+    

@@ -57,3 +57,9 @@ class Reagente(db.Model):
         self.deletado = True
         db.session.add(self)
         db.session.commit()
+    
+    @staticmethod
+    def debitar_massa_reagente(db:object, reagentes:list):
+        for reagente, massa_utilizada in reagentes:
+            reagente.massa -= massa_utilizada
+            db.session.add(reagente)

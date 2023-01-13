@@ -11,5 +11,5 @@ def turmas():
     if(Usuario.autorizar_professor(current_user) == False):
         return "Usuário não autorizado"
 
-    turmas = Turma.listar()
-    return render_template("turmas.html", turmas=turmas)
+    #turmas = Turma.listar()
+    return render_template("pages/turmas.html")
