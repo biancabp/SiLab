@@ -1,0 +1,29 @@
+.tags {
+  background: linear-gradient(
+    90deg,
+    #e9f5ff 0%,
+    rgba(249, 250, 252, 0) 106.36%
+  );
+
+  padding: 21px 32px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+
+  a {
+    border: 1px solid #3c4b58;
+    padding: 8px 16px;
+    display: block;
+    text-align: center;
+    color: #3C4B58;
+    font-size: 16px;
+    font-weight: 300;
+    
+    &:hover, 
+    &:focus {
+      border-color:  #000000;
+      text-decoration: none;
+      color: #090a0a;
+    }
+  }
+}

@@ -1,0 +1,23 @@
+.search-form {
+  border: 1px solid #8d9aa6;
+  border-radius: 6px;
+  background: #f9fafc;
+  padding: 12px 24px 12px 32px;
+  width: 288px;
+  height: 53px;
+  display: flex;
+  input {
+    all: unset;
+    width: 100%;
+    font-size: 18px;
+    color: #273444;
+    &::placeholder {
+      color: #c0ccda;
+    }
+  }
+  button {
+    all: unset;
+    display: flex;
+    align-items: center;
+  }
+}

@@ -1,0 +1,38 @@
+.box-title {
+  &::after {
+      content: "";
+      display: block;
+      background: #FE5A14;
+      height: 5px;
+      width: 200px;
+      border-radius: 40px;
+      position: absolute;
+      bottom: 0%;
+  }
+}
+
+.box-title-noticia {
+  &::after {
+    content: '';
+    display: block;
+    background: #2471b5;
+    height: 1px;
+    width: 100%;
+    border-radius: 1px;
+    position: absolute;
+    bottom: 0%;
+  }
+}
+
+.box-title-nav {
+  &::after {
+    content: '';
+    display: block;
+    background: #2471b5;
+    height: 1px;
+    width: 100%;
+    border-radius: 1px;
+    position: absolute;
+    bottom: 0%;
+  }
+}

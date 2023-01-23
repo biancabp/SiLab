@@ -1,0 +1,26 @@
+#cronograma {
+  text-align: center;
+  border-collapse: separate;
+  border-spacing: 2px 0px;
+  font-size: 19px;
+
+  thead {
+    background-color: #2471b5;
+    color: #f2f2f2;
+    font-weight: 500;
+    font-family: 'Poppins';
+  }
+
+  tbody {
+    font-family: 'Open sans';
+    color: #3c4b58;
+
+    tr {
+      background-color: #dae3eb;
+    }
+
+    tr:nth-of-type(odd) {
+      background-color: #eff2f7;
+    }
+  }
+}

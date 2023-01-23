@@ -1,0 +1,77 @@
+$utilities: (
+  'font-weight': (
+    property: font-weight,
+    class: fw,
+    values: (
+      'thin': $font-weight-thin,
+      'extra-light': $font-weight-extra-light,
+      'light': $font-weight-light,
+      'regular': $font-weight-regular,
+      'medium': $font-weight-medium,
+      'semi-bold': $font-weight-semi-bold,
+      'bold': $font-weight-bold,
+      'extra-bold': $font-weight-extra-bold,
+      'black': $font-weight-black,
+    ),
+  ),
+  'font-family': (
+    property: font-family,
+    values: $font-families,
+    class: 'ff',
+  ),
+  'line-height': (
+    property: line-height,
+    class: lh,
+    responsive: true,
+    values: (
+      140: $line-height-140,
+      160: $line-height-160,
+      180: $line-height-180,
+    ),
+  ),
+  'box-shadow': (
+    property: box-shadow,
+    class: box-shadow,
+    state: hover,
+    values: none,
+  ),
+  'color':
+    map-merge(
+      map-get($utilities, 'color'),
+      (
+        state: hover,
+      )
+    ),
+  'bg':
+    map-merge(
+      map-get($utilities, 'background-color'),
+      (
+        state: hover,
+      )
+    ),
+  'text-decoration':
+    map-merge(
+      map-get($utilities, 'text-decoration'),
+      (
+        state: hover,
+      )
+    ),
+);
+
+$utilities: map-merge(
+  $utilities,
+  (
+    'font-size': (
+      property: font-size,
+      class: fz,
+      responsive: true,
+      values: $font-sizes,
+    ),
+    'cursor': (
+      property: cursor,
+      class: cursor,
+      responsive: true,
+      values: auto pointer grab,
+    ),
+  )
+);

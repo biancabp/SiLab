@@ -1,0 +1,46 @@
+.input-header {
+    input {
+        border-bottom: 1px solid $white;
+        max-width: 281px;
+        display: none;
+        animation: opacidade 0.3s ease-in-out backwards;
+        &:focus {
+            display: block;
+        }
+    }
+    &:hover {
+        input {
+            display: block;
+        }
+    }
+}
+
+@keyframes opacidade {
+    0% {
+        opacity: 0%;
+    }
+    100% {
+        opacity: 100%;
+    }
+}
+
+@media (max-width: 991.98px) {
+    .input-header {
+        input {
+            display: block;
+        }
+    }
+}
+
+.input-posts {
+    width: 236px;
+    input {
+        height: 53px;
+        &:focus {
+            outline: none;
+        }
+        &::placeholder {
+            color: $fumaca-extra-dark;
+        }
+    }
+}
