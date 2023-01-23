@@ -1,4 +1,4 @@
-from models.database.database import db, Column, String, Integer
+from models.database.database import db, Column, String
 
 class TipoEquipamento(db.Model):
     __tablename__ = "tipo_material"
@@ -7,14 +7,13 @@ class TipoEquipamento(db.Model):
 
     def __init__(self, nome:str):
         """
-        ``id``: int | identificador único (chave primária) no banco de dados.
         ``nome``: str | nome do tipo de material.
         """
         self.nome = nome
 
     def cadastrar(self):
         """
-        Faz o registro do novo tipo de material no banco de dados.
+        Faz o registro do novo tipo de equipamento no banco de dados.
         """
         db.session.add(self)
         db.session.commit()
@@ -22,7 +21,7 @@ class TipoEquipamento(db.Model):
     @staticmethod
     def listar():
         """
-        Retorna uma lista contendo todos os tipos de materiais registrados no banco de dados.
+        Retorna uma lista contendo todos os tipos de equipamento registrados no banco de dados.
         """
         lista_tipos_material = TipoEquipamento.query.all()
         return lista_tipos_material
