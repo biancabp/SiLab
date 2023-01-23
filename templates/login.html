@@ -1,51 +1,74 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 
 <head>
   <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/style.css') }}" />
-  <title>SiLab</title>
+
+  <title>Login - Silab</title>
+
+  <!-- fonte -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Poppins:wght@100;200;300;400;600;700;800;900&display=swap"
+    rel="stylesheet">
+
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+  <!-- css -->
+  <link rel="stylesheet" href="../dist/css/style.css" />
 </head>
 
-<body>
-
-  <div class="containe"> 
-    <div class="forms-container">
-      <div class="signin-signup">
-        <form action="{{ url_for('usuario.login') }}" method="POST" class="sign-in-form">
-          <h2 class="title">Login</h2>
-          <div class="input-field">
-            <i class="fas fa-user"></i>
-            <input type="text" placeholder="Matricula" name="matricula"/>
-          </div>
-          <div class="input-field">
-            <i class="fas fa-lock"></i>
-            <input type="password" placeholder="Senha" name="senha"/>
-          </div>
-          <input type="submit" value="Acessar" class="btn solid" />
-          
-      </div>
+<body class="login">
+  <nav class="navbar navbar-light bg-primary">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+        <img src="/dist/image/logo.svg" alt="" width="100" height="auto">
+      </a>
     </div>
+  </nav>
 
-    <div class="panels-container">
-      <div class="panel left-panel">
-        <div class="content">
-          <h1>LOREM IPSUM</h1>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ullamcorper faucibus lacus, in aliquam elit
-            porttitor eget.
-          </p> 
-          <img src="{{ url_for('static', filename='assets/img/retangulo.svg') }}" class="image" alt="" />
-          <a href="">Lorem ipsum dolor</a>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-4 offset-md-1">
+        <div class="panels-container">
+          <div class="panel left-panel">
+            <div class="content align-items-center pt-awe-80">
+              <h1 class="fz-64 fw-semi-bold twxt-dark-2">Bem vindo!</h1>
+              <p class="fz-24 pb-awe-24">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ullamcorper faucibus. 
+              </p>
+              <img src="/dist/image/bg-login.svg" class="image" alt="" />
+            </div>
+
+          </div>
         </div>
-
       </div>
+      <div class="col-4 offset-md-3 align-items-center d-flex">
+        <div class="forms-container">
+          <form>
+
+            <h3 class="fw-semi-bold fz-40 text-dark-2 pb-awe-24">Login</h3>
+            <div class="input-field border border-2 mb-4">
+              <i class='bx bxs-user fz-24'></i>
+              <input type="text" placeholder="Matricula" />
+            </div>
+            <div class="input-field border border-2 mb-4" id="password">
+              <i class='bx bxs-lock-alt bi bi-eye-slash fz-24' id="togglePassword"></i>
+              <input type="password" placeholder="Senha" />
+            </div>
+            <div class="d-flex justify-content-center">
+            <button type="button" class="btn btn-primary-light ps-awe-48 pe-awe-48 pb-awe-12 pt-awe-12 acess">Acessar</button></div>
+          </form>
+        </div>
+      </div>
+
+
     </div>
   </div>
-
-  <script src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
+  <script src="/assets/js/main.js"></script>
 </body>
 
 </html>
