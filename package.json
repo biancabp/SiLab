@@ -1,0 +1,21 @@
+{
+  "name": "comidia",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "sass": "sass --watch src/sass/style.scss:dist/css/style.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/awe-zn/site-hd.git"
+  },
+  "author": "",
+  "license": "",
+  "homepage": "",
+  "dependencies": {
+    "bootstrap": "^5.0.2",
+    "sass": "^1.54.9"
+  },
+  "devDependencies": {}
+}
