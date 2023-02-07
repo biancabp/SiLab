@@ -1,4 +1,4 @@
-from models.database.database import db, Column, String, SmallInteger, Enum, ForeignKey
+from models.database.database import db, Column, String, SmallInteger, Enum
 
 class Turma(db.Model):
     """
@@ -9,7 +9,7 @@ class Turma(db.Model):
     cod = Column(String(10), primary_key=True)
     ano = Column(SmallInteger)
     turno = Column(Enum('Matutino', 'Vespertino', 'Noturno')) 
-    curso = Column(ForeignKey("curso.nome_curso"))
+    curso = Column(Enum("Eletrônica", "Comércio", "Informática para internet"))
     qtd_alunos = Column(SmallInteger)
 
     def __init__(self, cod:str, ano:int, turno:str, curso:str, qtd_alunos:int):

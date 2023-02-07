@@ -18,14 +18,15 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
     <!-- css -->
-    <link rel="stylesheet" href="../dist/css/style.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='../dist/css/style.css') }}" />
 </head>
 
 <body id="">
+    {{v[0]}}
     <nav class="navbar navbar-light bg-primary">
         <div class="container">
             <a class="navbar-brand" href="#">
-                <img src="../dist/image/box.svg" alt="">
+                <img src="{{ url_for('static', filename='../dist/image/box.svg') }}" alt="">
             </a>
         </div>
         </div>
@@ -34,14 +35,14 @@
     <div class="sidebar mt-awe-24">
         <div class="container pb-awe-24 text-center">
             <a class="navbar-brand pb-awe-24" href="#">
-                <img src="../dist/image/logo.svg" alt="" width="100" height="auto" class="">
+                <img src="{{ url_for('static', filename='../dist/image/logo.svg') }}" alt="" width="100" height="auto" class="">
             </a>
         </div>
 
         <div class="d-flex align-items-center justify-content-center flex-wrap">
             <div class="">
                 <div class="profile justify-content-center">
-                    <img src="../dist/image/profile.svg " class="rounded mx-auto d-block pt-awe-14" alt="">
+                    <img src="{{ url_for('static', filename='../dist/image/profile.svg') }}" class="rounded mx-auto d-block pt-awe-14" alt="">
                     <p class="d-block fw-semi-bold fz-16 text-primary-light-2 text-center pt-awe-24">Nome Sobrenome</p>
                     <p class="d-block fz-16 text-aco text-center">Tutor/Professor </p>
                     <div class="d-flex justify-content-center">
@@ -132,7 +133,7 @@
                         </div>
 
                         <div class="modal-body">
-                            <form>
+                            <form method="POST" action="{{ url_for('formula_quimica.cadastrar_formula_quimica') }}">
 
                                 <div class="d-flex justify-content-between">
                                     <div class="row">
@@ -142,7 +143,7 @@
                                                     <label for="message-text" class="col-form-label fw-semi-bold" placeholder="00">Fórmula:</label>
                                                     <div class="d-flex justify-content-between">
                                                         <input type="text" class="form-control me-awe-24"
-                                                            id="recipient-name">
+                                                            id="recipient-name" name="formula-quimica">
                                                     </div>
                                                 </div>
                                             </div>
@@ -159,7 +160,7 @@
                                                     <label for="message-text" class="col-form-label fw-semi-bold" placeholder="00">Nome:</label>
                                                     <div class="d-flex justify-content-between">
                                                         <input type="text" class="form-control me-awe-24"
-                                                            id="recipient-name">
+                                                            id="recipient-name" name="nome">
                                                     </div>
                                                 </div>
                                             </div>
@@ -169,12 +170,13 @@
                                 </div>
 
 
-                            </form>
+                            
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary fw-medium border-primary-dark-3 text-primary-dark-3" data-bs-dismiss="modal">Cancelar</button>
-                            <button type="button" class="btn btn-primary-light">Salvar</button>
+                            <button type="submit" class="btn btn-primary-light">Salvar</button>
                         </div>
+                    </form>
                     </div>
                 </div>
             </div>
@@ -201,6 +203,7 @@
                                 <td>00000</td>
                                 <td>Lorem Ipsum</td>
                                 <td class="icons">
+                                    <form method="POST" action="{{ url_for('formula_quimica.editar_formula_quimica') }}">
                                     <i class='bx bxs-edit-alt text-primary-light' data-bs-toggle="modal"
                                         data-bs-target="#exampleModal"></i>
                                     <div class="modal fade" id="exampleModal" tabindex="-1"
@@ -211,7 +214,7 @@
                                                     <h1 class="modal-title fz-18 fw-semi-bold text-primary-dark-3"
                                                         id="exampleModalLabel">Editar fórmula - 000
                                                     </h1>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    <button type="submit" class="btn-close" data-bs-dismiss="modal"
                                                         aria-label="Close"></button>
                                                 </div>
                                                 <div class="d-flex justify-content-center">
@@ -222,7 +225,7 @@
                                                                     <label for="message-text" class="col-form-label fw-semi-bold text-center" placeholder="00">Fórmula:</label>
                                                                     <div class="d-flex justify-content-between">
                                                                         <input type="text" class="form-control me-awe-24"
-                                                                            id="recipient-name">
+                                                                            id="recipient-name" name="nova-formula-quimica">
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -239,7 +242,7 @@
                                                                     <label for="message-text" class="col-form-label fw-semi-bold text-center" placeholder="00">Nome:</label>
                                                                     <div class="d-flex justify-content-between">
                                                                         <input type="text" class="form-control me-awe-24"
-                                                                            id="recipient-name">
+                                                                            id="recipient-name" name="nome">
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -257,6 +260,7 @@
                                         </div>
                                     </div>
                                     <i class='bx bxs-trash-alt text-primary-light'></i>
+                                </form>
                                 </td>
                             </tr>
                             <tr>

@@ -1,17 +1,8 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> front-end
 node_modules
-
 yarn.lock
 package-lock.json
-
-<<<<<<< HEAD
 .vscode
-=======
 **/__pycache__
->>>>>>> back-end
-=======
 .vscode
->>>>>>> front-end
+settings.json
+package.json

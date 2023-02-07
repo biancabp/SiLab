@@ -1,7 +1,7 @@
 from models.database.database import db, Column, String
 
 class TipoEquipamento(db.Model):
-    __tablename__ = "tipo_material"
+    __tablename__ = "tipo_equipamento"
 
     nome = Column(String(100), primary_key=True)
 

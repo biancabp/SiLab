@@ -1,8 +1,6 @@
 from models.database.database import db, Column, String, Integer, Numeric, Enum, ForeignKey
-from models.aula import Aula
 from models.reagente import Reagente
 from models.many_to_many_relationships.solucao.solucao_usa_reagente import SolucaoUsaReagente
-from models.many_to_many_relationships.aula.aula_solucao import AulaSolucao
 from sqlalchemy.exc import IntegrityError
 
 class Solucao(db.Model):
@@ -93,12 +91,6 @@ class Solucao(db.Model):
         elif(tipo_filtro == "estado-materia"):
             lista_solucoes = Solucao.query.filter_by(estado_materia=valor_filtro).all()
             
-        elif(tipo_filtro == "ate-data"):
-            lista_solucoes = Solucao.query.join(Aula, Aula.id == Solucao.id).filter(Aula.data <= valor_filtro).all()
-        
-        elif(tipo_filtro == "apos-data"):
-            lista_solucoes = Solucao.query.join(Aula, Aula.id == Solucao.id).filter(Aula.data >= valor_filtro).all()
-        
         else:
             lista_solucoes = Solucao.query.all()
         

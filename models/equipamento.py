@@ -11,7 +11,7 @@ class Equipamento(db.Model):
     qtd = db.Column(SmallInteger, nullable=False)
     volume = Column(SmallInteger, nullable=False)
     tamanho = Column(SmallInteger, nullable=False)
-    tipo_equipamento = Column(ForeignKey('tipo_equipamento.id'), nullable=False)
+    tipo_equipamento = Column(ForeignKey('tipo_equipamento.nome'), nullable=False)
     lugar = Column(String(100), nullable=False)
     danificado = Column(Boolean)
 

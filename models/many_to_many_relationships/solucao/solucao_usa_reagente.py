@@ -1,5 +1,5 @@
 from models.database.database import db, Column, Numeric, ForeignKey
-from sqlalchemy.ext import IntegrityError
+from sqlalchemy.exc import IntegrityError
 
 from models.reagente import Reagente
 
