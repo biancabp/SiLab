@@ -7,7 +7,7 @@ equipamento_blueprint = Blueprint('equipamento', __name__)
 @equipamento_blueprint.route('/equipamentos')
 @login_required
 def equipamentos():
-    return render_template('pages/equipamentos.html')
+    return render_template('equipamentos.html')
 
 @equipamento_blueprint.route('/equipamentos/cadastrar')
 @login_required

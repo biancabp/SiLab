@@ -18,14 +18,14 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
   <!-- css -->
-  <link rel="stylesheet" href="../dist/css/style.css" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='dist/css/style.css') }}" />
 </head>
 
 <body class="login">
   <nav class="navbar navbar-light bg-primary">
     <div class="container">
       <a class="navbar-brand" href="#">
-        <img src="/dist/image/logo.svg" alt="" width="100" height="auto">
+        <img src="{{ url_for('static', filename='/dist/image/logo.svg') }}" alt="" width="100" height="auto">
       </a>
     </div>
   </nav>
@@ -40,7 +40,7 @@
               <p class="fz-24 pb-awe-24">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ullamcorper faucibus. 
               </p>
-              <img src="/dist/image/bg-login.svg" class="image" alt="" />
+              <img src="{{ url_for('static', filename='dist/image/bg-login.svg') }}" class="image" alt="" />
             </div>
 
           </div>
@@ -48,60 +48,60 @@
       </div>
       <div class="col-5 offset-md-2 align-items-center d-flex">
         <div class="forms-container">
-          <form>
+          <form method="POST" action="{{ url_for('usuario.registrar_usuario') }}">
 
             <h3 class="fw-semi-bold fz-40 text-dark-2 pb-awe-24 pt-awe-40">Cadastro</h3>
             <!-- Email input -->
             <div class="input-field border border-2 mb-4">
               <i class='bx bxs-user fz-24'></i>
-              <input type="text" placeholder="Nome" />
+              <input type="text" placeholder="Nome" name="nome"/>
             </div>
 
             <div class="input-field border border-2 mb-4">
               <i class='bx bxs-id-card fz-24'></i>
-              <input type="text" placeholder="Matrícula" />
+              <input type="text" placeholder="Matrícula" name="matricula"/>
             </div>
 
             <div class="input-field border border-2 mb-4">
               <i class='bx bxs-envelope fz-24'></i>
-              <input type="text" placeholder="Email escolar" />
+              <input type="text" placeholder="Email escolar" name="email"/>
             </div>
 
             <div class="input-field border border-2 mb-4">
               <i class='bx bxs-user fz-24'></i>
-              <input type="text" placeholder="Confirme email" />
+              <input type="text" placeholder="Confirme email" name="confirme-email"/>
             </div>
           
             <!-- Password input -->
             <div class="input-field border border-2 mb-4" id="password">
               <i class='bx bxs-lock-alt bi bi-eye-slash' id="togglePassword"></i>
-              <input type="password" placeholder="Senha" />
+              <input type="password" placeholder="Senha" name="senha"/>
             </div>
 
             <div class="input-field border border-2 mb-4" id="password">
               <i class='bx bxs-lock-alt bi bi-eye-slash' id="togglePassword"></i>
-              <input type="password" placeholder="Confirme senha" />
+              <input type="password" placeholder="Confirme senha" name="confirme-senha"/>
             </div>
 
             <div class="d-flex justify-content-center pb-awe-24">
             <div class="form-check pe-awe-40">
-              <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+              <input class="form-check-input" type="radio"  id="flexRadioDefault1" name="tipo-usuario" value="Tutor">
               <label class="form-check-label" for="flexRadioDefault1">
                 Tutor
               </label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+              <input class="form-check-input" type="radio"  id="flexRadioDefault2" checked name="tipo-usuario" value="Professor">
               <label class="form-check-label" for="flexRadioDefault2">
                 Professor
               </label>
             </div></div>
             <div class="d-flex justify-content-center mb-2">
-              <button type="button" class="btn btn-primary-light ps-awe-80 pe-awe-80 pb-awe-12 pt-awe-12">Cadastrar</button>
+              <button type="submit" class="btn btn-primary-light ps-awe-80 pe-awe-80 pb-awe-12 pt-awe-12">Cadastrar</button>
             </div>
 
               <div class="d-flex justify-content-center">
-                <div class=""><span class="fz-16 text-gray-1">Já possui uma conta? <a href="#login.html" class="fw-medium">Entre!</a></span></div></div>
+                <div class=""><span class="fz-16 text-gray-1">Já possui uma conta? <a href="{{ url_for('usuario.login') }}" class="fw-medium">Entre!</a></span></div></div>
           </form>
         </div>
       </div>
@@ -109,7 +109,7 @@
 
     </div>
   </div>
-  <script src="/assets/js/main.js"></script>
+  <script src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
 </body>
 
 </html>

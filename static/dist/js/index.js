@@ -1,16 +1,3 @@
-function handleEdital(editalID) {
-  const listaDeEditais = document.querySelectorAll('[data-edital]');
-  const editalClicado = document.querySelector(`[data-edital='${editalID}']`);
-
-  listaDeEditais.forEach((edital) => {
-    if (edital != editalClicado) {
-      edital.classList.add('is-close');
-    }
-  });
-
-  editalClicado.classList.toggle('is-close');
-}
-
 $('.owl-carousel').owlCarousel({
   loop:true,
   margin:10,
@@ -49,4 +36,23 @@ const showNavbar = (toggleId, navId, bodyId, headerId) =>{
       })
   }
 }
+
+const togglePassword = document
+.querySelector('#togglePassword');
+
+const password = document.querySelector('#password');
+
+togglePassword.addEventListener('click', () => {
+
+// Toggle the type attribute using
+// getAttribure() method
+const type = password
+    .getAttribute('type') === 'password' ?
+    'text' : 'password';
+      
+password.setAttribute('type', type);
+
+// Toggle the eye and bi-eye icon
+this.classList.toggle('bi-eye');
+});
 

@@ -4,10 +4,10 @@ from models.solucao import Solucao
 
 solucao_blueprint = Blueprint('solucao', __name__)
 
-@solucao_blueprint.route('/solucoees')
+@solucao_blueprint.route('/solucoes')
 @login_required
 def solucoes():
-    return render_template('pages/solucoes.html')
+    return render_template('solucoes.html')
 
 @solucao_blueprint.route('/solucoes/cadastrar')
 @login_required
@@ -19,7 +19,7 @@ def cadastrar_solucao():
 
     nova_solucao = Solucao(nome, autor, formula_quimica, estado_materia, densidade, massa, concentracao, deletado_planejado)
     nova_solucao.cadastrar(reagentes)
-    return render_template('pages/solucoes.html')
+    return render_template('solucoes.html')
 
 @solucao_blueprint.route('/solucoes/editar')
 @login_required
@@ -28,7 +28,7 @@ def editar_solucao():
     estado_materia, densidade, massa = request.form.get('estado-materia'), request.form.get('densidade'), request.form.get('massa')
     concentracao, deletado_planejado = request.form.get('concentracao'), request.form.get('deletado-planejado')
     reagentes = request.form.get('reagentes')
-    return render_template('pages/solucoes.html')
+    return render_template('solucoes.html')
 
 @solucao_blueprint.route('/solucoes/deletar')
 @login_required

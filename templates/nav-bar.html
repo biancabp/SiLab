@@ -10,73 +10,86 @@
 {% block body %}
 {% endblock %}
 
-<header class="header" id="header">
-    <div class="header__toggle">
-        <i class='bx bx-menu' id="header-toggle"></i>
-    </div>
-    <div class="perfis">
-        <div class="topnav">
-        </div>
-    </div>
-    </div>
-</header>
-
-<div class="l-navbar" id="nav-bar">
-    <nav class="nav">
-        <div>
-            <a href="#" class="nav__logo d-flex">
-                <img src="{{ url_for('static', filename='assets/img/Logo.svg') }}" alt="">
-                <span class="nav__logo-name">Si<span class="color-logo">Lab</span></span>
-            </a>
-
-            <div class="nav__list">
-                <a href="#" class="nav__link">
-                    <i class='bx bxs-dashboard'></i>
-                    <span class="nav__name">Dashboard</span>
-                </a>
-
-                <a href="#" class="nav__link">
-                    <i class='bx bxs-box'></i>
-                    <span class="nav__name">Materiais</span>
-                </a>
-
-                <a href="#" class="nav__link">
-                    <i class='bx bxs-vial'></i>
-                    <span class="nav__name">Reagentes</span>
-                </a>
-
-                <a href="#" class="nav__link">
-                    <i class='bx bxs-bong'></i>
-                    <span class="nav__name">Soluções</span>
-                </a>
-
-                <a href="{{ url_for('aula.aulas') }}" class="nav__link">
-                    <i class='bx bxs-graduation'></i>
-                    <span class="nav__name">Aulas</span>
-                </a>
-
-                <!--<a href=" url_for('main.roteiros') " class="nav__link">
-                    <i class='bx bxs-notepad'></i>
-                    <span class="nav__name">Roteiro</span>
-                </a>
-                -->
-                <a href="{{ url_for('turma.turmas') }}" class="nav__link">
-                    <i class='bx bxs-group'></i>
-                    <span class="nav__name">Turmas</span>
-                </a>
-
-                <a href="#" class="nav__link">
-                    <i class='bx bxs-cog'></i>
-                    <span class="nav__name">Configurações</span>
-                </a>
-            </div>
-        </div>
-
-        <a href="#" class="nav__link">
-            <i class='bx bx-log-out nav__icon'></i>
-            <span class="nav__name">Sair</span>
+<nav class="navbar navbar-light bg-primary">
+    <div class="container">
+        <a class="navbar-brand" href="#">
+            <img src="{{ url_for('static', filename='dist/image/box.svg') }}" alt="">
         </a>
-    </nav>
+    </div>
+    </div>
+</nav>
+
+<div class="sidebar mt-awe-24">
+    <div class="container pb-awe-24 text-center">
+        <a class="navbar-brand pb-awe-24" href="#">
+            <img src="{{ url_for('static', filename='dist/image/logo.svg') }}" alt="" width="100" height="auto" class="">
+        </a>
+    </div>
+
+    <div class="d-flex align-items-center justify-content-center flex-wrap">
+        <div class="">
+            <div class="profile justify-content-center">
+                <img src="{{ url_for('static', filename='dist/image/profile.svg') }}" class="rounded mx-auto d-block pt-awe-14" alt="">
+                <p class="d-block fw-semi-bold fz-16 text-primary-light-2 text-center pt-awe-24">Nome Sobrenome</p>
+                <p class="d-block fz-16 text-aco text-center">Tutor/Professor </p>
+                <div class="d-flex justify-content-center">
+                    <i class='bx bxs-cog text-aco text-center fz-24'></i>
+                </div>
+            </div>
+            <ul class="nav text-center pt-awe-32">
+                <li>
+                    <a href="#">
+                        <i class='bx bxs-category fz-24 text-aco'></i>
+                        <span class="list text-decoration-none ps-awe-12">Painel</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url_for('equipamento.equipamentos') }}">
+                        <i class='bx bxs-box fz-24 text-aco'></i>
+                        <span class="list text-decoration-none">Equipamentos</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url_for('reagente.reagentes') }}">
+                        <i class='bx bxs-vial fz-24 text-aco'></i>
+                        <span class="list text-decoration-none">Reagentes</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url_for('solucao.solucoes') }}">
+                        <i class='bx bxs-bong fz-24 text-aco'></i>
+                        <span class="list text-decoration-none">Soluções</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url_for('formula_quimica.formulas_quimica') }}">
+                        <i class='bx bxs-notepad fz-24 text-aco'></i>
+                        <span class="list text-decoration-none">Fórmulas</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url_for('aula.aulas') }}">
+                        <i class='bx bxs-bong fz-24 text-aco'></i>
+                        <span class="list text-decoration-none">Aulas</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ url_for('turma.turmas') }}">
+                        <i class='bx bxs-group fz-24 text-aco'></i>
+                        <span class="list text-decoration-none">Turmas</span>
+                    </a>
+                </li>
+
+                <li class="mt-awe-32">
+                    <a href="{{ url_for('usuario.logout') }}">
+                        <i class='bx bx-log-out fz-18 text-aco'></i>
+                        <span class="list text-decoration">Sair</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
 </div>
 
 {% block content %}

@@ -18,14 +18,14 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
   <!-- css -->
-  <link rel="stylesheet" href="../dist/css/style.css" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='dist/css/style.css') }}" />
 </head>
 
 <body class="login">
   <nav class="navbar navbar-light bg-primary">
     <div class="container">
       <a class="navbar-brand" href="#">
-        <img src="/dist/image/logo.svg" alt="" width="100" height="auto">
+        <img src="{{ url_for('static', filename='dist/image/logo.svg') }}" alt="" width="100" height="auto">
       </a>
     </div>
   </nav>
@@ -40,7 +40,7 @@
               <p class="fz-24 pb-awe-24">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ullamcorper faucibus. 
               </p>
-              <img src="/dist/image/bg-login.svg" class="image" alt="" />
+              <img src="{{ url_for('static', filename='dist/image/bg-login.svg') }}" class="image" alt="" />
             </div>
 
           </div>
@@ -48,19 +48,19 @@
       </div>
       <div class="col-4 offset-md-3 align-items-center d-flex">
         <div class="forms-container">
-          <form>
+          <form method="POST" action="{{ url_for('usuario.login') }}">
 
             <h3 class="fw-semi-bold fz-40 text-dark-2 pb-awe-24">Login</h3>
             <div class="input-field border border-2 mb-4">
               <i class='bx bxs-user fz-24'></i>
-              <input type="text" placeholder="Matricula" />
+              <input type="text" placeholder="Matricula" name="matricula"/>
             </div>
             <div class="input-field border border-2 mb-4" id="password">
               <i class='bx bxs-lock-alt bi bi-eye-slash fz-24' id="togglePassword"></i>
-              <input type="password" placeholder="Senha" />
+              <input type="password" placeholder="Senha" name="senha"/>
             </div>
             <div class="d-flex justify-content-center">
-            <button type="button" class="btn btn-primary-light ps-awe-48 pe-awe-48 pb-awe-12 pt-awe-12 acess">Acessar</button></div>
+            <button type="submit" class="btn btn-primary-light ps-awe-48 pe-awe-48 pb-awe-12 pt-awe-12 acess">Acessar</button></div>
           </form>
         </div>
       </div>
@@ -68,7 +68,7 @@
 
     </div>
   </div>
-  <script src="/assets/js/main.js"></script>
+  <script src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
 </body>
 
 </html>

@@ -3,18 +3,19 @@ from flask_login import LoginManager
 
 from secrets import token_hex
 from models.database.database import db
+from models.usuario import Usuario
 
 from routes.aula import aula_blueprint
 from routes.usuario import usuario_blueprint
 from routes.turma import turma_blueprint
-from models.usuario import Usuario
+from routes.solucao import solucao_blueprint
 
 from flask_migrate import Migrate
 from routes.equipamento import equipamento_blueprint
 from routes.reagente import reagente_blueprint
 from routes.formula_quimica import formula_quimica_blueprint
-from models.formula_quimica import FormulaQuimica
-from models.tipo_equipamento import TipoEquipamento
+# from models.formula_quimica import FormulaQuimica
+# from models.tipo_equipamento import TipoEquipamento
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -36,4 +37,5 @@ app.register_blueprint(turma_blueprint)
 app.register_blueprint(equipamento_blueprint)
 app.register_blueprint(formula_quimica_blueprint)
 app.register_blueprint(aula_blueprint)
+app.register_blueprint(solucao_blueprint)
 app.run("0.0.0.0", debug=True)
