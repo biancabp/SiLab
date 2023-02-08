@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Editar Aulas - Silab</title>
+    <link rel="icon" href="/dist/image/icon.svg">
+
+    <!-- fonte -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Poppins:wght@100;200;300;400;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <!-- css -->
+    <link rel="stylesheet" href="../dist/css/style.css" />
+</head>
+
+<body id="">
+    <nav class="navbar navbar-light bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="/dist/image/box.svg" alt="">
+            </a>
+        </div>
+        </div>
+    </nav>
+
+    <div class="sidebar mt-awe-24">
+        <div class="container pb-awe-24 text-center">
+            <a class="navbar-brand pb-awe-24" href="#">
+                <img src="/dist/image/logo.svg" alt="" width="100" height="auto" class="">
+            </a>
+        </div>
+
+        <div class="d-flex align-items-center justify-content-center flex-wrap">
+            <div class="">
+                <div class="profile justify-content-center">
+                    <img src="/dist/image/profile.svg " class="rounded mx-auto d-block pt-awe-14" alt="">
+                    <p class="d-block fw-semi-bold fz-16 text-primary-light-2 text-center pt-awe-24">Nome Sobrenome</p>
+                    <p class="d-block fz-16 text-aco text-center">Tutor/Professor </p>
+                    <div class="d-flex justify-content-center">
+                        <i class='bx bxs-cog text-aco text-center fz-24'></i>
+                    </div>
+                </div>
+                <ul class="nav text-center pt-awe-32">
+                    <li>
+                        <a href="#">
+                            <i class='bx bxs-category fz-24 text-aco'></i>
+                            <span class="list text-decoration-none ps-awe-12">Painel</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class='bx bxs-box fz-24 text-aco'></i>
+                            <span class="list text-decoration-none">Equipamentos</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class='bx bxs-vial fz-24 text-aco'></i>
+                            <span class="list text-decoration-none">Reagentes</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class='bx bxs-bong fz-24 text-aco'></i>
+                            <span class="list text-decoration-none">Soluções</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class='bx bxs-notepad fz-24 text-aco'></i>
+                            <span class="list text-decoration-none">Fórmulas</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class='bx bxs-bong fz-24 text-aco'></i>
+                            <span class="list text-decoration-none">Aulas</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            <i class='bx bxs-group fz-24 text-aco'></i>
+                            <span class="list text-decoration-none">Turmas</span>
+                        </a>
+                    </li>
+
+                    <li class="mt-awe-32">
+                        <a href="#">
+                            <i class='bx bx-log-out fz-18 text-aco'></i>
+                            <span class="list text-decoration">Sair</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="container ps-awe-80">
+        <div class="row">
+            <div class="pt-awe-40 col-md-5">
+                <h1 class="fz-40 fw-semi-bold">Editar aula</h1>
+            </div> <!-- Modal -->
+        </div>
+
+        <div class="row">
+            <div class="pt-awe-16 col-md-3 d-flex pb-awe-40 ">
+                <div><h3 class="fz-32 fw-semi-bold me-awe-16">Status</h3></div>
+                <div class="input-group mb-3">
+                    <select class="form-select form-select" aria-label=".form-select-sm example">
+                        <option selected>Planejada</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+            </div> <!-- Modal -->
+        </div>
+
+        <div class="row mx-auto">
+            <div class="col-4">
+                <div><span class="d-block fw-semi-bold" id="">Aula:</span></div>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Lorem ipsum..." aria-label="Username"
+                        aria-describedby="basic-addon1">
+                </div>
+            </div>
+
+            <div class="col-2">
+                <div><span class="d-block fw-semi-bold" id="">Professor:</span></div>
+                <div class="input-group mb-3">
+
+                    <select class="form-select form-select" aria-label=".form-select-sm example">
+                        <option selected>Nome Sobrenome</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-2">
+                <div><span class="d-block fw-semi-bold" id="">Turma:</span></div>
+                <div class="input-group mb-3">
+
+                    <select class="form-select form-select" aria-label=".form-select-sm example">
+                        <option selected>0.0000.0M</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-2">
+                <div><span class="d-block fw-semi-bold" id="">Data:</span></div>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="00/00/0000" aria-label="Username"
+                        aria-describedby="basic-addon1">
+                </div>
+            </div>
+        </div>
+
+        <div class="row pt-awe-32">
+           <div class="col-10">
+            <div><span class="d-block fw-semi-bold" id="">Roteiro:</span></div>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control pb-awe-80" placeholder="Lorem ipsum..." aria-label="Username"
+                    aria-describedby="basic-addon1">
+            </div>
+           </div>
+        </div>
+
+        <div class="row pt-awe-32">
+            <div class="col-3 me-awe-64">
+                <div><span class="d-block fw-semi-bold" id="">Equipamento:</span></div>
+                <div class="input-group mb-3">
+
+                    <select class="form-select form-select" aria-label=".form-select-sm example">
+                        <option selected>Equipamento</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+                <div class="input-group mb-3">
+                    <select class="form-select form-select" aria-label=".form-select-sm example">
+                        <option selected>Equipamento</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+                <div class="input-group mb-3">
+                    <select class="form-select form-select" aria-label=".form-select-sm example">
+                        <option selected>Equipamento</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+                <div class="input-group mb-3">
+                    <select class="form-select form-select" aria-label=".form-select-sm example">
+                        <option selected>Equipamento</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-3 me-awe-64">
+                <div><span class="d-block fw-semi-bold" id="">Reagente:</span></div>
+                <div class="input-group mb-3">
+
+                    <select class="form-select form-select" aria-label=".form-select-sm example">
+                        <option selected>Reagente</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-3">
+                <div><span class="d-block fw-semi-bold" id="">Solução(utilizada):</span></div>
+                <div class="input-group mb-3">
+                    <select class="form-select form-select" aria-label=".form-select-sm example">
+                        <option selected>Solução</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+                <div><span class="d-block pt-awe-24 fw-semi-bold" id="">Solução(produzida):</span></div>
+                <div class="input-group mb-3">
+                    <select class="form-select form-select" aria-label=".form-select-sm example">
+                        <option selected>Solução</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-10 justify-content-end d-flex">
+                <button type="button"
+                    class="btn btn-white border-primary-dark-3 text-primary-dark-3 fz-16 me-awe-24"
+                    data-bs-toggle="modal" data-bs-target="#exampleModal1">
+                    Cancelar
+                </button>
+                <button type="button" class="btn btn-primary-light fz-16" data-bs-toggle="modal"
+                    data-bs-target="#exampleModal1">
+                    Salvar
+                </button>
+            </div>
+        </div>
+
+    </div>
+    <!--===== MAIN JS =====-->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>

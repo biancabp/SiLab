@@ -18,7 +18,7 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
     <!-- css -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='dist/css/style.css') }}" />
+    <link rel="stylesheet" href="../dist/css/style.css" />
 </head>
 
 <body id="">
@@ -26,7 +26,7 @@
     <nav class="navbar navbar-light bg-primary">
         <div class="container">
             <a class="navbar-brand" href="#">
-                <img src="{{ url_for('static', filename='dist/dist/image/box.svg') }}" alt="">
+                <img src="/dist/image/box.svg" alt="">
             </a>
         </div>
         </div>
@@ -35,14 +35,14 @@
     <div class="sidebar mt-awe-24">
         <div class="container pb-awe-24 text-center">
             <a class="navbar-brand pb-awe-24" href="#">
-                <img src="{{ url_for('static', filename='dist/dist/image/logo.svg') }}" alt="" width="100" height="auto" class="">
+                <img src="/dist/image/logo.svg" alt="" width="100" height="auto" class="">
             </a>
         </div>
 
         <div class="d-flex align-items-center justify-content-center flex-wrap">
             <div class="">
                 <div class="profile justify-content-center">
-                    <img src="{{ url_for('static', filename='dist/dist/image/profile.svg') }}" class="rounded mx-auto d-block pt-awe-14" alt="">
+                    <img src="/dist/image/profile.svg " class="rounded mx-auto d-block pt-awe-14" alt="">
                     <p class="d-block fw-semi-bold fz-16 text-primary-light-2 text-center pt-awe-24">Nome Sobrenome</p>
                     <p class="d-block fz-16 text-aco text-center">Tutor/Professor </p>
                     <div class="d-flex justify-content-center">
@@ -113,179 +113,13 @@
                 <div class="d-flex justify-content-between pb-awe-24">
 
                     <div class="col-12 justify-content-end d-flex">
-                        <button type="button" class="btn btn-primary-light fz-16" data-bs-toggle="modal"
-                            data-bs-target="#exampleModal1">
+                        <button type="button" class="btn btn-primary-light fz-16">
                             Cadastrar aula
                         </button>
                     </div>
                 </div>
             </div> <!-- Modal -->
         </div>
-
-        <div class="col-md-6">
-            <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fz-18 fw-semi-bold text-primary-dark-3" id="exampleModalLabel">
-                                Cadastrar reagente</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-
-                        <div class="modal-body">
-                            <form>
-                                <div class="d-flex justify-content">
-                                    <div class="row">
-                                        <div class="mb-3 me-awe-24">
-                                            <div class="col-md-12 d-flex">
-                                                <div>
-                                                    <label for="recipient-name" class="col-form-label">Reagente:</label>
-                                                    <div class=" d-flex justify-content-between">
-                                                        <select class="form-select form-select-md"
-                                                            aria-label=".form-select-md example">
-                                                            <option selected>Reagente - 000000</option>
-                                                            <option value="1">00000</option>
-                                                            <option value="2">00000</option>
-                                                            <option value="3">00000</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="ps-awe-24">
-                                                    <label for="message-text" class="col-form-label"
-                                                        placeholder="00">Massa:</label>
-                                                    <div class="d-flex justify-content-between">
-                                                        <input type="text" class="form-control me-awe-24"
-                                                            id="recipient-name">
-                                                        <select class="form-select form-select-sm"
-                                                            aria-label=".form-select-sm example">
-                                                            <option selected>g</option>
-                                                            <option value="1">3</option>
-                                                            <option value="2">2</option>
-                                                            <option value="3">1</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-
-                                <div class="d-flex justify-content-between">
-                                    <div class="row">
-                                        <div class="mb-3 me-awe-24">
-                                            <div class="col-md-12 d-flex">
-                                                <div class="">
-                                                    <label for="recipient-name" class="col-form-label">Estado:</label>
-                                                    <div class=" d-flex justify-content-between">
-                                                        <select class="form-select form-select-md"
-                                                            aria-label=".form-select-md example">
-                                                            <option selected class="text-prata-2">Lorem</option>
-                                                            <option value="1">1</option>
-                                                            <option value="2">2</option>
-                                                            <option value="3">3</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="ps-awe-24">
-                                                    <label for="message-text" class="col-form-label"
-                                                        placeholder="00">Volume:</label>
-                                                    <div class="d-flex justify-content-between">
-                                                        <input type="text" class="form-control me-awe-24"
-                                                            id="recipient-name">
-                                                        <select class="form-select form-select-sm"
-                                                            aria-label=".form-select-sm example">
-                                                            <option selected>m³</option>
-                                                            <option value="1">3</option>
-                                                            <option value="2">2</option>
-                                                            <option value="3">1</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-
-                                <div class="d-flex justify-content-between">
-                                    <div class="row">
-                                        <div class="mb-3 me-awe-24">
-                                            <div class="col-md-12 d-flex">
-                                                <div class="">
-                                                    <label for="message-text" class="col-form-label"
-                                                        placeholder="00">Validade:</label>
-                                                    <div class="d-flex justify-content-between">
-                                                        <input type="text" class="form-control me-awe-24"
-                                                            id="recipient-name">
-                                                    </div>
-                                                </div>
-                                                <div class="ps-awe-24">
-                                                    <label for="message-text" class="col-form-label"
-                                                        placeholder="00">Densidade:</label>
-                                                    <div class="d-flex justify-content-between">
-                                                        <input type="text" class="form-control me-awe-24"
-                                                            id="recipient-name">
-                                                        <select class="form-select form-select-md"
-                                                            aria-label=".form-select-md example">
-                                                            <option selected class="text-prata-2">g/m3
-                                                            </option>
-                                                            <option value="1">1</option>
-                                                            <option value="2">2</option>
-                                                            <option value="3">3</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-
-                                <div class="d-flex justify-content-between">
-                                    <div class="row">
-                                        <div class="mb-3 me-awe-24">
-                                            <div class="col-md-12 d-flex">
-                                                <div class="">
-                                                    <label for="message-text" class="col-form-label"
-                                                        placeholder="00">Local:</label>
-                                                    <div class="d-flex justify-content-between">
-                                                        <input type="text" class="form-control me-awe-24"
-                                                            id="recipient-name">
-                                                    </div>
-                                                </div>
-                                                <div class="ps-awe-24">
-                                                    <label for="message-text" class="col-form-label"
-                                                        placeholder="00">Quantidade:</label>
-                                                    <div class="d-flex justify-content-between">
-                                                        <input type="text" class="form-control me-awe-24"
-                                                            id="recipient-name">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-
-
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button"
-                                class="btn btn-secondary fw-medium border-primary-dark-3 text-primary-dark-3"
-                                data-bs-dismiss="modal">Cancelar</button>
-                            <button type="button" class="btn btn-primary-light">Salvar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-
-        <!-- Button trigger modal -->
 
 
         <div class="container">
@@ -2967,7 +2801,7 @@
                 <ul class="pagination">
                     <li class="page-item">
                         <span class="page-link">
-                            </span>
+                            << /span>
                     </li>
                     <li class="page-item" aria-current="page">
                         <span class="page-link">0</span>

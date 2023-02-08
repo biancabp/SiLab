@@ -1,22 +1,25 @@
 @import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
 
 //variáveis das cores
 $ui-color-primary-light:      #1970CF;
 $ui-color-primary:            #040C34;
 $ui-color-extra-primary:      #3A95E9;
-$danger:                      #C11616;
+$primary-1:                   #1970CF;
+$primary-light-2:             #4FE5F6;
 $primary-dark-1:              #1D1E24;
 $primary-dark-2:              #070708;
-$primary-dark-3:              #195080;
-$green:                       #27AE60;
+$primary-dark-3:              #1B47A6;
+$green:                       #03BA20;
 $green-2:                     #78C323;
-$black-2:                     #35363D;
+$danger:                      #BA0303;
+$black-2:                     #4E505B;
 $black-3:                     #333333;
-$aco:                         #273644;
+$aco:                         #97A1CB;
 $prata:                       #3C4B58;
 $prata-2:                     #77828C;
 $gray:                        #8492A6;
-$gray-1:                      #828282;
+$gray-1:                      #35363D;
 $gray-2:                      #8D9AA6;
 $fumaca-light:                #D3DDE6;
 $fumaca:                      #C3CFD9;
@@ -32,17 +35,19 @@ $transparent:               #00000000;
 
 $theme-colors: (
   "primary-light":          $ui-color-primary-light,
+  "primary-light-2":        $primary-light-2,
   "primary":                $ui-color-primary,
   "extra-primary":          $ui-color-extra-primary,
   "primary-dark-1":         $primary-dark-1,
   "primary-dark-2":         $primary-dark-2,
   "primary-dark-3":         $primary-dark-3,
-  "danger":                 $danger,
+  "primary-1":              $primary-1,
   "green":                  $green,
   "green-2":                $green-2,
   "black-2":                $black-2,
   "black-3":                $black-3,
   "aco":                    $aco,
+  "danger":                 $danger,
   "prata":                  $prata,
   "prata-2":                $prata-2,
   "gray":                   $gray,
@@ -63,7 +68,7 @@ $theme-colors: (
 
 
 //Variáveis das fontes
-$font-family-sans-serif: 'Work sans', sans-serif;
+$font-family-sans-serif: 'Work sans', sans-serif, 'Poppins', sans-serif;
 $font-sizes: (12: 12px, 14: 14px ,16: 16px, 18: 18px, 21: 21px, 24: 24px, 26: 26px, 28: 28px, 32: 32px, 40: 40px, 44: 44px, 64: 64px, 88: 88px, 156: 156px);
 $font-families: (open-sans: 'Work sans');
 
@@ -136,27 +141,34 @@ $accordion-button-active-icon:  url("/dist/image/svg/modal-btn-active.svg");
 $pagination-padding-y:              4px;
 $pagination-padding-x:              12px;
 
-$pagination-font-size:             18px;
+$pagination-font-size:             16px;
 
-$pagination-color:                  #2471B5;
+$pagination-color:                  #35363D;
 $pagination-bg:                     #ffffff;
-$pagination-border-radius:             4.30px;
+$pagination-border-radius:               15px;
 $pagination-border-width:                 1px;
 $pagination-margin-start:                12px;
-$pagination-border-color:           #2471B5;
+$pagination-border-color:           #35363D;
 
-$pagination-focus-color:            none;
+$pagination-focus-color:            #35363D;
 $pagination-focus-bg:               none;
 $pagination-focus-box-shadow:       none;
-$pagination-focus-outline:          1px solid #2471B5;
+$pagination-focus-outline:          1px solid #35363D;
 
-$pagination-hover-color:            #ffffff;
-$pagination-hover-bg:               #2471B5;
-$pagination-hover-border-color:     #2471B5;
+$pagination-hover-color:            #35363D;
+$pagination-hover-bg:               #ffffff;
+$pagination-hover-border-color:     #35363D;
 
 $pagination-active-color:           #ffffff;
-$pagination-active-bg:              #2471B5;
-$pagination-active-border-color:    #2471B5;
+$pagination-active-bg:              #35363D;
+$pagination-active-border-color:    #35363D;
+
+// form select
+$form-select-padding-x:             20px;
+$form-select-font-size:             16px;
+
+// modal
+$modal-content-border-color:        $ui-color-primary-light;
 
 // tabs
 
