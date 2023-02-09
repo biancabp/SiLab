@@ -18,7 +18,7 @@ def cadastrar_equipamento():
 
     novo_equipamento = Equipamento(localizacao, qtd, volume, tamanho, tipo_equipamento, lugar, danificado)
     novo_equipamento.cadastrar()
-    return render_template('pages/equipamentos.html')
+    return render_template('equipamentos.html')
 
 @equipamento_blueprint.route('/equipamentos/editar')
 @login_required
@@ -32,7 +32,7 @@ def editar_equipamento():
     equipamento = Equipamento.query.get(id_equipamento)
     equipamento.editar(localizacao, qtd, volume, tamanho, tipo_equipamento, lugar, danificado)
 
-    return render_template('pages/equipamentos.html')
+    return render_template('equipamentos.html')
 
 @equipamento_blueprint.route('/equipamentos/deletar')
 @login_required
@@ -41,4 +41,4 @@ def deletar_equipamento():
     equipamento = Equipamento.query.get(id_equipamento)
     equipamento.deletar()
 
-    return render_template('pages/equipamentos.html')
+    return render_template('equipamentos.html')

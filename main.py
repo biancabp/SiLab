@@ -4,6 +4,7 @@ from flask_login import LoginManager
 from secrets import token_hex
 from models.database.database import db
 from models.usuario import Usuario
+from models.tipo_equipamento import TipoEquipamento
 
 from routes.aula import aula_blueprint
 from routes.usuario import usuario_blueprint
@@ -38,4 +39,5 @@ app.register_blueprint(equipamento_blueprint)
 app.register_blueprint(formula_quimica_blueprint)
 app.register_blueprint(aula_blueprint)
 app.register_blueprint(solucao_blueprint)
-app.run("0.0.0.0", debug=True)
+if __name__ == '__main__':
+    app.run("0.0.0.0", debug=True)

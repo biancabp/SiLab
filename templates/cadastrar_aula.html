@@ -60,10 +60,9 @@
                 <div class="input-group mb-3">
 
                     <select class="form-select form-select" aria-label=".form-select-sm example">
-                        <option selected>0.0000.0M</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                        {% for turma in turmas %}
+                            <option value="{{ turma.cod }}">{{ turma.cod }}</option>
+                        {% endfor %}
                     </select>
                 </div>
             </div>
@@ -71,7 +70,7 @@
             <div class="col-2">
                 <div><span class="d-block fw-semi-bold" id="">Data:</span></div>
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="00/00/0000" aria-label="Username"
+                    <input type="date" class="form-control" placeholder="00/00/0000" aria-label="Username"
                         aria-describedby="basic-addon1">
                 </div>
             </div>

@@ -1,4 +1,5 @@
 from models.database.database import db, Column, String, Integer, Numeric, Enum, ForeignKey, Date, Boolean
+from datetime import datetime
 
 class Reagente(db.Model):
     """
@@ -7,8 +8,7 @@ class Reagente(db.Model):
     __tablename__ = "reagente"
 
     id = Column(Integer, primary_key=True, autoincrement=True)
-    nome = Column(String(50), nullable=False)
-    estado_materia = Column(Enum('Sólido, Líquido, Gasoso'), nullable=False)
+    estado_materia = Column(Enum('Sólido', 'Líquido', 'Gasoso'), nullable=False)
     densidade = Column(Numeric, nullable=False)
     massa = Column(Numeric)
     volume = Column(Numeric)
@@ -16,13 +16,12 @@ class Reagente(db.Model):
     formula_quimica = Column(ForeignKey('formula_quimica.formula'), nullable=False)
     deletado = Column(Boolean)
 
-    def __init__(self, nome:str, estado_materia:str, densidade:float, massa:float, volume:float, data_validade:object, formula_quimica:object, deletado:bool):
-        self.nome = nome
+    def __init__(self, estado_materia:str, densidade:float, massa:float, volume:float, data_validade:object, formula_quimica:object, deletado:bool):
         self.estado_materia = estado_materia
-        self.densidade = densidade
-        self.massa = massa
-        self.volume = volume
-        self.data_validade = data_validade
+        self.densidade = float(densidade)
+        self.massa = float(massa)
+        self.volume = float(volume)
+        self.data_validade = datetime.strptime(data_validade, '%Y-%m-%d').date()
         self.formula_quimica = formula_quimica
         self.deletado = deletado
     

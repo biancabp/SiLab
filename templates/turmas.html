@@ -49,42 +49,61 @@
                                     aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <form>
+                                <form method="POST" action="{{ url_for('turma.cadastrar_turma') }}" id="cadastrar-turma">
                                     <div class="d-flex justify-content-between">
                                         <div class="mb-3 me-awe-40">
                                             <label for="recipient-name" class="col-form-label">Turma:</label>
-                                            <input type="text" class="form-control" id="recipient-name">
+                                            <input type="text" class="form-control" id="recipient-name" name="codigo">
                                         </div>
                                         <div class="mb-3">
                                             <label for="message-text" class="col-form-label">Ano:</label>
-                                            <input type="text" class="form-control" id="recipient-name">
+                                            <input type="text" class="form-control" id="recipient-name" name="ano">
                                         </div>
                                     </div>
 
                                     <div class="d-flex justify-content-between">
                                         <div class="mb-3 me-awe-40">
                                             <label for="recipient-name" class="col-form-label">Curso:</label>
-                                            <input type="text" class="form-control" id="recipient-name">
+                                            <select class="form-select form-select-md"
+                                                aria-label=".form-select-md example" name="curso">
+                                                
+                                                <option value="Eletrônica">Eletrônica</option>
+                                                <option value="Informática para internet" selected>Informática para internet</option>
+                                                <option value="Comércio">Comércio</option>
+                                            </select>
+                                                    
                                         </div>
                                         <div class="mb-3">
                                             <label for="message-text" class="col-form-label">Alunos:</label>
-                                            <input type="text" class="form-control" id="recipient-name">
+                                            <input type="text" class="form-control" id="recipient-name" name="qtd-alunos">
                                         </div>
 
 
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="message-text" class="col-form-label"
-                                            aria-placeholder="Turno">Turno:</label>
-                                        <input type="text" class="form-control" id="recipient-name">
+                                        <div>
+                                            <label for="recipient-name"
+                                                class="col-form-label">Turno:</label>
+                                            <div
+                                                class=" d-flex justify-content-between">
+                                                <select
+                                                    class="form-select form-select-md"
+                                                    aria-label=".form-select-md example" name="turno">
+                                                    <option value="Matutino" selected>Matutino</option>
+                                                    <option value="Vespertino">Vespertino</option>
+                                                    <option value="Noturno">Noturno</option>
+                                                    
+                                                </select>
+                                            </div>
+                                        </div>
                                     </div>
                                 </form>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary"
                                     data-bs-dismiss="modal">Cancelar</button>
-                                <button type="button" class="btn btn-primary-light">Salvar</button>
+                                <button type="submit" class="btn btn-primary-light" form="cadastrar-turma">Salvar</button>
                             </div>
                         </div>
                     </div>
@@ -109,15 +128,16 @@
                         </tr>
                     </thead>
                     <tbody>
+                        {% for turma in turmas %}
                         <tr>
-                            <td>0.0000.0M</td>
-                            <td>Lorem</td>
-                            <td>Lorem</td>
-                            <td>0</td>
-                            <td>00</td>
+                            <td>{{ turma.cod }}</td>
+                            <td>{{ turma.curso }}</td>
+                            <td>{{ turma.turno }}</td>
+                            <td>{{ turma.ano }}</td>
+                            <td>{{ turma.qtd_alunos }}</td>
                             <td class="icons">
-                                <i class='bx bxs-edit-alt text-primary-light' data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
-                                <div class="modal fade" id="exampleModal" tabindex="-1"
+                                <i class='bx bxs-edit-alt text-primary-light' data-bs-toggle="modal" data-bs-target="#exampleModal{{ turma.cod.replace('.', '') }}" style="cursor:pointer;"></i>
+                                <div class="modal fade" id="exampleModal{{ turma.cod.replace('.', '') }}" tabindex="-1"
                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content">
@@ -128,17 +148,18 @@
                                                     aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body text-center">
-                                                <form>
+                                                <form method="POST" action="{{ url_for('turma.editar_turma') }}" id="{{ turma.cod.replace('.', '') }}">
+                                                    <input type="hidden" name="id-turma" value="{{ turma.cod }}">
                                                     <div class="d-flex justify-content-between">
                                                         <div class="mb-3 me-awe-40">
                                                             <label for="recipient-name"
                                                                 class="col-form-label">Turma:</label>
-                                                            <input type="text" class="form-control" id="recipient-name">
+                                                            <input type="text" class="form-control" id="recipient-name" value="{{ turma.cod }}" name="codigo">
                                                         </div>
                                                         <div class="mb-3">
                                                             <label for="message-text"
                                                                 class="col-form-label">Ano:</label>
-                                                            <input type="text" class="form-control" id="recipient-name">
+                                                            <input type="text" class="form-control" id="recipient-name" value="{{ turma.ano }}" name="ano">
                                                         </div>
                                                     </div>
 
@@ -146,365 +167,46 @@
                                                         <div class="mb-3 me-awe-40">
                                                             <label for="recipient-name"
                                                                 class="col-form-label">Curso:</label>
-                                                            <input type="text" class="form-control" id="recipient-name">
+                                                                <select class="form-select form-select-md"
+                                                                aria-label=".form-select-md example" name="curso">
+                                                                
+                                                                <option value="Eletrônica">Eletrônica</option>
+                                                                <option value="Informática para internet" selected>Informática para internet</option>
+                                                                <option value="Comércio">Comércio</option>
+                                                            </select>
                                                         </div>
                                                         <div class="mb-3">
                                                             <label for="message-text"
                                                                 class="col-form-label">Alunos:</label>
-                                                            <input type="text" class="form-control" id="recipient-name">
+                                                            <input type="text" class="form-control" id="recipient-name" value="{{ turma.qtd_alunos }}" name="qtd-alunos">
                                                         </div>
 
 
                                                     </div>
 
                                                     <div class="mb-3">
-                                                        <label for="message-text" class="col-form-label"
-                                                            aria-placeholder="Turno">Turno:</label>
-                                                        <input type="text" class="form-control" id="recipient-name">
+                                                        <label for="message-text" class="col-form-label" aria-placeholder="Turno">Turno:</label>
+                                                        <select class="form-select form-select-md" aria-label=".form-select-md example" name="turno">
+                                                            <option value="Matutino" selected>Matutino</option>
+                                                            <option value="Vespertino">Vespertino</option>
+                                                            <option value="Noturno">Noturno</option>
+                            
+                                                        </select>
                                                     </div>
                                                 </form>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary"
                                                     data-bs-dismiss="modal">Cancelar</button>
-                                                <button type="button" class="btn btn-primary-light">Salvar</button>
+                                                <button type="submit" class="btn btn-primary-light" form="{{ turma.cod.replace('.', '') }}">Salvar</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <i class='bx bxs-trash-alt text-primary-light'></i>
+                                <i class='bx bxs-trash-alt text-primary-light' style="cursor:pointer;"></i>
                             </td>
                         </tr>
-                        <tr>
-                            <td>0.0000.0M</td>
-                            <td>Lorem</td>
-                            <td>Lorem</td>
-                            <td>0</td>
-                            <td>00</td>
-                            <td class="icons">
-                                <i class='bx bxs-edit-alt text-primary-light' data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
-                                <div class="modal fade" id="exampleModal" tabindex="-1"
-                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h1 class="modal-title fz-18 fw-semi-bold text-primary-light" id="exampleModalLabel">Editar Turma
-                                                </h1>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body text-center">
-                                                <form>
-                                                    <div class="d-flex justify-content-between">
-                                                        <div class="mb-3 me-awe-40">
-                                                            <label for="recipient-name"
-                                                                class="col-form-label">Turma:</label>
-                                                            <input type="text" class="form-control" id="recipient-name">
-                                                        </div>
-                                                        <div class="mb-3">
-                                                            <label for="message-text"
-                                                                class="col-form-label">Ano:</label>
-                                                            <input type="text" class="form-control" id="recipient-name">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="d-flex justify-content-between">
-                                                        <div class="mb-3 me-awe-40">
-                                                            <label for="recipient-name"
-                                                                class="col-form-label">Curso:</label>
-                                                            <input type="text" class="form-control" id="recipient-name">
-                                                        </div>
-                                                        <div class="mb-3">
-                                                            <label for="message-text"
-                                                                class="col-form-label">Alunos:</label>
-                                                            <input type="text" class="form-control" id="recipient-name">
-                                                        </div>
-
-
-                                                    </div>
-
-                                                    <div class="mb-3">
-                                                        <label for="message-text" class="col-form-label"
-                                                            aria-placeholder="Turno">Turno:</label>
-                                                        <input type="text" class="form-control" id="recipient-name">
-                                                    </div>
-                                                </form>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary"
-                                                    data-bs-dismiss="modal">Cancelar</button>
-                                                <button type="button" class="btn btn-primary-light">Salvar</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <i class='bx bxs-trash-alt text-primary-light'></i>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>0.0000.0M</td>
-                            <td>Lorem</td>
-                            <td>Lorem</td>
-                            <td>0</td>
-                            <td>00</td>
-                            <td class="icons">
-                                <i class='bx bxs-edit-alt text-primary-light' data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
-                                <div class="modal fade" id="exampleModal" tabindex="-1"
-                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h1 class="modal-title fz-18 fw-semi-bold text-primary-light" id="exampleModalLabel">Editar Turma
-                                                </h1>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body text-center">
-                                                <form>
-                                                    <div class="d-flex justify-content-between">
-                                                        <div class="mb-3 me-awe-40">
-                                                            <label for="recipient-name"
-                                                                class="col-form-label">Turma:</label>
-                                                            <input type="text" class="form-control" id="recipient-name">
-                                                        </div>
-                                                        <div class="mb-3">
-                                                            <label for="message-text"
-                                                                class="col-form-label">Ano:</label>
-                                                            <input type="text" class="form-control" id="recipient-name">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="d-flex justify-content-between">
-                                                        <div class="mb-3 me-awe-40">
-                                                            <label for="recipient-name"
-                                                                class="col-form-label">Curso:</label>
-                                                            <input type="text" class="form-control" id="recipient-name">
-                                                        </div>
-                                                        <div class="mb-3">
-                                                            <label for="message-text"
-                                                                class="col-form-label">Alunos:</label>
-                                                            <input type="text" class="form-control" id="recipient-name">
-                                                        </div>
-
-
-                                                    </div>
-
-                                                    <div class="mb-3">
-                                                        <label for="message-text" class="col-form-label"
-                                                            aria-placeholder="Turno">Turno:</label>
-                                                        <input type="text" class="form-control" id="recipient-name">
-                                                    </div>
-                                                </form>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary"
-                                                    data-bs-dismiss="modal">Cancelar</button>
-                                                <button type="button" class="btn btn-primary-light">Salvar</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <i class='bx bxs-trash-alt text-primary-light'></i>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>0.0000.0M</td>
-                            <td>Lorem</td>
-                            <td>Lorem</td>
-                            <td>0</td>
-                            <td>00</td>
-                            <td class="icons">
-                                <i class='bx bxs-edit-alt text-primary-light' data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
-                                <div class="modal fade" id="exampleModal" tabindex="-1"
-                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h1 class="modal-title fz-18 fw-semi-bold text-primary-light" id="exampleModalLabel">Editar Turma
-                                                </h1>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body text-center">
-                                                <form>
-                                                    <div class="d-flex justify-content-between">
-                                                        <div class="mb-3 me-awe-40">
-                                                            <label for="recipient-name"
-                                                                class="col-form-label">Turma:</label>
-                                                            <input type="text" class="form-control" id="recipient-name">
-                                                        </div>
-                                                        <div class="mb-3">
-                                                            <label for="message-text"
-                                                                class="col-form-label">Ano:</label>
-                                                            <input type="text" class="form-control" id="recipient-name">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="d-flex justify-content-between">
-                                                        <div class="mb-3 me-awe-40">
-                                                            <label for="recipient-name"
-                                                                class="col-form-label">Curso:</label>
-                                                            <input type="text" class="form-control" id="recipient-name">
-                                                        </div>
-                                                        <div class="mb-3">
-                                                            <label for="message-text"
-                                                                class="col-form-label">Alunos:</label>
-                                                            <input type="text" class="form-control" id="recipient-name">
-                                                        </div>
-
-
-                                                    </div>
-
-                                                    <div class="mb-3">
-                                                        <label for="message-text" class="col-form-label"
-                                                            aria-placeholder="Turno">Turno:</label>
-                                                        <input type="text" class="form-control" id="recipient-name">
-                                                    </div>
-                                                </form>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary"
-                                                    data-bs-dismiss="modal">Cancelar</button>
-                                                <button type="button" class="btn btn-primary-light">Salvar</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <i class='bx bxs-trash-alt text-primary-light'></i>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>0.0000.0M</td>
-                            <td>Lorem</td>
-                            <td>Lorem</td>
-                            <td>0</td>
-                            <td>00</td>
-                            <td class="icons">
-                                <i class='bx bxs-edit-alt text-primary-light' data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
-                                <div class="modal fade" id="exampleModal" tabindex="-1"
-                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h1 class="modal-title fz-18 fw-semi-bold text-primary-light" id="exampleModalLabel">Editar Turma
-                                                </h1>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body text-center">
-                                                <form>
-                                                    <div class="d-flex justify-content-between">
-                                                        <div class="mb-3 me-awe-40">
-                                                            <label for="recipient-name"
-                                                                class="col-form-label">Turma:</label>
-                                                            <input type="text" class="form-control" id="recipient-name">
-                                                        </div>
-                                                        <div class="mb-3">
-                                                            <label for="message-text"
-                                                                class="col-form-label">Ano:</label>
-                                                            <input type="text" class="form-control" id="recipient-name">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="d-flex justify-content-between">
-                                                        <div class="mb-3 me-awe-40">
-                                                            <label for="recipient-name"
-                                                                class="col-form-label">Curso:</label>
-                                                            <input type="text" class="form-control" id="recipient-name">
-                                                        </div>
-                                                        <div class="mb-3">
-                                                            <label for="message-text"
-                                                                class="col-form-label">Alunos:</label>
-                                                            <input type="text" class="form-control" id="recipient-name">
-                                                        </div>
-
-
-                                                    </div>
-
-                                                    <div class="mb-3">
-                                                        <label for="message-text" class="col-form-label"
-                                                            aria-placeholder="Turno">Turno:</label>
-                                                        <input type="text" class="form-control" id="recipient-name">
-                                                    </div>
-                                                </form>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary"
-                                                    data-bs-dismiss="modal">Cancelar</button>
-                                                <button type="button" class="btn btn-primary-light">Salvar</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <i class='bx bxs-trash-alt text-primary-light'></i>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>0.0000.0M</td>
-                            <td>Lorem</td>
-                            <td>Lorem</td>
-                            <td>0</td>
-                            <td>00</td>
-                            <td class="icons">
-                                <i class='bx bxs-edit-alt text-primary-light' data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
-                                <div class="modal fade" id="exampleModal" tabindex="-1"
-                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h1 class="modal-title fz-18 fw-semi-bold text-primary-light" id="exampleModalLabel">Editar Turma
-                                                </h1>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body text-center">
-                                                <form>
-                                                    <div class="d-flex justify-content-between">
-                                                        <div class="mb-3 me-awe-40">
-                                                            <label for="recipient-name"
-                                                                class="col-form-label">Turma:</label>
-                                                            <input type="text" class="form-control" id="recipient-name">
-                                                        </div>
-                                                        <div class="mb-3">
-                                                            <label for="message-text"
-                                                                class="col-form-label">Ano:</label>
-                                                            <input type="text" class="form-control" id="recipient-name">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="d-flex justify-content-between">
-                                                        <div class="mb-3 me-awe-40">
-                                                            <label for="recipient-name"
-                                                                class="col-form-label">Curso:</label>
-                                                            <input type="text" class="form-control" id="recipient-name">
-                                                        </div>
-                                                        <div class="mb-3">
-                                                            <label for="message-text"
-                                                                class="col-form-label">Alunos:</label>
-                                                            <input type="text" class="form-control" id="recipient-name">
-                                                        </div>
-
-
-                                                    </div>
-
-                                                    <div class="mb-3">
-                                                        <label for="message-text" class="col-form-label"
-                                                            aria-placeholder="Turno">Turno:</label>
-                                                        <input type="text" class="form-control" id="recipient-name">
-                                                    </div>
-                                                </form>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary"
-                                                    data-bs-dismiss="modal">Cancelar</button>
-                                                <button type="button" class="btn btn-primary-light">Salvar</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <i class='bx bxs-trash-alt text-primary-light'></i>
-                            </td>
-                        </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
 

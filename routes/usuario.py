@@ -15,7 +15,7 @@ def login():
         return "Usuário ou senha incorretos"
     
     login_user(usuario)
-    return "Usuário Logado!"    
+    return render_template('formulas.html')    
 
 @usuario_blueprint.route("/logout")
 @login_required
