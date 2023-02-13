@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 02e7dc0c6529
+Revision ID: 3ddbd7d8093e
 Revises: 
-Create Date: 2023-02-09 11:38:24.552146
+Create Date: 2023-02-10 10:46:30.117462
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '02e7dc0c6529'
+revision = '3ddbd7d8093e'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -74,6 +74,7 @@ def upgrade():
     sa.Column('massa', sa.Numeric(), nullable=True),
     sa.Column('volume', sa.Numeric(), nullable=True),
     sa.Column('data_validade', sa.Date(), nullable=True),
+    sa.Column('local', sa.String(length=3), nullable=True),
     sa.Column('formula_quimica', sa.String(length=30), nullable=False),
     sa.Column('deletado', sa.Boolean(), nullable=True),
     sa.ForeignKeyConstraint(['formula_quimica'], ['formula_quimica.formula'], ),
@@ -81,14 +82,15 @@ def upgrade():
     )
     op.create_table('solucao',
     sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
-    sa.Column('nome', sa.String(length=100), nullable=True),
-    sa.Column('autor', sa.String(length=100), nullable=True),
     sa.Column('aula', sa.Integer(), nullable=True),
     sa.Column('formula_quimica', sa.String(length=30), nullable=True),
     sa.Column('estado_materia', sa.Enum('Sólido', 'Líquido', 'Gasoso'), nullable=True),
     sa.Column('densidade', sa.Numeric(), nullable=True),
     sa.Column('massa', sa.Numeric(), nullable=True),
+    sa.Column('volume', sa.Numeric(), nullable=True),
     sa.Column('concentracao', sa.Numeric(), nullable=True),
+    sa.Column('local', sa.String(length=10), nullable=True),
+    sa.Column('data_validade', sa.Date(), nullable=True),
     sa.Column('deletado_planejado', sa.Enum('Deletado', 'Planejado'), nullable=True),
     sa.ForeignKeyConstraint(['aula'], ['aula.id'], ),
     sa.ForeignKeyConstraint(['formula_quimica'], ['formula_quimica.formula'], ),

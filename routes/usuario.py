@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, request
 from flask_login import login_user, logout_user, login_required
 from models.usuario import Usuario
+from models.formula_quimica import FormulaQuimica
 
 usuario_blueprint = Blueprint("usuario", __name__)
 
@@ -15,7 +16,8 @@ def login():
         return "Usuário ou senha incorretos"
     
     login_user(usuario)
-    return render_template('formulas.html')    
+    formulas_quimica = FormulaQuimica.query.all()
+    return render_template('formulas.html', formulas=formulas_quimica)    
 
 @usuario_blueprint.route("/logout")
 @login_required
