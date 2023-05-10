@@ -7,19 +7,13 @@ class Equipamento(db.Model):
     __tablename__ = "equipamento"
 
     id = db.Column(Integer, primary_key=True)
-    localizacao = Column(String(100), nullable=False)
     qtd = db.Column(SmallInteger, nullable=False)
-    volume = Column(SmallInteger, nullable=False)
-    tamanho = Column(SmallInteger, nullable=False)
     tipo_equipamento = Column(ForeignKey('tipo_equipamento.nome'), nullable=False)
     lugar = Column(String(100), nullable=False)
     danificado = Column(Boolean)
 
-    def __init__(self, localizacao:str, qtd:int, volume:float, tamanho:float, tipo_equipamento:object, lugar:str, danificado:bool):
-        self.localizacao = localizacao
+    def __init__(self, qtd:int, tipo_equipamento:object, lugar:str, danificado:bool):
         self.qtd = qtd
-        self.volume = volume
-        self.tamanho = tamanho
         self.tipo_equipamento = tipo_equipamento.id
         self.lugar = lugar
         self.danificado = danificado
@@ -46,14 +40,11 @@ class Equipamento(db.Model):
             lista_equipamentos = Equipamento.query.filter(Equipamento.tipo_equipamento == valor_filtro.id).all()
         return lista_equipamentos
 
-    def editar(self, nova_localizacao:str, nova_qtd:int, novo_volume:float, novo_tamanho:float, novo_tipo_equipamento:object, novo_lugar:str, danificado:bool):
+    def editar(self, nova_qtd:int, novo_tipo_equipamento:object, novo_lugar:str, danificado:bool):
         """
         Modifica o valor das propriedades do item no banco de dados.
         """
-        self.localizacao = nova_localizacao
         self.qtd = nova_qtd
-        self.volume = novo_volume
-        self.tamanho = novo_tamanho
         self.tipo_equipamento = novo_tipo_equipamento.nome
         self.lugar = novo_lugar
         self.danificado = danificado

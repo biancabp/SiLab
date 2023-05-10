@@ -7,7 +7,7 @@ class FormulaQuimica(db.Model):
     __tablename__ = "formula_quimica"
 
     formula = Column(String(30), primary_key=True)
-    nome = Column(String(50))
+    nome = Column(String(50), nullable=False)
 
     def __init__(self, formula:str, nome:str):
         """

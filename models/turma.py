@@ -7,10 +7,10 @@ class Turma(db.Model):
     __tablename__ = "turma"
 
     cod = Column(String(10), primary_key=True)
-    ano = Column(SmallInteger)
+    ano = Column(SmallInteger, nullable=False)
     turno = Column(Enum('Matutino', 'Vespertino', 'Noturno')) 
     curso = Column(Enum("Eletrônica", "Comércio", "Informática para internet"))
-    qtd_alunos = Column(SmallInteger)
+    qtd_alunos = Column(SmallInteger, nullalbe=False)
 
     def __init__(self, cod:str, ano:int, turno:str, curso:str, qtd_alunos:int):
         self.cod = cod

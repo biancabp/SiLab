@@ -1,5 +1,6 @@
 from flask import Flask, request, render_template, url_for
 from flask_login import LoginManager
+from flask_migrate import Migrate
 
 from secrets import token_hex
 from models.database.database import db
@@ -9,9 +10,7 @@ from models.tipo_equipamento import TipoEquipamento
 from routes.aula import aula_blueprint
 from routes.usuario import usuario_blueprint
 from routes.turma import turma_blueprint
-from routes.solucao import solucao_blueprint
 
-from flask_migrate import Migrate
 from routes.equipamento import equipamento_blueprint
 from routes.reagente import reagente_blueprint
 from routes.formula_quimica import formula_quimica_blueprint
@@ -38,6 +37,6 @@ app.register_blueprint(turma_blueprint)
 app.register_blueprint(equipamento_blueprint)
 app.register_blueprint(formula_quimica_blueprint)
 app.register_blueprint(aula_blueprint)
-app.register_blueprint(solucao_blueprint)
+
 if __name__ == '__main__':
     app.run("0.0.0.0", debug=True)

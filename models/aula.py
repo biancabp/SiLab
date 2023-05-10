@@ -1,12 +1,9 @@
 from models.database.database import db, Column, String, Integer, Date, ForeignKey, Enum, Boolean
 from models.usuario import Usuario
 from models.reagente import Reagente
-from models.solucao import Solucao
 
 from models.many_to_many_relationships.aula.aula_equipamento import AulaEquipamento
 from models.many_to_many_relationships.aula.aula_reagente import AulaReagente
-from models.many_to_many_relationships.aula.aula_solucao import AulaSolucao
-from models.many_to_many_relationships.solucao.solucao_usa_reagente import SolucaoUsaReagente
 
 class Aula(db.Model):
     """
@@ -15,14 +12,14 @@ class Aula(db.Model):
     __tablename__ = "aula"
     
     id = Column(Integer, primary_key=True, autoincrement=True)
-    turma = Column(ForeignKey("turma.cod"))
-    data_aula = Column(Date)
-    roteiro = Column(String(500))
-    professor = Column(ForeignKey("usuario.matricula"))
+    turma = Column(ForeignKey("turma.cod"), nullable=False)
+    data_aula = Column(Date, nullable=False)
+    roteiro = Column(String(500), nullable=True)
+    professor = Column(ForeignKey("usuario.matricula"), nullable=False)
     planejada_efetivada = Column(Enum('Planejada', 'Efetivada'))
-    deletada = Column(Boolean)
+    deletada = Column(Boolean, nullable=False)
 
-    def __init__(self, turma:object, data:object, roteiro:str, professor:object, planejada_efetivada:str):
+    def __init__(self, turma:object, data:object, roteiro:str, professor:Usuario, planejada_efetivada:str):
         """
            ``id``: int | Atributo numérico identificador 
             
@@ -62,27 +59,26 @@ class Aula(db.Model):
             for reagente in reagentes:
                 AulaReagente(id_aula[0], reagente.id, reagente.massa).relacionar(db)
             
-            for solucao, reagentes in solucoes_criadas:
-                nova_solucao = Solucao(solucao.nome, solucao.autor, solucao.formula_quimica, solucao.estado_materia, solucao.densidade, solucao.massa, solucao.concentracao, solucao.deleta_planejado)
-                id_nova_solucao = nova_solucao.cadastrar(reagentes, id_aula)
-                AulaSolucao(id_aula[0], id_nova_solucao, 'Criada', solucao.massa).relacionar(db)
+            # for solucao, reagentes in solucoes_criadas:
+            #     nova_solucao = Solucao(solucao.nome, solucao.autor, solucao.formula_quimica, solucao.estado_materia, solucao.densidade, solucao.massa, solucao.concentracao, solucao.deleta_planejado)
+            #     id_nova_solucao = nova_solucao.cadastrar(reagentes, id_aula)
+            #     AulaSolucao(id_aula[0], id_nova_solucao, 'Criada', solucao.massa).relacionar(db)
             
-            for solucao, massa in solucoes_utilizadas:
-                AulaSolucao(id_aula[0], solucao, 'Utilizada', massa).relacionar(db)
+            # for solucao, massa in solucoes_utilizadas:
+            #     AulaSolucao(id_aula[0], solucao, 'Utilizada', massa).relacionar(db)
 
-            for solucao, reagentes in solucoes_criadas_utilizadas:
-                nova_solucao = Solucao(solucao[0].nome, solucao[0].autor, solucao[0].formula_quimica, solucao[0].estado_materia, solucao[0].densidade, solucao[0].massa, solucao[0].concentracao, solucao[0].deleta_planejado)
-                id_nova_solucao = nova_solucao.cadastrar(reagentes, id_aula)
-                AulaSolucao(id_aula[0], id_nova_solucao, 'Ambos', solucao.massa).relacionar(db)
+            # for solucao, reagentes in solucoes_criadas_utilizadas:
+            #     nova_solucao = Solucao(solucao[0].nome, solucao[0].autor, solucao[0].formula_quimica, solucao[0].estado_materia, solucao[0].densidade, solucao[0].massa, solucao[0].concentracao, solucao[0].deleta_planejado)
+            #     id_nova_solucao = nova_solucao.cadastrar(reagentes, id_aula)
+            #     AulaSolucao(id_aula[0], id_nova_solucao, 'Ambos', solucao.massa).relacionar(db)
 
 
             if self.planejada_efetivada == "Efetivada":
                 Reagente.debitar_massa_reagente(db, reagentes)
-                Solucao.debitar_massa_solucoes(db, solucoes_utilizadas)
 
-                for solucao, reagentes in solucoes_utilizadas:
-                    Solucao.debitar_massa_solucoes(db, solucoes_criadas_utilizadas)
-                Solucao.debitar_massa_solucoes(db, solucoes_criadas_utilizadas)
+                # for solucao, reagentes in solucoes_utilizadas:
+                #     Solucao.debitar_massa_solucoes(db, solucoes_criadas_utilizadas)
+                # Solucao.debitar_massa_solucoes(db, solucoes_criadas_utilizadas)
            
             db.session.commit()
 

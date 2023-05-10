@@ -10,12 +10,14 @@ class Reagente(db.Model):
     id = Column(Integer, primary_key=True, autoincrement=True)
     estado_materia = Column(Enum('Sólido', 'Líquido', 'Gasoso'), nullable=False)
     densidade = Column(Numeric, nullable=False)
-    massa = Column(Numeric)
-    volume = Column(Numeric)
-    data_validade = Column(Date)
-    local = Column(String(3))
+    concentracao = Column(Numeric)
+    massa = Column(Numeric, nullable=False)
+    volume = Column(Numeric, nullalbe=False)
+    data_validade = Column(Date, nullable=True)
+    data_criacao = Column(Date, nullalbe=True)
+    local = Column(String(3), nullable=False)
     formula_quimica = Column(ForeignKey('formula_quimica.formula'), nullable=False)
-    deletado = Column(Boolean)
+    deletado = Column(Boolean, nullable=False)
 
     def __init__(self, estado_materia:str, densidade:float, massa:float, volume:float, data_validade:object, formula_quimica:object, local:str, deletado:bool = False):
         self.estado_materia = estado_materia

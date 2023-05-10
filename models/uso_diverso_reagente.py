@@ -4,10 +4,10 @@ from models.reagente import Reagente
 class UsoDiversoReagente(db.Model):
 
     id = Column(Integer, primary_key=True, autoincrement=True)
-    data_uso = Column(Date)
-    massa = Column(Numeric)
-    descricao = Column(String(200))
-    reagente = Column(ForeignKey('reagente.id'))
+    data_uso = Column(Date, nullable=False)
+    massa = Column(Numeric, nullalbe=False)
+    descricao = Column(String(200), nullable=True)
+    reagente = Column(ForeignKey('reagente.id'), nullable=False)
 
     def __init__(self, data_uso:object, massa:float, descricao:str, reagente:object):
         self.data_uso = data_uso
