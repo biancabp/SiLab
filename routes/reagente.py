@@ -5,12 +5,14 @@ from models.formula_quimica import FormulaQuimica
 
 reagente_blueprint = Blueprint('reagente', __name__)
 
+
 @reagente_blueprint.route('/reagentes')
 @login_required
 def reagentes():
     reagentes = Reagente.query.all()
     formulas_quimica = FormulaQuimica.query.all()
     return render_template('reagentes.html', reagentes=reagentes, formulas_quimica=formulas_quimica, round=round)
+
 
 @reagente_blueprint.route('/reagentes/cadastrar', methods=['POST'])
 @login_required
@@ -24,6 +26,7 @@ def cadastrar_reagente():
     reagentes = Reagente.query.all()
     formulas_quimica = FormulaQuimica.query.all()
     return render_template('reagentes.html', reagentes=reagentes, formulas_quimica=formulas_quimica, round=round)
+
 
 @reagente_blueprint.route('/reagentes/editar', methods=['POST'])
 @login_required
@@ -40,6 +43,7 @@ def editar_reagente():
     reagentes = Reagente.query.all()
     formulas_quimica = FormulaQuimica.query.all()
     return render_template('reagentes.html', reagentes=reagentes, formulas_quimica=formulas_quimica, round=round)
+
 
 @reagente_blueprint.route('/reagentes/deletar')
 @login_required

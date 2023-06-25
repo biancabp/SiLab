@@ -15,6 +15,7 @@ def aulas():
     aulas = Aula.listar()
     return render_template("aulas.html", aulas=aulas)
 
+
 @aula_blueprint.route('/aulas/cadastrar')
 @login_required
 def cadastrar_aula():
@@ -30,6 +31,7 @@ def cadastrar_aula():
     nova_aula = Aula(turma, data, roteiro, professor, planejada_efetivada)
     nova_aula.cadastrar_aula(equipamentos, reagentes, solucoes_criadas, solucoes_utilizadas, solucoes_criadas_utilizadas)
     return render_template('aulas.html')
+
 
 @aula_blueprint.route('/aulas/editar')
 @login_required
@@ -47,6 +49,7 @@ def editar_aula():
     aula = Aula.query.get(id_aula)
     aula.editar()
     return render_template('aulas.html')
+
 
 @aula_blueprint.route('/aulas/deletar')
 @login_required

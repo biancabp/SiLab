@@ -7,6 +7,7 @@ package-lock.json
 settings.json
 package.json
 node_modules
-
+migrations
 yarn.lock
 package-lock.json
+.idea
