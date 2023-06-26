@@ -1,8 +1,9 @@
-from models.database.database import db, Column, String, Integer, Date, ForeignKey, Enum
+from models.database.database import func, db, Column, String, Integer, Date, ForeignKey, Enum
 
 from models.turma import Turma
 from models.experimento import Experimento
 from models.usuario import Usuario
+from models.reagente import Reagente
 
 
 class Aula(db.Model):
@@ -40,13 +41,17 @@ class Aula(db.Model):
         else:
             self.efetivar_aula_planejada()
     
-    def efetivar_aula_planejada(self):
+    def efetivar_aula_planejada(self, alunos_faltantes: int = 0):
         experimento_concreto = Experimento(self.experimento.nome, self.experimento.path_pdf)
         experimento_concreto.ideal_concreto = "concreto"
         
         for reagente in self.experimento.reagentes:
             experimento_concreto.reagentes.append(reagente)
-            experimento_concreto.reagentes[len(experimento_concreto.reagentes) - 1].experimento_reagente.massa = reagente.experimento_reagente.massa
+            if reagente.status == 'planejado':
+                novo_reagente = Reagente(reagente.estado_materia, reagente.concentracao, reagente.massa, reagente.volume, reagente.formula_quimica, reagente.local, reagente.data_validade, reagente.data_criacao)
+                novo_reagente.cadastrar()
+            else:
+                experimento_concreto.reagentes[len(experimento_concreto.reagentes) - 1].experimento_reagente.massa = reagente.experimento_reagente.massa
             
             if reagente.status == "planejado":
                 reagente.status = None
@@ -82,3 +87,53 @@ class Aula(db.Model):
         if usuario.tipo_usuario != 'Professor':
             raise ValueError("Somente professores podem registrar uma aula.")
     
+    def __somar_massa_reagentes_aula(self) -> dict:
+        tipos_reagente = {}
+        
+        for reagente in self.experimento.reagentes:
+            if reagente.formula_quimica in tipos_reagente:
+                tipos_reagente[reagente.formula_quimica] += reagente.massa
+            else:
+                tipos_reagente[reagente.formula_quimica] = reagente.massa
+        return tipos_reagente
+    
+    def __somar_massa_reagentes_aulas_anteriores(self) -> dict:
+        # a implementação desta função é feita de modo a incluir apenas reagentes que existam na aula atual
+        aulas_anteriores = Aula.query.filter(Aula.data_aula < self.data_aula).all()
+        somatorio_massa_tipos_reagente_aulas_anteriores = {}
+
+        for aula_anterior in aulas_anteriores:
+            # percorre uma lista que contém todas as aulas anteriores
+            for reagente_aula_anterior in aula_anterior.experimento.reagentes:
+                # percorre uma lista que contém todos os reagentes da aula anterior
+                for reagente_aula_atual in self.experimento.reagentes:
+                    # percorre uma lista com todos os reagentes da aula atual
+                    if reagente_aula_atual.formula_quimica == reagente_aula_anterior.formula_quimica:
+                        # verifica se o reagente da aula anterior que está sendo percorrido também existe na lista de reagentes da aula atual
+                        if reagente_aula_anterior.formula_quimica in somatorio_massa_tipos_reagente_aulas_anteriores:
+                            somatorio_massa_tipos_reagente_aulas_anteriores[reagente_aula_anterior.formula_quimica] += reagente_aula_anterior.experimento_reagente.massa
+                            break
+                        else:
+                            somatorio_massa_tipos_reagente_aulas_anteriores[reagente_aula_anterior.formula_quimica] = reagente_aula_anterior.experimento_reagente.massa
+                            break
+        return somatorio_massa_tipos_reagente_aulas_anteriores
+    
+    def __somatorio_massa_reagentes_sistema(self, lista_reagentes: list) -> dict:
+        somatorio_massa_reagentes_sistema = {}
+        
+        for formula_quimica in lista_reagentes:
+            massa_reagentes = db.session.query(func.sum(Reagente.massa)).filter(Reagente.formula_quimica == formula_quimica and Reagente.status != 'deletado' and Reagente.status != 'planejado').scalar()
+            somatorio_massa_reagentes_sistema[formula_quimica] = massa_reagentes
+        return somatorio_massa_reagentes_sistema
+    
+    def __verificar_disponibilidade_aula(self) -> bool:
+        somatorio_massa_reagentes_aulas_anteriores = self.__somar_massa_reagentes_aulas_anteriores()
+        somatorio_massa_tipos_reagente_aula_atual = self.__somar_massa_reagentes_aula()
+        lista_reagentes = [formula for formula in somatorio_massa_tipos_reagente_aula_atual]
+        somatorio_massa_tipos_reagente_disponiveis_sistema = self.__somatorio_massa_reagentes_sistema(lista_reagentes)
+        
+        for formula_quimica in somatorio_massa_tipos_reagente_disponiveis_sistema:
+            if (somatorio_massa_tipos_reagente_disponiveis_sistema[formula_quimica] - somatorio_massa_reagentes_aulas_anteriores) < somatorio_massa_tipos_reagente_aula_atual[formula_quimica]:
+                return False
+        return True
+        

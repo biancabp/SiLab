@@ -1,29 +1,32 @@
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, redirect, url_for
 from flask_login import login_user, logout_user, login_required
 from models.usuario import Usuario
 from models.formula_quimica import FormulaQuimica
 
-usuario_blueprint = Blueprint("usuario", __name__)
+usuario_blueprint = Blueprint("usuario", __name__, url_prefix='usuarios')
+
 
 @usuario_blueprint.route("/login", methods=["GET", "POST"])
 def login():
-    if(len(request.form) == 0):
+    if request.method == 'GET':
         return render_template("login.html")
 
     usuario = Usuario.query.get(int(request.form['matricula']))
     
-    if(usuario == None or usuario.senha != request.form['senha']):
+    if usuario is None or usuario.senha != request.form['senha']:
         return "Usuário ou senha incorretos"
     
     login_user(usuario)
     formulas_quimica = FormulaQuimica.query.all()
     return render_template('formulas.html', formulas=formulas_quimica)    
 
-@usuario_blueprint.route("/logout")
+
+@usuario_blueprint.route("/logout", methods=['GET'])
 @login_required
 def logout():
     logout_user()
-    return "Usuário deslogado."
+    redirect(url_for(login))
+
 
 @usuario_blueprint.route("/registrar-se", methods=['GET', 'POST'])
 def registrar_usuario():

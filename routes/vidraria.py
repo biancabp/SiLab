@@ -1,43 +1,47 @@
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, redirect, url_for
 from flask_login import login_required, current_user
 from models.vidraria import Vidraria
 
-vidraria_blueprint = Blueprint('vidraria', __name__, url_prefix = "vidraria")
+vidraria_blueprint = Blueprint('vidraria', __name__, url_prefix="vidrarias")
 
-@vidraria_blueprint.route("/")
+
+@vidraria_blueprint.route("/", methods=['GET'])
+@login_required
 def index():
-    return render_template('vidraria.html')
+    vidrarias = Vidraria.listar()
+    return render_template('vidraria.html', vidrarias=vidrarias)
 
-@vidraria_blueprint.route("/cadastrar")
+
+@vidraria_blueprint.route("/cadastrar", methods=['POST'])
+@login_required
 def cadastrar_vidraria():
-    volume = request.form.get('volume')
-    material = request.form.get('material')
+    nome, material, volume = request.form.get('nome'), float(request.form.get('volume')), request.form.get('material')
     local = request.form.get('local')
 
     Vidraria(volume, material, local).cadastrar()
+    redirect(url_for('index'))
 
-    vidrarias = Vidraria.listar()
-    return render_template('vidraria.html', vidrarias=vidrarias)
 
-@vidraria_blueprint.route("/editar")
+@vidraria_blueprint.route("/editar", methods=['PUT'])
+@login_required
 def editar_vidraria():
-    id_vidraria = request.form.get('id-vidraria')
-    volume = request.form.get('volume')
+    id_vidraria = int(request.form.get('id-vidraria'))
+    nome = request.form.get('nome')
+    volume = float(request.form.get('volume'))
     material = request.form.get('material')
     local = request.form.get('local')
 
-    vidraria = Vidraria.query.get(int(id_vidraria))
-    vidraria.editar(volume, material, local)
+    vidraria = Vidraria.query.get(id_vidraria)
+    vidraria.editar(nome, material, volume, local)
 
-    vidrarias = Vidraria.listar()
-    return render_template('vidraria.html', vidrarias=vidrarias)
+    redirect(url_for('index'))
 
-@vidraria_blueprint.route("/deletar")
+
+@vidraria_blueprint.route("/deletar", methods=['DELETE'])
+@login_required
 def deletar_vidraria():
     id_vidraria = request.form.get('id-vidraria')
     vidraria = Vidraria.query.get(int(id_vidraria))
     vidraria.deletar()
 
-    vidrarias = Vidraria.listar()
-
-    return render_template('vidrarias.html', vidrarias=vidrarias)
+    redirect(url_for('index'))

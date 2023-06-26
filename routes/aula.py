@@ -1,60 +1,65 @@
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, redirect, url_for
 from flask_login import login_required, current_user
+
 from models.aula import Aula
 from models.usuario import Usuario
 from models.turma import Turma
+from models.experimento import Experimento
 
-aula_blueprint = Blueprint("aula", __name__)
+aula_blueprint = Blueprint("aula", __name__, url_prefix='aulas')
 
-@aula_blueprint.route("/aulas")
+
+@aula_blueprint.route("/", methods=['GET'])
 @login_required
 def aulas():
-    if(Usuario.autorizar_professor(current_user) == False):
+    if not Usuario.autorizar_professor(current_user):
         return "Você não tem autorização para acessar esta página."
 
     aulas = Aula.listar()
     return render_template("aulas.html", aulas=aulas)
 
 
-@aula_blueprint.route('/aulas/cadastrar')
+@aula_blueprint.route('/cadastrar', methods=['POST'])
 @login_required
 def cadastrar_aula():
-    if len(request.form) == 0:
-        turmas = Turma.query.all()
-        return render_template('cadastrar_aula.html', turmas=turmas)
+    if not Usuario.autorizar_professor(current_user):
+        return "Você não tem autorização para acessar esta página."
     
-    turma, data, roteiro = request.form.get('turma'), request.form.get('data'), request.form.get('roteiro')
-    professor, planejada_efetivada, equipamentos = request.form.get('professor'), request.form.get('planejada-efetivada'), request.form.get('equipamentos')
-    reagentes, solucoes_criadas = request.form.get('reagentes'), request.form.get('solucoes-criadas')
-    solucoes_utilizadas, solucoes_criadas_utilizadas = request.form.get('solucoes-utilizadas'), request.form.get('solucoes-criadas-utilizadas')
+    nome_aula, turma_cod, data = request.form.get('nome-aula'), request.form.get('turma-cod'), request.form.get('data')
+    professor_matricula = request.form.get('professor-matricula')
+    planejada_efetivada = request.form.get('planejada-efetivada')
+    experimento_id = int(request.form.get('experimento-id'))
     
-    nova_aula = Aula(turma, data, roteiro, professor, planejada_efetivada)
-    nova_aula.cadastrar_aula(equipamentos, reagentes, solucoes_criadas, solucoes_utilizadas, solucoes_criadas_utilizadas)
-    return render_template('aulas.html')
+    Aula(nome_aula, data, planejada_efetivada, Turma.query.get(turma_cod), Usuario.query.get(professor_matricula), Experimento.query.get(experimento_id)).cadastrar()
+    redirect(url_for('aulas'))
 
 
-@aula_blueprint.route('/aulas/editar')
+@aula_blueprint.route('/editar', methods=['PUT'])
 @login_required
 def editar_aula():
-    if len(request.form) == 0:
-        return render_template('editar_aula.html')
+    if not Usuario.autorizar_professor(current_user):
+        return "Você não tem autorização para acessar esta página."
     
-    id_aula = request.form.get('id-aula')
-
-    turma, data, roteiro = request.form.get('turma'), request.form.get('data'), request.form.get('roteiro')
-    professor, planejada_efetivada, equipamentos = request.form.get('professor'), request.form.get('planejada-efetivada'), request.form.get('equipamentos')
-    reagentes, solucoes_criadas = request.form.get('reagentes'), request.form.get('solucoes-criadas')
-    solucoes_utilizadas, solucoes_criadas_utilizadas = request.form.get('solucoes-utilizadas'), request.form.get('solucoes-criadas-utilizadas')
-
+    id_aula = int(request.form.get('id-aula'))
     aula = Aula.query.get(id_aula)
-    aula.editar()
-    return render_template('aulas.html')
+    
+    nome_aula, turma_cod, data = request.form.get('nome-aula'), request.form.get('turma-cod'), request.form.get('data')
+    professor_matricula = request.form.get('professor-matricula')
+    planejada_efetivada = request.form.get('planejada-efetivada')
+    experimento_id = int(request.form.get('experimento-id'))
+    
+    aula.editar(nome_aula, data, planejada_efetivada, Turma.query.get(turma_cod), Usuario.query.get(professor_matricula), Experimento.query.get(experimento_id))
+    redirect(url_for('aulas'))
 
 
-@aula_blueprint.route('/aulas/deletar')
+@aula_blueprint.route('/deletar', methods=['DELETE'])
 @login_required
 def deletar_aula():
-    id_aula = request.form.get('id-aula')
+    if not Usuario.autorizar_professor(current_user):
+        return "Você não tem autorização para acessar esta página."
+    
+    id_aula = int(request.form.get('aula-id'))
     aula = Aula.query.get(id_aula)
     aula.deletar()
-    return render_template('aulas.html')
+    redirect(url_for('aulas'))
+    

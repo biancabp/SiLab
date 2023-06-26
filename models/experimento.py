@@ -33,7 +33,19 @@ class Experimento(db.Model):
     vidrarias = db.relationship('Vidraria', secondary=experimento_vidraria)
     reagentes = db.relationship('Reagente', secondary=experimento_reagente, lazy="joined")
     
-    def __init__(self, nome: str, path_pdf: str = None, equipamentos: list[Equipamento] = [], vidrarias: list[Vidraria] = [], reagentes: list[Reagente, int] = []):
+    def __init__(self, nome: str, path_pdf: str = None, equipamentos: list[Equipamento] = [], vidrarias: list[Vidraria] = [], reagentes: list[Reagente, int] = [], reagentes_planejados: list[dict] = {}):
+        for reagente_planejado in reagentes_planejados:
+            estado_materia, concentracao = reagente_planejado['estado-materia'], reagente_planejado['concentracao']
+            massa, volume = reagente_planejado['massa'], reagente_planejado['volume']
+            formula_quimica, local = reagente_planejado['formula_quimica'], reagente_planejado['local']
+            data_validade, data_criacao = reagente_planejado['data-validade'], reagente_planejado['data-criacao']
+            status = reagente_planejado['status']
+            
+            novo_reagente_planejado = Reagente(estado_materia, concentracao, massa, volume, formula_quimica, data_validade, data_criacao, status)
+            db.session.add(novo_reagente_planejado)
+            db.session.commit()
+            self.reagentes.append(novo_reagente_planejado)
+            
         self.nome = nome
         self.path_pdf = path_pdf
         self.ideal_concreto = "ideal"

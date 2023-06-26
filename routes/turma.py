@@ -1,45 +1,46 @@
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, redirect, url_for
 from flask_login import login_required, current_user
 from models.usuario import Usuario
 from models.turma import Turma
 
-turma_blueprint = Blueprint("turma", __name__)
+turma_blueprint = Blueprint("turma", __name__, url_prefix='turmas')
 
-@turma_blueprint.route("/turmas")
+
+@turma_blueprint.route("/", methods=['GET'])
 @login_required
 def turmas():
-    if(Usuario.autorizar_professor(current_user) == False):
+    if Usuario.autorizar_professor(current_user) == False:
         return "Usuário não autorizado"
 
     turmas = Turma.listar()
     return render_template("turmas.html", turmas=turmas)
 
-@turma_blueprint.route('/turmas/cadastrar', methods=['POST'])
+
+@turma_blueprint.route('/cadastrar', methods=['POST'])
 @login_required
 def cadastrar_turma():
-    cod, ano, turno, curso, qtd_alunos = request.form.get('codigo'), int(request.form.get('ano')), request.form.get('turno'), request.form.get('curso'), int(request.form.get('qtd-alunos'))
+    cod, ano, turno, curso, qtd_alunos = request.form.get('codigo'), request.form.get('ano'), request.form.get('turno'), request.form.get('curso'), int(request.form.get('qtd-alunos'))
     Turma(cod, ano, turno, curso, qtd_alunos).cadastrar()
+    
+    redirect(url_for('turmas'))
 
-    turmas = Turma.listar()
-    return render_template("turmas.html", turmas=turmas)
 
-@turma_blueprint.route('/turmas/editar', methods=['POST'])
+@turma_blueprint.route('/editar', methods=['POST'])
 @login_required
 def editar_turma():
-    id_turma = request.form.get('id-turma')
-    cod, ano, turno, curso, qtd_alunos = request.form.get('codigo'), request.form.get('ano'), request.form.get('turno'), request.form.get('curso'), request.form.get('qtd-alunos')
-    turma = Turma.query.get(id_turma)
-    turma.editar(cod, ano, turno, curso, qtd_alunos)
+    cod_original = request.form.get('cod-original')
+    novo_cod, ano, turno, curso, qtd_alunos = request.form.get('novo-codigo'), request.form.get('ano'), request.form.get('turno'), request.form.get('curso'), int(request.form.get('qtd-alunos'))
+    turma = Turma.query.get(cod_original)
+    turma.editar(novo_cod, ano, turno, curso, qtd_alunos)
+    
+    redirect(url_for('turmas'))
 
-    turmas = Turma.listar()
-    return render_template("turmas.html", turmas=turmas)
 
-@turma_blueprint.route('/turmas/deletar')
+@turma_blueprint.route('/deletar')
 @login_required
 def deletar_turma():
-    id_turma = request.form.get('id-turma')
-    turma = Turma.query.get(id_turma)
+    cod_turma = request.form.get('cod-turma')
+    turma = Turma.query.get(cod_turma)
     turma.deletar()
-
-    turmas = Turma.listar()
-    return render_template("turmas.html", turmas=turmas)
+    
+    redirect(url_for('turmas'))

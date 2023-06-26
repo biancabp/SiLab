@@ -1,44 +1,47 @@
-from flask import Blueprint, render_template, request
-from flask_login import login_required, current_user
+from flask import Blueprint, render_template, request, redirect, url_for
+from flask_login import login_required
 from models.equipamento import Equipamento
 
-equipamento_blueprint = Blueprint('equipamento', __name__)
+equipamento_blueprint = Blueprint('equipamento', __name__, url_prefix='equipamentos')
 
-@equipamento_blueprint.route('/equipamentos')
+
+@equipamento_blueprint.route('/', methods=['GET'])
 @login_required
 def equipamentos():
-    return render_template('equipamentos.html')
+    equipamentos = Equipamento.listar()
+    return render_template('equipamentos.html', equipamentos=equipamentos)
 
-@equipamento_blueprint.route('/equipamentos/cadastrar')
+
+@equipamento_blueprint.route('/cadastrar', methods=['POST'])
 @login_required
 def cadastrar_equipamento():
-    localizacao, qtd, volume = request.form.get('localizacao'), request.form.get('qtd'), request.form.get('volume')
-    tamanho, tipo_equipamento = request.form.get('tamanho'), request.form.get('tipo-equipamento')
-    lugar, danificado = request.form.get('lugar'), request.form.get('danificado')
+    tombo, tipo_equipamento = request.form.get('tombo'), request.form.get('tiipo-equipamento')
+    descricao, local = request.form.get('descricao'), request.form.get('local')
 
-    novo_equipamento = Equipamento(localizacao, qtd, volume, tamanho, tipo_equipamento, lugar, danificado)
+    novo_equipamento = Equipamento(tombo, tipo_equipamento, descricao, local)
     novo_equipamento.cadastrar()
-    return render_template('equipamentos.html')
+    redirect(url_for('equipamentos'))
 
-@equipamento_blueprint.route('/equipamentos/editar')
+
+@equipamento_blueprint.route('/editar', methods=['PUT'])
 @login_required
 def editar_equipamento():
-    id_equipamento = request.form.get('id-equipamento')
+    tombo_original = request.form.get('tombo-original')
 
-    localizacao, qtd, volume = request.form.get('localizacao'), request.form.get('qtd'), request.form.get('volume')
-    tamanho, tipo_equipamento = request.form.get('tamanho'), request.form.get('tipo-equipamento')
-    lugar, danificado = request.form.get('lugar'), request.form.get('danificado')
+    novo_tombo, tipo_equipamento = request.form.get('novo-tombo'), request.form.get('tiipo-equipamento')
+    descricao, local = request.form.get('descricao'), request.form.get('local')
 
-    equipamento = Equipamento.query.get(id_equipamento)
-    equipamento.editar(localizacao, qtd, volume, tamanho, tipo_equipamento, lugar, danificado)
+    equipamento = Equipamento.query.get(tombo_original)
+    equipamento.editar(novo_tombo, tipo_equipamento, descricao, local)
 
-    return render_template('equipamentos.html')
+    redirect(url_for('equipamentos'))
 
-@equipamento_blueprint.route('/equipamentos/deletar')
+
+@equipamento_blueprint.route('/deletar', methods=['DELETE'])
 @login_required
 def deletar_equipamento():
-    id_equipamento = request.form.get('id-equipamento')
-    equipamento = Equipamento.query.get(id_equipamento)
+    tombo_equipamento = request.form.get('tombo-equipamento')
+    equipamento = Equipamento.query.get(tombo_equipamento)
     equipamento.deletar()
 
-    return render_template('equipamentos.html')
+    redirect(url_for('equipamento'))
