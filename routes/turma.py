@@ -3,7 +3,7 @@ from flask_login import login_required, current_user
 from models.usuario import Usuario
 from models.turma import Turma
 
-turma_blueprint = Blueprint("turma", __name__, url_prefix='turmas')
+turma_blueprint = Blueprint("turma", __name__, url_prefix='/turmas')
 
 
 @turma_blueprint.route("/", methods=['GET'])

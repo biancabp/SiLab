@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, request, redirect, url_for
 from flask_login import login_required, current_user
 from models.vidraria import Vidraria
 
-vidraria_blueprint = Blueprint('vidraria', __name__, url_prefix="vidrarias")
+vidraria_blueprint = Blueprint('vidraria', __name__, url_prefix="/vidrarias")
 
 
 @vidraria_blueprint.route("/", methods=['GET'])

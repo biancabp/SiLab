@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, request, redirect, url_for
 from flask_login import login_required, current_user
 from models.uso_diverso_reagente import UsoDiversoReagente
 
-uso_diverso_reagente_blueprint = Blueprint('UsoDiversoReagente', __name__, url_prefix='uso_diverso_reagente')
+uso_diverso_reagente_blueprint = Blueprint('UsoDiversoReagente', __name__, url_prefix='/uso_diverso_reagente')
 
 
 @uso_diverso_reagente_blueprint.route('/')

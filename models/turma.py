@@ -8,7 +8,7 @@ class Turma(db.Model):
     ano = Column(String(1), nullable=False)
     turno = Column(Enum('Matutino', 'Vespertino', 'Noturno'), nullable=False) 
     curso = Column(String(100), nullable=False)
-    qtd_alunos = Column(SmallInteger(60), nullable=False)
+    qtd_alunos = Column(SmallInteger(), nullable=False)
 
     def __init__(self, cod: str, ano: str, turno: str, curso: str, qtd_alunos: int):
         self.cod = cod

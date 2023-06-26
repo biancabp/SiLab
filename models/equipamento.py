@@ -6,7 +6,7 @@ class Equipamento(db.Model):
 
     tombo = db.Column(String(10), primary_key=True)
     tipo_equipamento = Column(String(50), nullable=False)
-    descricao = Column(String(400), nullabe=False)
+    descricao = Column(String(400), nullable=False)
     local = Column(String(45), nullable=False)
     deletado = Column(Boolean, nullable=False)
 

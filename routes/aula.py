@@ -6,7 +6,7 @@ from models.usuario import Usuario
 from models.turma import Turma
 from models.experimento import Experimento
 
-aula_blueprint = Blueprint("aula", __name__, url_prefix='aulas')
+aula_blueprint = Blueprint("aula", __name__, url_prefix='/aulas')
 
 
 @aula_blueprint.route("/", methods=['GET'])

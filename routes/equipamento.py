@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, request, redirect, url_for
 from flask_login import login_required
 from models.equipamento import Equipamento
 
-equipamento_blueprint = Blueprint('equipamento', __name__, url_prefix='equipamentos')
+equipamento_blueprint = Blueprint('equipamento', __name__, url_prefix='/equipamentos')
 
 
 @equipamento_blueprint.route('/', methods=['GET'])

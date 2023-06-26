@@ -3,7 +3,7 @@ from flask_login import login_required, current_user
 from models.reagente import Reagente
 from models.formula_quimica import FormulaQuimica
 
-reagente_blueprint = Blueprint('reagente', __name__, url_prefix='reagentes')
+reagente_blueprint = Blueprint('reagente', __name__, url_prefix='/reagentes')
 
 
 @reagente_blueprint.route('/', methods=['GET'])

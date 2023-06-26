@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, request, redirect, url_for
 from flask_login import login_required, current_user
 from models.formula_quimica import FormulaQuimica
 
-formula_quimica_blueprint = Blueprint('formula_quimica', __name__, url_prefix='formula_quimica')
+formula_quimica_blueprint = Blueprint('formula_quimica', __name__, url_prefix='/formula_quimica')
 
 
 @formula_quimica_blueprint.route('/', methods=['GET'])

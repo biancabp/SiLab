@@ -3,7 +3,7 @@ from flask_login import login_user, logout_user, login_required
 from models.usuario import Usuario
 from models.formula_quimica import FormulaQuimica
 
-usuario_blueprint = Blueprint("usuario", __name__, url_prefix='usuarios')
+usuario_blueprint = Blueprint("usuario", __name__, url_prefix='/usuarios')
 
 
 @usuario_blueprint.route("/login", methods=["GET", "POST"])
