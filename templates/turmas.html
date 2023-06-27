@@ -149,7 +149,7 @@
                                             </div>
                                             <div class="modal-body text-center">
                                                 <form method="POST" action="{{ url_for('turma.editar_turma') }}" id="{{ turma.cod.replace('.', '') }}">
-                                                    <input type="hidden" name="id-turma" value="{{ turma.cod }}">
+                                                    <input type="hidden" name="cod-original" value="{{ turma.cod }}">
                                                     <div class="d-flex justify-content-between">
                                                         <div class="mb-3 me-awe-40">
                                                             <label for="recipient-name"
@@ -190,7 +190,6 @@
                                                             <option value="Matutino" selected>Matutino</option>
                                                             <option value="Vespertino">Vespertino</option>
                                                             <option value="Noturno">Noturno</option>
-                            
                                                         </select>
                                                     </div>
                                                 </form>

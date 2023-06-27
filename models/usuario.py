@@ -9,7 +9,7 @@ class Usuario(db.Model, UserMixin):
     nome = Column(String(50), nullable=False)
     email = Column(String(60), nullable=False)
     senha = Column(String(64), nullable=False)
-    tipo_usuario = Column(Enum('professor', 'tutor'), nullable=False)
+    tipo_usuario = Column(Enum('Professor', 'Tutor'), nullable=False)
 
     def __init__(self, matricula: str, nome: str, email: str, senha: str, tipo_usuario: str):
         self.matricula = matricula
@@ -46,7 +46,7 @@ class Usuario(db.Model, UserMixin):
         """
         Realiza a autorização de usuário verificando se o mesmo é do tipo ``professor`` no banco de dados.
         """
-        if Usuario.query.get(matricula).tipo_usuario != 'Professor':
+        if Usuario.query.get({"matricula": matricula}).tipo_usuario != 'Professor':
             return False
         return True
     

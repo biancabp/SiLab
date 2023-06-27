@@ -20,10 +20,10 @@ def cadastrar_experimento():
     reagentes, reagentes_planejados = request.form.get('reagentes'), request.form.get('reagentes-planejados')
     
     Experimento(nome, arquivo, equipamentos, vidrarias, reagentes, reagentes_planejados).cadastrar()
-    redirect(url_for('experimentos'))
+    return redirect(url_for('experimento.experimentos'))
     
 
-@experimento_blueprint.route('/editar', methods=['PUT'])
+@experimento_blueprint.route('/editar', methods=['POST'])
 @login_required
 def editar_experimento():
     experimento_id = int(request.form.get('experimento-id'))
@@ -33,14 +33,14 @@ def editar_experimento():
     vidrarias, reagentes, reagentes_planejados = request.form.get('vidrarias'), request.form.get('reagentes'), request.form.get('reagentes-planejados')
     
     experimento.editar(nome, arquivo, equipamentos, vidrarias, reagentes, reagentes_planejados)
-    redirect(url_for('experimentos'))
+    return redirect(url_for('experimento.experimentos'))
     
 
-@experimento_blueprint.route('/deletar', methods=['DELETE'])
+@experimento_blueprint.route('/deletar', methods=['POST'])
 @login_required
 def deletar_experimento():
     experimento_id = int(request.form.get('equipamento-id'))
     experimento = Experimento.query.get(experimento_id)
     experimento.deletar()
-    redirect(url_for('experimentos'))
+    return redirect(url_for('experimento.experimentos'))
     

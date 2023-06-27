@@ -11,7 +11,7 @@ reagente_blueprint = Blueprint('reagente', __name__, url_prefix='/reagentes')
 def reagentes():
     reagentes = Reagente.query.all()
     formulas_quimica = FormulaQuimica.query.all()
-    return render_template('reagentes.html', reagentes=reagentes, formulas_quimica=formulas_quimica, round=round)
+    return render_template('reagentes.html', reagentes=reagentes, formulas_quimica=formulas_quimica)
 
 
 @reagente_blueprint.route('/cadastrar', methods=['POST'])
@@ -23,10 +23,10 @@ def cadastrar_reagente():
     novo_reagente = Reagente(estado_materia, concentracao, massa, volume, formula_quimica, local, data_validade, data_criacao)
     novo_reagente.cadastrar()
 
-    redirect(url_for('reagentes'))
+    return redirect(url_for('reagente.reagentes'))
 
 
-@reagente_blueprint.route('/editar', methods=['PUT'])
+@reagente_blueprint.route('/editar', methods=['POST'])
 @login_required
 def editar_reagente():
     id_reagente = int(request.form.get('id-reagente'))
@@ -36,15 +36,15 @@ def editar_reagente():
     formula_quimica, local, data_criacao = request.form.get('formula-quimica'), request.form.get('local'), request.form.get('data-criacao')
 
     reagente = Reagente.query.get(id_reagente)
-    reagente.editar(estado_materia, concentracao, massa, volume, data_validade, formula_quimica, local)
+    reagente.editar(estado_materia, concentracao, massa, volume, formula_quimica, local, data_validade, data_criacao)
    
-    redirect(url_for('reagentes'))
+    return redirect(url_for('reagente.reagentes'))
 
 
-@reagente_blueprint.route('/deletar', methods=['DELETE'])
+@reagente_blueprint.route('/deletar', methods=['POST'])
 @login_required
 def deletar_reagente():
     id_reagente = int(request.form.get('id-reagente'))
     reagente = Reagente.query.form.get(id_reagente)
     reagente.deletar()
-    redirect(url_for('reagentes'))
+    return redirect(url_for('reagente.reagentes'))

@@ -17,26 +17,26 @@ def formulas_quimica():
 def cadastrar_formula_quimica():
     formula_quimica, nome = request.form.get('formula-quimica'), request.form.get('nome')
     FormulaQuimica(formula_quimica, nome).cadastrar()
-    redirect(url_for('formulas_quimica'))
+    return redirect(url_for('formula_quimica.formulas_quimica'))
 
 
-@formula_quimica_blueprint.route('/editar', methods=['PUT'])
+@formula_quimica_blueprint.route('/editar', methods=['POST'])
 @login_required
 def editar_formula_quimica():
-    formula_original = request.form.get('formula-quimica')
-    formula_quimica = FormulaQuimica.query.get(formula_original)
-
+    formula_original = request.form.get('formula-original')
+    formula_quimica = FormulaQuimica.query.get({"formula": formula_original})
+    print(formula_original)
     nova_formula = request.form.get('nova-formula-quimica')
     novo_nome = request.form.get('nome')
     formula_quimica.editar(nova_formula, novo_nome)
     
-    redirect(url_for('formulas_quimica'))
+    return redirect(url_for('formula_quimica.formulas_quimica'))
 
 
-@formula_quimica_blueprint.route('/deletar', methods=['DELETE'])
+@formula_quimica_blueprint.route('/deletar', methods=['POST'])
 @login_required
 def deletar_formula_quimica():
     formula_quimica = request.form.get('formula-quimica')
     formula_quimica = FormulaQuimica.query.get(formula_quimica)
     formula_quimica.deletar()
-    redirect(url_for('formulas_quimica'))
+    return redirect(url_for('formula_quimica.formulas_quimica'))

@@ -4,7 +4,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
    
 
-    <title>Equipamentos - Silab</title>
+    <title>vidrarias - Silab</title>
 
     <!-- fonte -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -29,12 +29,12 @@
     <div class="container ps-awe-80">
         <div class="row">
             <div class="pt-awe-40 col-md-10">
-                <h1 class="pb-awe-40 fz-40 fw-semi-bold">Equipamentos</h1>
+                <h1 class="pb-awe-40 fz-40 fw-semi-bold">vidrarias</h1>
 
                 <div class="d-flex justify-content-between pb-awe-24">
                     <div class="col-md-3">
                         <select class="form-select form-select" aria-label=".form-select-sm example">
-                            <option selected>Equipamento</option>
+                            <option selected>vidraria</option>
                             <option value="1">Agitador</option>
                             <option value="2">Balão</option>
                             <option value="3">Béquer</option>
@@ -44,7 +44,7 @@
                     <div class="col-6 justify-content-end d-flex">
                         <button type="button" class="btn btn-primary-light fz-18" data-bs-toggle="modal"
                             data-bs-target="#exampleModal1">
-                            Cadastrar equipamento
+                            Cadastrar vidraria
                         </button>
                     </div>
                 </div>
@@ -58,23 +58,23 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h1 class="modal-title fz-18 fw-semi-bold text-primary-dark-3" id="exampleModalLabel">
-                                Cadastrar equipamento</h1>
+                                Cadastrar vidraria</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
 
                         <div class="modal-body">
-                            <form method="POST" action="{{ url_for('equipamento.cadastrar_equipamento') }}" id="cadastrar-equipamento">
+                            <form method="POST" action="{{ url_for('vidraria.cadastrar_vidraria') }}" id="cadastrar-vidraria">
                                 <div class="d-flex justify-content">
                                     <div class="row">
                                         <div class="mb-3 me-awe-24">
                                             <div class="col-md-12 d-flex">
                                                 <div>
                                                     <label for="recipient-name"
-                                                        class="col-form-label">Equipamento:</label>
+                                                        class="col-form-label">vidraria:</label>
                                                     <div class=" d-flex justify-content-between">
                                                         <select class="form-select form-select-md"
-                                                            aria-label=".form-select-md example" name="tipo-equipamento">
-                                                            <option selected>Equipamento</option>
+                                                            aria-label=".form-select-md example" name="material">
+                                                            <option selected>vidraria</option>
                                                             <option>Agitador</option>
                                                             <option>Balão</option>
                                                             <option>Béquer</option>
@@ -82,10 +82,10 @@
                                                     </div>
                                                 </div>
                                                 <div class="ps-awe-24">
-                                                    <label for="message-text" class="col-form-label" placeholder="00">Tombo:</label>
+                                                    <label for="message-text" class="col-form-label" placeholder="00">Nome:</label>
                                                     <div class="d-flex justify-content-between">
                                                         <input type="text" class="form-control me-awe-24"
-                                                            id="recipient-name" name="tombo">
+                                                            id="recipient-name" name="nome">
                                                         
                                                     </div>
                                                 </div>
@@ -100,13 +100,22 @@
                                         <div class="mb-3 me-awe-24">
                                             <div class="col-md-12 d-flex">
                                                 <div class="">
-                                                    <label for="recipient-name"
-                                                        class="col-form-label">Descrição:</label>
-                                                    <div class=" d-flex justify-content-between">
-                                                        <div class="d-flex justify-content-between">
-                                                            <textarea type="text" class="form-control" rows="3"
-                                                                      id="recipient-name" name="descricao"></textarea>
-                                                        </div>
+                                                    <label for="message-text"
+                                                        class="col-form-label"
+                                                        placeholder="00">Volume:</label>
+                                                    <div
+                                                        class="d-flex justify-content-between">
+                                                        <input type="text"
+                                                            class="form-control me-awe-24"
+                                                            id="recipient-name" name="volume">
+                                                        <select
+                                                            class="form-select form-select-sm"
+                                                            aria-label=".form-select-sm example">
+                                                            <option selected>m³</option>
+                                                            <option value="1">cm³</option>
+                                                            <option value="2">mm³</option>
+                                                            
+                                                        </select>
                                                     </div>
                                                 </div>
                                                 <div class="ps-awe-24">
@@ -129,7 +138,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary fw-medium border-primary-dark-3 text-primary-dark-3" data-bs-dismiss="modal">Cancelar</button>
-                            <button type="submit" class="btn btn-primary-light" form="cadastrar-equipamento">Salvar</button>
+                            <button type="submit" class="btn btn-primary-light" form="cadastrar-vidraria">Salvar</button>
                         </div>
                     </div>
                 </div>
@@ -147,57 +156,59 @@
                     <table class="blueTable">
                         <thead>
                             <tr>
-                                <th>Tombo</th>
-                                <th>Tipo Equipamento</th>
+                                <th>ID</th>
+                                <th>Volume</th>
+                                <th>Material</th>
                                 <th>Local</th>
                                 <th>Ações</th>
                             </tr>
                         </thead>
                         <tbody>
-                          {% for equipamento in equipamentos %}
+                          {% for vidraria in vidrarias %}
                             <tr>
-                                <td>{{ equipamento.tombo }}</td>
-                                <td>{{ equipamento.tipo_equipamento }}</td>
-                                <td>{{ equipamento.local }}</td>
+                                <td>{{ vidraria.id }}</td>
+                                <td>{{ vidraria.volume }}</td>
+                                <td>{{ vidraria.material }}</td>
+                                <td>{{ vidraria.local }}</td>
                                 <td class="icons">
                                     <i class='bx bxs-edit-alt text-primary-light' data-bs-toggle="modal"
-                                        data-bs-target="#exampleModal{{ equipamento.tombo }}"></i>
-                                    <div class="modal fade" id="exampleModal{{ equipamento.tombo }}" tabindex="-1"
+                                        data-bs-target="#exampleModal{{ vidraria.id }}"></i>
+                                    <div class="modal fade" id="exampleModal{{ vidraria.id }}" tabindex="-1"
                                         aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered">
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <h1 class="modal-title fz-18 fw-semi-bold text-primary-dark-3"
-                                                        id="exampleModalLabel">Editar equipamento - 000
+                                                        id="exampleModalLabel">Editar vidraria - 000
                                                     </h1>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                         aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body text-start">
-                                                    <form method="POST" action="{{ url_for('equipamento.editar_equipamento') }}" id="{{ equipamento.tombo }}">
-                                                        <input type="hidden" name="tombo-original" value="{{ equipamento.tombo }}">
+                                                    <form method="POST" action="{{ url_for('vidraria.editar_vidraria') }}" id="{{ vidraria.id }}">
+                                                        <input type="hidden" name="id" value="{{ vidraria.id }}">
                                                         <div class="d-flex justify-content">
                                                             <div class="row">
                                                                 <div class="mb-3 me-awe-24">
                                                                     <div class="col-md-12 d-flex">
                                                                         <div>
                                                                             <label for="recipient-name"
-                                                                                class="col-form-label">Equipamento:</label>
+                                                                                class="col-form-label">vidraria:</label>
                                                                             <div class=" d-flex justify-content-between">
                                                                                 <select class="form-select form-select-md"
-                                                                                    aria-label=".form-select-md example" name="tipo-equipamento">
-                                                                                    <option selected>Equipamento</option>
-                                                                                    <option value="1">Agitador</option>
-                                                                                    <option value="2">Balão</option>
-                                                                                    <option value="3">Béquer</option>
+                                                                                    aria-label=".form-select-md example" name="material">
+                                                                                    <option>vidraria</option>
+                                                                                    <option>Agitador</option>
+                                                                                    <option>Balão</option>
+                                                                                    <option>Béquer</option>
                                                                                 </select>
                                                                             </div>
                                                                         </div>
                                                                         <div class="ps-awe-24">
-                                                                            <label for="message-text" class="col-form-label" placeholder="00">Tombo:</label>
+                                                                            <label for="message-text" class="col-form-label" placeholder="00">Nome:</label>
                                                                             <div class="d-flex justify-content-between">
                                                                                 <input type="text" class="form-control me-awe-24"
-                                                                                    id="recipient-name" name="tombo" value="{{ equipamento.tombo }}">
+                                                                                    id="recipient-name" name="nome" value="{{ vidraria.nome }}">
                                                                                 
                                                                             </div>
                                                                         </div>
@@ -212,18 +223,29 @@
                                                                 <div class="mb-3 me-awe-24">
                                                                     <div class="col-md-12 d-flex">
                                                                         <div class="">
-                                                                            <label for="recipient-name"
-                                                                                class="col-form-label">Descrição:</label>
-                                                                            <div class=" d-flex justify-content-between">
-                                                                                <textarea type="text" class="form-control" rows="3"
-                                                                      id="recipient-name" name="descricao">{{ equipamento.descricao }}</textarea>
-                                                                            </div>
-                                                                        </div>
+                                                    <label for="message-text"
+                                                        class="col-form-label"
+                                                        placeholder="00">Volume:</label>
+                                                    <div
+                                                        class="d-flex justify-content-between">
+                                                        <input type="text"
+                                                            class="form-control me-awe-24"
+                                                            id="recipient-name" name="volume" value="{{ vidraria.volume }}">
+                                                        <select
+                                                            class="form-select form-select-sm"
+                                                            aria-label=".form-select-sm example">
+                                                            <option selected>m³</option>
+                                                            <option value="1">cm³</option>
+                                                            <option value="2">mm³</option>
+                                                            
+                                                        </select>
+                                                    </div>
+                                                </div>
                                                                         <div class="ps-awe-24">
                                                                             <label for="message-text" class="col-form-label" placeholder="00">Local:</label>
                                                                             <div class="d-flex justify-content-between">
                                                                                 <input type="text" class="form-control me-awe-24"
-                                                                                    id="recipient-name" name="local" value="{{ equipamento.local }}">
+                                                                                    id="recipient-name" name="local" value="{{ vidraria.local }}">
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -236,7 +258,7 @@
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary"
                                                         data-bs-dismiss="modal">Cancelar</button>
-                                                    <button type="submit" class="btn btn-primary-light" form="{{ equipamento.tombo }}">Salvar</button>
+                                                    <button type="submit" class="btn btn-primary-light" form="{{ vidraria.id }}">Salvar</button>
                                                 </div>
                                             </div>
                                         </div>

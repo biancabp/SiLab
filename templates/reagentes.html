@@ -155,11 +155,11 @@
                                                 <div class="ps-awe-24">
                                                     <label for="message-text"
                                                         class="col-form-label"
-                                                        placeholder="00">Densidade:</label>
+                                                        placeholder="00">Concentração:</label>
                                                     <div class="d-flex justify-content-between">
                                                         <input type="text"
                                                             class="form-control me-awe-24"
-                                                            id="recipient-name" name="densidade">
+                                                            id="recipient-name" name="concentracao">
                                                         <select
                                                             class="form-select form-select-md"
                                                             aria-label=".form-select-md example">
@@ -192,7 +192,16 @@
                                                             id="recipient-name" name="local">
                                                     </div>
                                                 </div>
-                            
+                                                <div class="">
+                                                    <label for="message-text"
+                                                        class="col-form-label"
+                                                        placeholder="00">Data de criação:</label>
+                                                    <div class="d-flex justify-content-between">
+                                                        <input type="date"
+                                                            class="form-control me-awe-24"
+                                                            id="recipient-name" name="data-criacao">
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
 
@@ -239,7 +248,7 @@
                                 <td>{{ reagente.id }}</td>
                                 <td>{{ reagente.formula_quimica }}</td>
                                 <td>{{ reagente.estado_materia }}</td>
-                                <td>{{ round(reagente.volume, 3) }}</td>
+                                <td>{{ reagente.volume }}</td>
                                 <td>{{ reagente.data_validade }}</td>
                                 <td>{{ reagente.local }}</td>
                                 <td class="icons d-flex justify-content-center">
@@ -277,7 +286,7 @@
                                                                                     placeholder="00">Massa:</label>
                                                                                 <div
                                                                                     class="d-flex justify-content-between">
-                                                                                    <span>{{ round(reagente.massa, 3) }} g</span>
+                                                                                    <span>{{ reagente.massa }} g</span>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -304,7 +313,7 @@
                                                                                     placeholder="00">Volume:</label>
                                                                                 <div
                                                                                     class="d-flex justify-content-between">
-                                                                                    <span>{{ round(reagente.volume, 3) }} m3</span>
+                                                                                    <span>{{ reagente.volume }} m3</span>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -332,7 +341,7 @@
                                                                                     placeholder="00">Densidade:</label>
                                                                                 <div
                                                                                     class="d-flex justify-content-between">
-                                                                                    <span>{{ round(reagente.densidade, 3) }} g/m³</span>
+                                                                                    <span>{{ reagente.densidade }} g/m³</span>
                                                                                     </select>
                                                                                 </div>
                                                                             </div>
@@ -407,7 +416,7 @@
                                                                                         class="d-flex justify-content-between">
                                                                                         <input type="text"
                                                                                             class="form-control me-awe-24"
-                                                                                            id="recipient-name" name="massa" value="{{ round(reagente.massa, 3) }}">
+                                                                                            id="recipient-name" name="massa" value="{{ reagente.massa }}">
                                                                                         <select
                                                                                             class="form-select form-select-sm"
                                                                                             aria-label=".form-select-sm example">
@@ -451,7 +460,7 @@
                                                                                         class="d-flex justify-content-between">
                                                                                         <input type="text"
                                                                                             class="form-control me-awe-24"
-                                                                                            id="recipient-name" name="volume" value="{{ round(reagente.volume, 3) }}">
+                                                                                            id="recipient-name" name="volume" value="{{ reagente.volume }}">
                                                                                         <select
                                                                                             class="form-select form-select-sm"
                                                                                             aria-label=".form-select-sm example">
@@ -485,11 +494,11 @@
                                                                                 <div class="ps-awe-24">
                                                                                     <label for="message-text"
                                                                                         class="col-form-label"
-                                                                                        placeholder="00">Densidade:</label>
+                                                                                        placeholder="00">Concentração:</label>
                                                                                     <div class="d-flex justify-content-between">
                                                                                         <input type="text"
                                                                                             class="form-control me-awe-24"
-                                                                                            id="recipient-name" name="densidade" value="{{ round(reagente.densidade, 3) }}">
+                                                                                            id="recipient-name" name="concentracao" value="{{ reagente.concentracao }}">
                                                                                         <select
                                                                                             class="form-select form-select-md"
                                                                                             aria-label=".form-select-md example">
@@ -522,7 +531,16 @@
                                                                                             id="recipient-name" name="local" value="{{ reagente.local }}">
                                                                                     </div>
                                                                                 </div>
-                                                                                
+                                                                                <div class="">
+                                                                                    <label for="message-text"
+                                                                                        class="col-form-label"
+                                                                                        placeholder="00">Data de criação:</label>
+                                                                                    <div class="d-flex justify-content-between">
+                                                                                        <input type="date"
+                                                                                            class="form-control me-awe-24"
+                                                                                            id="recipient-name" name="data-criacao" value="{{ reagente.data_criacao }}">
+                                                                                    </div>
+                                                                                </div>
                                                                             </div>
                                                                         </div>
                                 

@@ -15,33 +15,33 @@ def equipamentos():
 @equipamento_blueprint.route('/cadastrar', methods=['POST'])
 @login_required
 def cadastrar_equipamento():
-    tombo, tipo_equipamento = request.form.get('tombo'), request.form.get('tiipo-equipamento')
+    tombo, tipo_equipamento = request.form.get('tombo'), request.form.get('tipo-equipamento')
     descricao, local = request.form.get('descricao'), request.form.get('local')
 
     novo_equipamento = Equipamento(tombo, tipo_equipamento, descricao, local)
     novo_equipamento.cadastrar()
-    redirect(url_for('equipamentos'))
+    return redirect(url_for('equipamento.equipamentos'))
 
 
-@equipamento_blueprint.route('/editar', methods=['PUT'])
+@equipamento_blueprint.route('/editar', methods=['POST'])
 @login_required
 def editar_equipamento():
     tombo_original = request.form.get('tombo-original')
 
-    novo_tombo, tipo_equipamento = request.form.get('novo-tombo'), request.form.get('tiipo-equipamento')
+    novo_tombo, tipo_equipamento = request.form.get('tombo'), request.form.get('tipo-equipamento')
     descricao, local = request.form.get('descricao'), request.form.get('local')
 
-    equipamento = Equipamento.query.get(tombo_original)
+    equipamento = Equipamento.query.get({"tombo": tombo_original})
     equipamento.editar(novo_tombo, tipo_equipamento, descricao, local)
 
-    redirect(url_for('equipamentos'))
+    return redirect(url_for('equipamento.equipamentos'))
 
 
-@equipamento_blueprint.route('/deletar', methods=['DELETE'])
+@equipamento_blueprint.route('/deletar', methods=['POST'])
 @login_required
 def deletar_equipamento():
     tombo_equipamento = request.form.get('tombo-equipamento')
     equipamento = Equipamento.query.get(tombo_equipamento)
     equipamento.deletar()
 
-    redirect(url_for('equipamento'))
+    return redirect(url_for('equipamento.equipamentos'))

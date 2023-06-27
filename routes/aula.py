@@ -12,7 +12,7 @@ aula_blueprint = Blueprint("aula", __name__, url_prefix='/aulas')
 @aula_blueprint.route("/", methods=['GET'])
 @login_required
 def aulas():
-    if not Usuario.autorizar_professor(current_user):
+    if not Usuario.autorizar_professor(current_user.matricula):
         return "Você não tem autorização para acessar esta página."
 
     aulas = Aula.listar()
@@ -31,10 +31,10 @@ def cadastrar_aula():
     experimento_id = int(request.form.get('experimento-id'))
     
     Aula(nome_aula, data, planejada_efetivada, Turma.query.get(turma_cod), Usuario.query.get(professor_matricula), Experimento.query.get(experimento_id)).cadastrar()
-    redirect(url_for('aulas'))
+    return redirect(url_for('aula.aulas'))
 
 
-@aula_blueprint.route('/editar', methods=['PUT'])
+@aula_blueprint.route('/editar', methods=['POST'])
 @login_required
 def editar_aula():
     if not Usuario.autorizar_professor(current_user):
@@ -49,10 +49,10 @@ def editar_aula():
     experimento_id = int(request.form.get('experimento-id'))
     
     aula.editar(nome_aula, data, planejada_efetivada, Turma.query.get(turma_cod), Usuario.query.get(professor_matricula), Experimento.query.get(experimento_id))
-    redirect(url_for('aulas'))
+    return redirect(url_for('aula.aulas'))
 
 
-@aula_blueprint.route('/deletar', methods=['DELETE'])
+@aula_blueprint.route('/deletar', methods=['POST'])
 @login_required
 def deletar_aula():
     if not Usuario.autorizar_professor(current_user):
@@ -61,5 +61,5 @@ def deletar_aula():
     id_aula = int(request.form.get('aula-id'))
     aula = Aula.query.get(id_aula)
     aula.deletar()
-    redirect(url_for('aulas'))
+    return redirect(url_for('aula.aulas'))
     

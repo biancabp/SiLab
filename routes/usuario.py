@@ -25,17 +25,17 @@ def login():
 @login_required
 def logout():
     logout_user()
-    redirect(url_for(login))
+    return redirect(url_for('usuario.login'))
 
 
 @usuario_blueprint.route("/registrar-se", methods=['GET', 'POST'])
 def registrar_usuario():
-    if len(request.form) == 0:
+    if request.method == 'GET':
         return render_template("cadastro.html")
 
     if request.form['senha'] != request.form['confirme-senha']:
         return "As senhas devem ser iguais."
-    
-    usuario = Usuario(int(request.form['matricula']), request.form['nome'], request.form['email'], request.form['senha'], request.form['tipo-usuario'])
+    print(request.form.get('tipo-usuario'))
+    usuario = Usuario(request.form['matricula'], request.form['nome'], request.form['email'], request.form['senha'], request.form['tipo-usuario'])
     usuario.cadastrar()
     return render_template('login.html')

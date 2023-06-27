@@ -27,12 +27,11 @@ class Vidraria(db.Model):
         vidrarias = Vidraria.query.all()
         return vidrarias
 
-    def editar(self, novo_nome: str, novo_material: str, novo_volume: float, novo_local: str, deletado: bool):
+    def editar(self, novo_nome: str, novo_material: str, novo_volume: float, novo_local: str):
         self.nome = novo_nome
         self.material = novo_material
         self.volume = novo_volume
         self.local = novo_local
-        self.deletado = deletado
 
         db.session.add(self)
         db.session.commit()
