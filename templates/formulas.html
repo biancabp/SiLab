@@ -1,217 +1,486 @@
-{% extends "nav-bar.html" %}
-    {% block head %}
-    
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    
+<!DOCTYPE html>
+<html lang="en">
 
-    <title>Fórmulas - Silab</title>
-
-    <!-- fonte -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Poppins:wght@100;200;300;400;600;700;800;900&display=swap"
-        rel="stylesheet">
-
+<head>
+    <meta charset="UTF-8">
+    <title>Fórmulas - SiLab</title>
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/remixicon@2.2.0/fonts/remixicon.css'>
+    <link rel='stylesheet' href='https://unpkg.com/css-pro-layout@1.1.0/dist/css/css-pro-layout.css'>
+    <link rel='stylesheet'
+        href='https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&amp;display=swap'>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="../dist/css/style.css" />
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
-    <!-- css -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='dist/css/style.css') }}" />
-    {% endblock %}
 
-{% block body %}
-<body id="">
-{% endblock %}
-    
-    {% block content %}
+</head>
 
-    <div class="container ps-awe-80">
-        <div class="row">
-            <div class="pt-awe-40 col-md-5">
-                <h1 class="pb-awe-40 fz-40 fw-semi-bold">Fórmulas</h1>
-
-                <div class="d-flex justify-content-end pb-awe-24">
-                    <div class="col-6 justify-content-end d-flex">
-                        <button type="button" class="btn btn-primary-light fz-16" data-bs-toggle="modal"
-                            data-bs-target="#exampleModal1">
-                            Cadastrar fórmula
-                        </button>
-                    </div>
-                </div>
-            </div> <!-- Modal -->
+<body>
+    <nav class="navbar navbar-light bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand pb-awe-14 ps-awe-40 pt-awe-14" href="#">
+                <img src="/dist/image/logo.svg" alt="" width="100" height="auto" class="">
+            </a>
         </div>
+        </div>
+    </nav>
 
-        <div class="col-md-6">
-            <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog modal-sm modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fz-18 fw-semi-bold text-primary-dark-3" id="exampleModalLabel">
-                                Cadastrar fórmula</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
+    <div class="col-md-6">
+        <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-sm modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fz-18 fw-semi-bold text-primary-dark-3" id="exampleModalLabel">
+                            Adicionar fórmula</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
 
-                        <div class="modal-body">
-                            <form method="POST" action="{{ url_for('formula_quimica.cadastrar_formula_quimica') }}" id="cadastrar-formula">
-
-                                <div class="d-flex justify-content-between">
-                                    <div class="row">
-                                        <div class="mb-3 me-awe-24">
-                                            <div class="col-md-12 d-flex">
-                                                <div class="ps-awe-24">
-                                                    <label for="message-text" class="col-form-label fw-semi-bold" placeholder="00">Fórmula:</label>
-                                                    <div class="d-flex justify-content-between">
-                                                        <input type="text" class="form-control me-awe-24"
-                                                            id="recipient-name" name="formula-quimica">
-                                                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="d-flex justify-content">
+                                <div class="row">
+                                    <div class="mb-3 me-awe-24 d-flex">
+                                        <div class="col-md-12">
+                                            <div class="">
+                                                <label for="message-text" class="col-form-label fw-semi-bold text-black-4 fz-16"
+                                                    >Fórmula:</label>
+                                                <div class="d-flex justify-content-between">
+                                                    <input type="text" class="form-control text-prata-2 fz-16"
+                                                        id="recipient-name" placeholder="Lorem Ipsum">
+                                                </div>
+                                            </div>
+                                            <div class="pt-awe-14">
+                                                <label for="message-text" class="col-form-label fw-semi-bold text-black-4 fz-16"
+                                                    >Nome:</label>
+                                                <div class="d-flex justify-content-between">
+                                                    <input type="text" class="form-control text-prata-2 fz-16"
+                                                        id="recipient-name" placeholder="Lorem Ipsum">
                                                 </div>
                                             </div>
                                         </div>
 
                                     </div>
                                 </div>
+                            </div>
 
-                                <div class="d-flex justify-content-between">
-                                    <div class="row">
-                                        <div class="mb-3 me-awe-24">
-                                            <div class="col-md-12 d-flex">
-                                                <div class="ps-awe-24">
-                                                    <label for="message-text" class="col-form-label fw-semi-bold" placeholder="00">Nome:</label>
-                                                    <div class="d-flex justify-content-between">
-                                                        <input type="text" class="form-control me-awe-24"
-                                                            id="recipient-name" name="nome">
-                                                    </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button"
+                            class="btn btn-secondary fw-medium border-primary-dark-3 text-primary-dark-3"
+                            data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-primary-light">Salvar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-sm modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fz-18 fw-semi-bold text-primary-dark-3" id="exampleModalLabel">
+                            Editar fórmula</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <form>
+                            <div class="d-flex justify-content">
+                                <div class="row">
+                                    <div class="mb-3 me-awe-24 d-flex">
+                                        <div class="col-md-12">
+                                            <div class="">
+                                                <label for="message-text" class="col-form-label fw-semi-bold text-black-4 fz-16"
+                                                    >Fórmula:</label>
+                                                <div class="d-flex justify-content-between">
+                                                    <input type="text" class="form-control text-prata-2 fz-16"
+                                                        id="recipient-name" placeholder="Lorem Ipsum">
+                                                </div>
+                                            </div>
+                                            <div class="pt-awe-14">
+                                                <label for="message-text" class="col-form-label fw-semi-bold text-black-4 fz-16"
+                                                    >Nome:</label>
+                                                <div class="d-flex justify-content-between">
+                                                    <input type="text" class="form-control text-prata-2 fz-16"
+                                                        id="recipient-name" placeholder="Lorem Ipsum">
                                                 </div>
                                             </div>
                                         </div>
 
                                     </div>
                                 </div>
+                            </div>
 
-
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary fw-medium border-primary-dark-3 text-primary-dark-3" data-bs-dismiss="modal">Cancelar</button>
-                            <button type="submit" form="cadastrar-formula" class="btn btn-primary-light">Salvar</button>
-                        </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button"
+                            class="btn btn-secondary fw-medium border-primary-dark-3 text-primary-dark-3"
+                            data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-primary-light">Salvar</button>
                     </div>
                 </div>
             </div>
-        </div>
-
-   
-
-        <!-- Button trigger modal -->
-
-
-        <div class="container">
-            <div class="row">
-                <div class="col-md-5">
-                    <table class="blueTable">
-                        <thead>
-                            <tr>
-                                <th>Fórmula</th>
-                                <th>Nome</th>
-                                <th>Ações</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for formula in formulas %}
-                            <tr>
-                                <td>{{ formula.formula }}</td>
-                                <td>{{ formula.nome }}</td>
-                                <td class="icons">
-                                    <i class='bx bxs-edit-alt text-primary-light' data-bs-toggle="modal"
-                                        data-bs-target="#exampleModal{{ formula.formula }}"></i>
-                                    <div class="modal fade" id="exampleModal{{ formula.formula }}" tabindex="-1"
-                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog modal-sm modal-dialog-centered">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h1 class="modal-title fz-18 fw-semi-bold text-primary-dark-3"
-                                                        id="exampleModalLabel">Editar fórmula - {{ formula.formula }}
-                                                    </h1>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                        aria-label="Close"></button>
-                                                </div>
-                                                <form method="POST" action="{{ url_for('formula_quimica.editar_formula_quimica') }}" id="{{ formula.formula }}">
-                                                    <input type="hidden" name="formula-original" value="{{ formula.formula }}">
-                                                <div class="d-flex justify-content-center">
-                                                    <div class="row">
-                                                        <div class="mb-3 me-awe-24">
-                                                            <div class="col-md-12 d-flex">
-                                                                <div class="ps-awe-24">
-                                                                    <label for="message-text" class="col-form-label fw-semi-bold text-center" placeholder="00">Fórmula:</label>
-                                                                    <div class="d-flex justify-content-between">
-                                                                        <input type="text" class="form-control me-awe-24"
-                                                                            id="recipient-name" value="{{ formula.formula }}" name="nova-formula-quimica">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                
-                                                    </div>
-                                                </div>
-                
-                                                <div class="d-flex justify-content-center">
-                                                    <div class="row">
-                                                        <div class="mb-3 me-awe-24">
-                                                            <div class="col-md-12 d-flex justify-content-center">
-                                                                <div class="ps-awe-24">
-                                                                    <label for="message-text" class="col-form-label fw-semi-bold text-center" placeholder="00">Nome:</label>
-                                                                    <div class="d-flex justify-content-between">
-                                                                        <input type="text" class="form-control me-awe-24"
-                                                                            id="recipient-name" value="{{ formula.nome }}" name="nome">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                
-                                                    </div>
-                                                </div>
-                                                </form>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary"
-                                                        data-bs-dismiss="modal">Cancelar</button>
-                                                    <button type="submit" class="btn btn-primary-light" form="{{ formula.formula }}">Salvar</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <i class='bx bxs-trash-alt text-primary-light'></i>
-                                </td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-
-                    <nav aria-label="..." class="pt-awe-80">
-                        <ul class="pagination">
-                            <li class="page-item">
-                                <span class="page-link">
-                                    <</span>
-                            </li>
-                            <li class="page-item" aria-current="page">
-                                <span class="page-link">0</span>
-                            </li>
-                            <li class="page-item rounded-circle">
-                                <a class="page-link" href="#">></a>
-                            </li>
-                        </ul>
-                    </nav>
-
-                </div>
-            </div>
-
         </div>
 
     </div>
-        <!--===== MAIN JS =====-->
+    <!-- partial:index.partial.html -->
+    <div class="layout has-sidebar fixed-sidebar fixed-header">
+        <aside id="sidebar" class="sidebar break-point-sm has-bg-image">
+            <div class="image-wrapper">
+                <img src="assets/images/sidebar-bg.jpg" alt="sidebar background" />
+            </div>
+            <div class="sidebar-layout">
+                <div class="sidebar-header d-flex align-items-center justify-content-center flex-wrap mb-awe-40">
+                    <div class="profile justify-content-center">
+                        <img src="/dist/image/profile.svg " class="rounded mx-auto d-block pt-awe-14" alt="">
+                        <p class="d-block fw-semi-bold fz-16 text-primary-light-2 text-center pt-awe-24">Nome Sobrenome
+                        </p>
+                        <p class="d-block fz-16 text-aco text-center">Tutor/Professor </p>
+                        <div class="d-flex justify-content-center">
+                            <i class='bx bxs-cog text-aco text-center fz-24'></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="sidebar-content mt-awe-24">
+                    <nav class="menu open-current-submenu">
+                        <ul class="nav text-center pt-awe-32">
+                            <li>
+                                <a href="#">
+                                    <i class='bx bxs-category fz-24 text-aco'></i>
+                                    <span class="list text-decoration-none ps-awe-12">Painel</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class='bx bxs-box fz-24 text-aco'></i>
+                                    <span class="list text-decoration-none">Equipamentos</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class='bx bxs-vial fz-24 text-aco'></i>
+                                    <span class="list text-decoration-none">Reagentes</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class='bx bxs-bong fz-24 text-aco'></i>
+                                    <span class="list text-decoration-none">Soluções</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class='bx bxs-notepad fz-24 text-aco'></i>
+                                    <span class="list text-decoration-none">Fórmulas</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class='bx bxs-bong fz-24 text-aco'></i>
+                                    <span class="list text-decoration-none">Aulas</span>
+                                </a>
+                            </li>
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
-            crossorigin="anonymous"></script>
+                            <li>
+                                <a href="#">
+                                    <i class='bx bxs-group fz-24 text-aco'></i>
+                                    <span class="list text-decoration-none">Turmas</span>
+                                </a>
+                            </li>
 
-{% endblock %}
+                            <li class="mt-awe-32">
+                                <a href="#">
+                                    <i class='bx bx-log-out fz-18 text-aco'></i>
+                                    <span class="list text-decoration">Sair</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="sidebar-footer">
+                    <div class="footer-box">
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <div id="overlay" class="overlay"></div>
+        <div class="layout">
+            <main class="content">
+                <div class="container ps-awe-80">
+                    <div class="row">
+                        <div class="pt-awe-40 col-md-5">
+                            <h1 class="pb-awe-40 fz-40 fw-semi-bold">Fórmulas</h1>
+                
+                            <div class="d-flex justify-content-end pb-awe-24">
+                                <div class="col-6 justify-content-end d-flex">
+                                    <button type="button" class="btn btn-primary-light fz-16" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModal1">
+                                        Adicionar fórmula
+                                    </button>
+                                </div>
+                            </div>
+                        </div> <!-- Modal -->
+                    </div>
+                
+                
+                
+                
+                    <!-- Button trigger modal -->
+                
+                
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <table class="blueTable">
+                                    <thead>
+                                        <tr>
+                                            <div class="d-flex">
+                                                <th class="">
+                                                    <span>Fórmula</span>
+                                                    <i class='fw-bold bx bx-filter fz-18'></i>
+                                            </div>
+                                            <div class="d-flex">
+                                                <th class="">
+                                                    <span>Nome</span>
+                                                    <i class='bx bx-sort-alt-2 fz-18'></i>
+                                                    <i class='fw-bold bx bx-filter fz-18'></i>
+                                                    
+                                            </div>
+                                            <th>Ações</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>00000</td>
+                                            <td>Lorem Ipsum</td>
+                                            <td class="icons">
+                                                <i class='bx bxs-edit-alt text-primary-light' data-bs-toggle="modal"
+                                                    data-bs-target="#exampleModal"></i>
+                                                <i class='bx bxs-trash-alt text-primary-light'></i>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>000</td>
+                                            <td>Lorem Ipsum</td>
+                                            <td class="icons">
+                                                <i class='bx bxs-edit-alt text-primary-light' data-bs-toggle="modal"
+                                                    data-bs-target="#exampleModal"></i>
+                                                <i class='bx bxs-trash-alt text-primary-light'></i>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>000</td>
+                                            <td>Lorem Ipsum</td>
+                                            <td class="icons">
+                                                <i class='bx bxs-edit-alt text-primary-light' data-bs-toggle="modal"
+                                                    data-bs-target="#exampleModal"></i>
+                                                <i class='bx bxs-trash-alt text-primary-light'></i>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>000</td>
+                                            <td>Lorem Ipsum</td>
+                                            <td class="icons">
+                                                <i class='bx bxs-edit-alt text-primary-light' data-bs-toggle="modal"
+                                                    data-bs-target="#exampleModal"></i>
+                                                <i class='bx bxs-trash-alt text-primary-light'></i>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>000</td>
+                                            <td>Lorem Ipsum</td>
+                                            <td class="icons">
+                                                <i class='bx bxs-edit-alt text-primary-light' data-bs-toggle="modal"
+                                                    data-bs-target="#exampleModal"></i>
+                                                <i class='bx bxs-trash-alt text-primary-light'></i>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>000</td>
+                                            <td>Lorem Ipsum</td>
+                                            <td class="icons">
+                                                <i class='bx bxs-edit-alt text-primary-light' data-bs-toggle="modal"
+                                                    data-bs-target="#exampleModal"></i>
+                                                <i class='bx bxs-trash-alt text-primary-light'></i>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>000</td>
+                                            <td>Lorem Ipsum</td>
+                                            <td class="icons">
+                                                <i class='bx bxs-edit-alt text-primary-light' data-bs-toggle="modal"
+                                                    data-bs-target="#exampleModal"></i>
+                                                <i class='bx bxs-trash-alt text-primary-light'></i>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                
+                                <nav aria-label="..." class="pt-awe-80">
+                                    <ul class="pagination">
+                                        <li class="page-item">
+                                            <span class="page-link">
+                                                <</span>
+                                        </li>
+                                        <li class="page-item" aria-current="page">
+                                            <span class="page-link">0</span>
+                                        </li>
+                                        <li class="page-item rounded-circle">
+                                            <a class="page-link" href="#">></a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                
+                            </div>
+                        </div>
+                
+                    </div>
+                
+                </div>
+                <footer class="footer">
+                </footer>
+            </main>
+            <div class="overlay"></div>
+        </div>
+    </div>
+    <!-- partial -->
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>
+
+<div class="container ps-awe-80">
+    <div class="row">
+        <div class="pt-awe-40 col-md-5">
+            <h1 class="pb-awe-40 fz-40 fw-semi-bold">Fórmulas</h1>
+
+            <div class="d-flex justify-content-end pb-awe-24">
+                <div class="col-6 justify-content-end d-flex">
+                    <button type="button" class="btn btn-primary-light fz-16" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal1">
+                        Adicionar fórmula
+                    </button>
+                </div>
+            </div>
+        </div> <!-- Modal -->
+    </div>
+
+
+
+    <!-- Button trigger modal -->
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5">
+                <table class="blueTable">
+                    <thead>
+                        <tr>
+                            <th>Fórmula</th>
+                            <th>Nome</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>00000</td>
+                            <td>Lorem Ipsum</td>
+                            <td class="icons">
+                                <i class='bx bxs-edit-alt text-primary-light' data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal"></i>
+                                <i class='bx bxs-trash-alt text-primary-light'></i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>000</td>
+                            <td>Lorem Ipsum</td>
+                            <td class="icons">
+                                <i class='bx bxs-edit-alt text-primary-light' data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal"></i>
+                                <i class='bx bxs-trash-alt text-primary-light'></i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>000</td>
+                            <td>Lorem Ipsum</td>
+                            <td class="icons">
+                                <i class='bx bxs-edit-alt text-primary-light' data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal"></i>
+                                <i class='bx bxs-trash-alt text-primary-light'></i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>000</td>
+                            <td>Lorem Ipsum</td>
+                            <td class="icons">
+                                <i class='bx bxs-edit-alt text-primary-light' data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal"></i>
+                                <i class='bx bxs-trash-alt text-primary-light'></i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>000</td>
+                            <td>Lorem Ipsum</td>
+                            <td class="icons">
+                                <i class='bx bxs-edit-alt text-primary-light' data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal"></i>
+                                <i class='bx bxs-trash-alt text-primary-light'></i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>000</td>
+                            <td>Lorem Ipsum</td>
+                            <td class="icons">
+                                <i class='bx bxs-edit-alt text-primary-light' data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal"></i>
+                                <i class='bx bxs-trash-alt text-primary-light'></i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>000</td>
+                            <td>Lorem Ipsum</td>
+                            <td class="icons">
+                                <i class='bx bxs-edit-alt text-primary-light' data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal"></i>
+                                <i class='bx bxs-trash-alt text-primary-light'></i>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="row">
+                    <div class="col-5">
+                        <div class="d-flex justify-content-between pt-awe-80">
+                            <nav aria-label="..." class="">
+                                <ul class="pagination">
+                                    <li class="page-item">
+                                        <span class="page-link">
+                                            < </span>
+                                    </li>
+                                    <li class="page-item" aria-current="page">
+                                        <span class="page-link">2</span>
+                                    </li>
+                                    <li class="page-item rounded-circle">
+                                        <a class="page-link" href="#">></a>
+                                    </li>
+                                </ul>
+                            </nav>
+                            <span class="fz-16 text-gray-1">00 fórmulas cadastradas</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>

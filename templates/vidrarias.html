@@ -1,300 +1,608 @@
-{% extends "nav-bar.html" %}
+<!DOCTYPE html>
+<html lang="en">
 
-    {% block head %}
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-   
-
-    <title>vidrarias - Silab</title>
-
-    <!-- fonte -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Poppins:wght@100;200;300;400;600;700;800;900&display=swap"
-        rel="stylesheet">
-
+<head>
+    <meta charset="UTF-8">
+    <title>Vidrarias - SiLab</title>
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/remixicon@2.2.0/fonts/remixicon.css'>
+    <link rel='stylesheet' href='https://unpkg.com/css-pro-layout@1.1.0/dist/css/css-pro-layout.css'>
+    <link rel='stylesheet'
+        href='https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&amp;display=swap'>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="../dist/css/style.css" />
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
-    <!-- css -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='dist/css/style.css') }}" />
-    {% endblock %}
 
-{% block body %}
-<body id="">
-{% endblock %}
-    
+</head>
 
-    {% block content %}
-
-    <div class="container ps-awe-80">
-        <div class="row">
-            <div class="pt-awe-40 col-md-10">
-                <h1 class="pb-awe-40 fz-40 fw-semi-bold">vidrarias</h1>
-
-                <div class="d-flex justify-content-between pb-awe-24">
-                    <div class="col-md-3">
-                        <select class="form-select form-select" aria-label=".form-select-sm example">
-                            <option selected>vidraria</option>
-                            <option value="1">Agitador</option>
-                            <option value="2">Balão</option>
-                            <option value="3">Béquer</option>
-                        </select>
-                    </div>
-
-                    <div class="col-6 justify-content-end d-flex">
-                        <button type="button" class="btn btn-primary-light fz-18" data-bs-toggle="modal"
-                            data-bs-target="#exampleModal1">
-                            Cadastrar vidraria
-                        </button>
-                    </div>
-                </div>
-            </div> <!-- Modal -->
+<body>
+    <nav class="navbar navbar-light bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand pb-awe-14 ps-awe-40 pt-awe-14" href="#">
+                <img src="/dist/image/logo.svg" alt="" width="100" height="auto" class="">
+            </a>
         </div>
+        </div>
+    </nav>
 
-        <div class="col-md-6">
-            <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fz-18 fw-semi-bold text-primary-dark-3" id="exampleModalLabel">
-                                Cadastrar vidraria</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
+    <div class="col-md-6">
+        <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fz-18 fw-semi-bold text-primary-dark-3" id="exampleModalLabel">
+                            Adicionar vidraria</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
 
-                        <div class="modal-body">
-                            <form method="POST" action="{{ url_for('vidraria.cadastrar_vidraria') }}" id="cadastrar-vidraria">
-                                <div class="d-flex justify-content">
-                                    <div class="row">
-                                        <div class="mb-3 me-awe-24">
-                                            <div class="col-md-12 d-flex">
-                                                <div>
-                                                    <label for="recipient-name"
-                                                        class="col-form-label">vidraria:</label>
-                                                    <div class=" d-flex justify-content-between">
-                                                        <select class="form-select form-select-md"
-                                                            aria-label=".form-select-md example" name="material">
-                                                            <option selected>vidraria</option>
-                                                            <option>Agitador</option>
-                                                            <option>Balão</option>
-                                                            <option>Béquer</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="ps-awe-24">
-                                                    <label for="message-text" class="col-form-label" placeholder="00">Nome:</label>
+                    <div class="modal-body">
+                        <form>
+                            <div class="d-flex justify-content">
+                                <div class="row">
+                                    <div class="mb-3 me-awe-24 d-flex">
+                                        <div class="col-md-6">
+                                            <div>
+                                                <label for="recipient-name"
+                                                    class="col-form-label fw-semi-bold text-black-4 fz-16">Vidraria:</label>
+                                                <div class=" d-flex justify-content-between modal-input">
                                                     <div class="d-flex justify-content-between">
-                                                        <input type="text" class="form-control me-awe-24"
-                                                            id="recipient-name" name="nome">
-                                                        
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-
-                                <div class="d-flex justify-content-between">
-                                    <div class="row">
-                                        <div class="mb-3 me-awe-24">
-                                            <div class="col-md-12 d-flex">
-                                                <div class="">
-                                                    <label for="message-text"
-                                                        class="col-form-label"
-                                                        placeholder="00">Volume:</label>
-                                                    <div
-                                                        class="d-flex justify-content-between">
                                                         <input type="text"
-                                                            class="form-control me-awe-24"
-                                                            id="recipient-name" name="volume">
-                                                        <select
-                                                            class="form-select form-select-sm"
-                                                            aria-label=".form-select-sm example">
-                                                            <option selected>m³</option>
-                                                            <option value="1">cm³</option>
-                                                            <option value="2">mm³</option>
-                                                            
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="ps-awe-24">
-                                                    <label for="message-text" class="col-form-label" placeholder="00">Local:</label>
-                                                    <div class="d-flex justify-content-between">
-                                                        <input type="text" class="form-control me-awe-24"
-                                                            id="recipient-name" name="local">
+                                                            class="form-control text-prata-2 fz-16 pe-awe-32"
+                                                            id="recipient-name" placeholder="Vidraria">
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
 
+                                            <div class="pt-awe-24">
+                                                <label for="recipient-name"
+                                                    class="col-form-label fw-semi-bold text-black-4 fz-16">Material:</label>
+                                                <div class=" d-flex justify-content-between modal-input">
+                                                    <select class="form-select form-select-sm text-prata-2"
+                                                        aria-label=".form-select-sm example">
+                                                        <option selected class="text-prata-2">Material</option>
+                                                        <option value="1">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="pt-awe-24">
+                                                <label for="message-text" class="col-form-label fw-semi-bold text-black-4 fz-16"
+                                                >Local:</label>
+                                                <div class="d-flex justify-content-between massa">
+                                                  <input type="text" class="form-control me-awe-24 text-prata-2 fz-16 pe-awe-11"
+                                                      id="recipient-name" placeholder="XXX">
+                                                      
+                                                </div>
+                                              </div>
+                                        </div>
+                                        <div class="col-md-6 ms-awe-24">
+                                            <div class="d-flex justify-content-between">
+                                                <div class="row">
+                                                    <div class="mb-3">
+                                                        <div class="col-md-12 ps-awe-24">
+
+                                                            <div class="">
+                                                                <label for="message-text"
+                                                                    class="col-form-label fw-semi-bold text-black-4 fz-16">Volume:</label>
+                                                                <div class="d-flex justify-content-between massa">
+                                                                    <input type="text"
+                                                                        class="form-control me-awe-24 text-prata-2 fz-16 pe-awe-11"
+                                                                        id="recipient-name" placeholder="00">
+                                                                    <select class="form-select form-select-sm"
+                                                                        aria-label=".form-select-sm example">
+                                                                        <option selected>m³</option>
+                                                                        <option value="1">m</option>
+                                                                        <option value="2">l</option>
+                                                                        <option value="3">m</option>
+                                                                    </select>
+
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="pt-awe-24">
+                                                                <label for="message-text"
+                                                                    class="col-form-label fw-semi-bold text-black-4 fz-16">Quantidade:</label>
+                                                                <div class="d-flex justify-content-between massa">
+                                                                    <input type="text"
+                                                                        class="form-control me-awe-24 text-prata-2 fz-16 pe-awe-11"
+                                                                        id="recipient-name" placeholder="001">
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
+                            </div>
 
-                                
-
-
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary fw-medium border-primary-dark-3 text-primary-dark-3" data-bs-dismiss="modal">Cancelar</button>
-                            <button type="submit" class="btn btn-primary-light" form="cadastrar-vidraria">Salvar</button>
-                        </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button"
+                            class="btn btn-secondary fw-medium border-primary-dark-3 text-primary-dark-3"
+                            data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-primary-light">Salvar</button>
                     </div>
                 </div>
             </div>
         </div>
 
-   
+        <div class="modal fade" id="exampleModal4" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fz-18 fw-semi-bold text-primary-dark-3" id="exampleModalLabel">
+                            Editar vidraria</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
 
-        <!-- Button trigger modal -->
-
-
-        <div class="container">
-            <div class="row">
-                <div class="col-md-10">
-                    <table class="blueTable">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Volume</th>
-                                <th>Material</th>
-                                <th>Local</th>
-                                <th>Ações</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                          {% for vidraria in vidrarias %}
-                            <tr>
-                                <td>{{ vidraria.id }}</td>
-                                <td>{{ vidraria.volume }}</td>
-                                <td>{{ vidraria.material }}</td>
-                                <td>{{ vidraria.local }}</td>
-                                <td class="icons">
-                                    <i class='bx bxs-edit-alt text-primary-light' data-bs-toggle="modal"
-                                        data-bs-target="#exampleModal{{ vidraria.id }}"></i>
-                                    <div class="modal fade" id="exampleModal{{ vidraria.id }}" tabindex="-1"
-                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h1 class="modal-title fz-18 fw-semi-bold text-primary-dark-3"
-                                                        id="exampleModalLabel">Editar vidraria - 000
-                                                    </h1>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                        aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body text-start">
-                                                    <form method="POST" action="{{ url_for('vidraria.editar_vidraria') }}" id="{{ vidraria.id }}">
-                                                        <input type="hidden" name="id" value="{{ vidraria.id }}">
-                                                        <div class="d-flex justify-content">
-                                                            <div class="row">
-                                                                <div class="mb-3 me-awe-24">
-                                                                    <div class="col-md-12 d-flex">
-                                                                        <div>
-                                                                            <label for="recipient-name"
-                                                                                class="col-form-label">vidraria:</label>
-                                                                            <div class=" d-flex justify-content-between">
-                                                                                <select class="form-select form-select-md"
-                                                                                    aria-label=".form-select-md example" name="material">
-                                                                                    <option>vidraria</option>
-                                                                                    <option>Agitador</option>
-                                                                                    <option>Balão</option>
-                                                                                    <option>Béquer</option>
-                                                                                </select>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="ps-awe-24">
-                                                                            <label for="message-text" class="col-form-label" placeholder="00">Nome:</label>
-                                                                            <div class="d-flex justify-content-between">
-                                                                                <input type="text" class="form-control me-awe-24"
-                                                                                    id="recipient-name" name="nome" value="{{ vidraria.nome }}">
-                                                                                
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                        
-                                                            </div>
-                                                        </div>
-                        
-                                                        <div class="d-flex justify-content-between">
-                                                            <div class="row">
-                                                                <div class="mb-3 me-awe-24">
-                                                                    <div class="col-md-12 d-flex">
-                                                                        <div class="">
-                                                    <label for="message-text"
-                                                        class="col-form-label"
-                                                        placeholder="00">Volume:</label>
-                                                    <div
-                                                        class="d-flex justify-content-between">
+                    <div class="modal-body">
+                        <form>
+                            <div class="d-flex justify-content">
+                                <div class="row">
+                                    <div class="mb-3 me-awe-24 d-flex">
+                                        <div class="col-md-6">
+                                            <div>
+                                                <label for="recipient-name"
+                                                    class="col-form-label fw-semi-bold text-black-4 fz-16">Vidraria:</label>
+                                                <div class=" d-flex justify-content-between modal-input">
+                                                    <div class="d-flex justify-content-between">
                                                         <input type="text"
-                                                            class="form-control me-awe-24"
-                                                            id="recipient-name" name="volume" value="{{ vidraria.volume }}">
-                                                        <select
-                                                            class="form-select form-select-sm"
-                                                            aria-label=".form-select-sm example">
-                                                            <option selected>m³</option>
-                                                            <option value="1">cm³</option>
-                                                            <option value="2">mm³</option>
-                                                            
-                                                        </select>
+                                                            class="form-control text-prata-2 fz-16 pe-awe-32"
+                                                            id="recipient-name" placeholder="Vidraria">
                                                     </div>
                                                 </div>
-                                                                        <div class="ps-awe-24">
-                                                                            <label for="message-text" class="col-form-label" placeholder="00">Local:</label>
-                                                                            <div class="d-flex justify-content-between">
-                                                                                <input type="text" class="form-control me-awe-24"
-                                                                                    id="recipient-name" name="local" value="{{ vidraria.local }}">
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                        
-                                                            </div>
-                                                        </div>
-                                                    </form>
+                                            </div>
+
+                                            <div class="pt-awe-24">
+                                                <label for="recipient-name"
+                                                    class="col-form-label fw-semi-bold text-black-4 fz-16">Material:</label>
+                                                <div class=" d-flex justify-content-between modal-input">
+                                                    <select class="form-select form-select-sm text-prata-2"
+                                                        aria-label=".form-select-sm example">
+                                                        <option selected class="text-prata-2">Material</option>
+                                                        <option value="1">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                    </select>
                                                 </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary"
-                                                        data-bs-dismiss="modal">Cancelar</button>
-                                                    <button type="submit" class="btn btn-primary-light" form="{{ vidraria.id }}">Salvar</button>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-6 ms-awe-24">
+                                            <div class="d-flex justify-content-between">
+                                                <div class="row">
+                                                    <div class="mb-3">
+                                                        <div class="col-md-12 ps-awe-24">
+
+                                                            <div class="">
+                                                                <label for="message-text"
+                                                                    class="col-form-label fw-semi-bold text-black-4 fz-16">Volume:</label>
+                                                                <div class="d-flex justify-content-between massa">
+                                                                    <input type="text"
+                                                                        class="form-control me-awe-24 text-prata-2 fz-16 pe-awe-11"
+                                                                        id="recipient-name" placeholder="00">
+                                                                    <select class="form-select form-select-sm"
+                                                                        aria-label=".form-select-sm example">
+                                                                        <option selected>m³</option>
+                                                                        <option value="1">m</option>
+                                                                        <option value="2">l</option>
+                                                                        <option value="3">m</option>
+                                                                    </select>
+
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="pt-awe-24">
+                                                                <label for="message-text" class="col-form-label fw-semi-bold text-black-4 fz-16"
+                                                                >Local:</label>
+                                                                <div class="d-flex justify-content-between massa">
+                                                                  <input type="text" class="form-control me-awe-24 text-prata-2 fz-16 pe-awe-11"
+                                                                      id="recipient-name" placeholder="XXX">
+                                                                      
+                                                                </div>
+                                                              </div>
+                                                        </div>
+                                                    </div>
+
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <i class='bx bxs-trash-alt text-primary-light'></i>
-                                </td>
-                            </tr>
-                          {% endfor %}  
-                        </tbody>
-                    </table>
+                                </div>
+                            </div>
 
-                    <nav aria-label="..." class="pt-awe-80">
-                        <ul class="pagination">
-                            <li class="page-item">
-                                <span class="page-link">
-                                    <</span>
-                            </li>
-                            <li class="page-item" aria-current="page">
-                                <span class="page-link">0</span>
-                            </li>
-                            <li class="page-item rounded-circle">
-                                <a class="page-link" href="#">></a>
-                            </li>
-                        </ul>
-                    </nav>
-
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button"
+                            class="btn btn-secondary fw-medium border-primary-dark-3 text-primary-dark-3"
+                            data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-primary-light">Salvar</button>
+                    </div>
                 </div>
             </div>
+        </div>
 
+        <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fz-18 fw-semi-bold text-primary-dark-3" id="exampleModalLabel">
+                            Visualizar vidraria - (id)</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <form>
+                            <div class="d-flex justify-content">
+                                <div class="row">
+                                    <div class="mb-3 me-awe-24 d-flex">
+                                        <div class="col-md-6">
+                                            <div>
+                                                <label for="recipient-name"
+                                                    class="col-form-label fw-semi-bold text-black-4 fz-16">Reagente:</label>
+                                                <div class=" d-flex justify-content-between modal-input">
+                                                    <span class="fz-16 text-gray-1">Reagente</span>
+                                                </div>
+                                            </div>
+                                            <div class="pt-awe-14">
+                                                <label for="recipient-name"
+                                                    class="col-form-label fw-semi-bold text-black-4 fz-16">Fórmula:</label>
+                                                <div class=" d-flex justify-content-between modal-input">
+                                                    <span class="fz-16 text-gray-1">Fórmula</span>
+                                                </div>
+                                            </div>
+                                            <div class="pt-awe-14">
+                                                <label for="recipient-name"
+                                                    class="col-form-label fw-semi-bold text-black-4 fz-16">Estado:</label>
+                                                <span class="fz-16 text-gray-1">Estado</span>
+                                            </div>
+
+                                            <div class="pt-awe-24">
+                                                <label for="message-text"
+                                                    class="col-form-label fw-semi-bold text-black-4 fz-16">Validade:</label>
+                                                <span class="fz-16 text-gray-1">00/00/0000</span>
+
+                                            </div>
+                                            <div class="pt-awe-14">
+                                                <label for="message-text"
+                                                    class="col-form-label fw-semi-bold text-black-4 fz-16">Criação
+                                                    (solução):</label>
+                                                <span class="fz-16 text-gray-1">00/00/0000</span>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 ms-awe-24">
+                                            <div class="d-flex justify-content-between">
+                                                <div class="row">
+                                                    <div class="mb-3">
+                                                        <div class="col-md-12 ps-awe-24">
+                                                            <div>
+                                                                <label for="message-text"
+                                                                    class="col-form-label fw-semi-bold text-black-4 fz-16">Massa:</label>
+                                                                <div>
+                                                                    <span class="fz-16 text-gray-1">00</span>
+                                                                    <span class="fz-16 text-gray-1 ps-awe-12">g</span>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="pt-awe-24">
+                                                                <label for="message-text"
+                                                                    class="col-form-label fw-semi-bold text-black-4 fz-16">Volume:</label>
+                                                                <div>
+                                                                    <span class="fz-16 text-gray-1">00</span>
+                                                                    <span class="fz-16 text-gray-1 ps-awe-12">m³</span>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="pt-awe-24">
+                                                                <label for="message-text"
+                                                                    class="col-form-label fw-semi-bold text-black-4 fz-16">Concentração:</label>
+                                                                <div>
+                                                                    <span class="fz-16 text-gray-1">00</span>
+                                                                    <span
+                                                                        class="fz-16 text-gray-1 ps-awe-12">g/m³</span>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="pt-awe-24">
+                                                                <label for="message-text"
+                                                                    class="col-form-label fw-semi-bold text-black-4 fz-16">Local:</label>
+                                                                <div>
+                                                                    <span class="fz-16 text-gray-1">00</span>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button"
+                            class="btn btn-secondary fw-medium border-primary-dark-3 text-primary-dark-3"
+                            data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-primary-light">Salvar</button>
+                    </div>
+                </div>
+            </div>
         </div>
 
     </div>
-        <!--===== MAIN JS =====-->
+    <!-- partial:index.partial.html -->
+    <div class="layout has-sidebar fixed-sidebar fixed-header">
+        <aside id="sidebar" class="sidebar break-point-sm has-bg-image">
+            <div class="image-wrapper">
+                <img src="assets/images/sidebar-bg.jpg" alt="sidebar background" />
+            </div>
+            <div class="sidebar-layout">
+                <div class="sidebar-header d-flex align-items-center justify-content-center flex-wrap mb-awe-40">
+                    <div class="profile justify-content-center">
+                        <img src="/dist/image/profile.svg " class="rounded mx-auto d-block pt-awe-14" alt="">
+                        <p class="d-block fw-semi-bold fz-16 text-primary-light-2 text-center pt-awe-24">Nome Sobrenome
+                        </p>
+                        <p class="d-block fz-16 text-aco text-center">Tutor/Professor </p>
+                        <div class="d-flex justify-content-center">
+                            <i class='bx bxs-cog text-aco text-center fz-24'></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="sidebar-content mt-awe-24">
+                    <nav class="menu open-current-submenu">
+                        <ul class="nav text-center pt-awe-32">
+                            <li>
+                                <a href="#">
+                                    <i class='bx bxs-category fz-24 text-aco'></i>
+                                    <span class="list text-decoration-none ps-awe-12">Painel</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class='bx bxs-box fz-24 text-aco'></i>
+                                    <span class="list text-decoration-none">Equipamentos</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class='bx bxs-vial fz-24 text-aco'></i>
+                                    <span class="list text-decoration-none">Reagentes</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class='bx bxs-bong fz-24 text-aco'></i>
+                                    <span class="list text-decoration-none">Soluções</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class='bx bxs-notepad fz-24 text-aco'></i>
+                                    <span class="list text-decoration-none">Fórmulas</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class='bx bxs-bong fz-24 text-aco'></i>
+                                    <span class="list text-decoration-none">Aulas</span>
+                                </a>
+                            </li>
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
-            crossorigin="anonymous"></script>
+                            <li>
+                                <a href="#">
+                                    <i class='bx bxs-group fz-24 text-aco'></i>
+                                    <span class="list text-decoration-none">Turmas</span>
+                                </a>
+                            </li>
 
-{% endblock %}
+                            <li class="mt-awe-32">
+                                <a href="#">
+                                    <i class='bx bx-log-out fz-18 text-aco'></i>
+                                    <span class="list text-decoration">Sair</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="sidebar-footer">
+                    <div class="footer-box">
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <div id="overlay" class="overlay"></div>
+        <div class="layout">
+            <main class="content">
+                <div class="container ps-awe-80">
+                    <div class="row">
+                        <div class="pt-awe-40 col-md-7">
+                            <h1 class="pb-awe-40 fz-40 fw-semi-bold">Vidrarias</h1>
+
+                            <div class="d-flex justify-content-between pb-awe-24">
+                                <div class="col-md-5 d-flex">
+                                    <select class="form-select form-select" aria-label=".form-select-sm example">
+                                        <option selected>Vidraria</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-6 justify-content-end d-flex">
+                                    <button type="button" class="btn btn-primary-light fz-16" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModal1">
+                                        Adicionar vidraria
+                                    </button>
+                                </div>
+                            </div>
+                        </div> <!-- Modal -->
+                    </div>
+
+                    <!-- Button trigger modal -->
+
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-7">
+                                <table class="blueTable">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <div class="d-flex">
+                                                <th class="">
+                                                    <span>Volume</span>
+                                                    <i class='fw-bold bx bx-filter fz-18'></i>
+                                            </div>
+                                            <div class="d-flex">
+                                                <th class="">
+                                                    <span>Material</span>
+                                                    <i class='fw-bold bx bx-filter fz-18'></i>
+                                            </div>
+                                            <div class="d-flex">
+                                                <th class="">
+                                                    <span>Local</span>
+                                                    <i class='fw-bold bx bx-filter fz-18'></i>
+                                            </div>
+                                            <th>Ações</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>000</td>
+                                            <td>00xx</td>
+                                            <td>Lorem Ipsum</td>
+                                            <td>XXX</td>
+                                            <td class="icons">
+                                                <i class='bx bxs-edit-alt text-primary-light' data-bs-toggle="modal"
+                                                    data-bs-target="#exampleModal4"></i>
+                                                <i class='bx bxs-trash-alt text-primary-light'></i>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>000</td>
+                                            <td>00xx</td>
+                                            <td>Lorem Ipsum</td>
+                                            <td>XXX</td>
+                                            <td class="icons">
+                                                <i class='bx bxs-edit-alt text-primary-light' data-bs-toggle="modal"
+                                                    data-bs-target="#exampleModal4"></i>
+                                                <i class='bx bxs-trash-alt text-primary-light'></i>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>000</td>
+                                            <td>00xx</td>
+                                            <td>Lorem Ipsum</td>
+                                            <td>XXX</td>
+                                            <td class="icons">
+                                                <i class='bx bxs-edit-alt text-primary-light' data-bs-toggle="modal"
+                                                    data-bs-target="#exampleModal4"></i>
+                                                <i class='bx bxs-trash-alt text-primary-light'></i>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>000</td>
+                                            <td>00xx</td>
+                                            <td>Lorem Ipsum</td>
+                                            <td>XXX</td>
+                                            <td class="icons">
+                                                <i class='bx bxs-edit-alt text-primary-light' data-bs-toggle="modal"
+                                                    data-bs-target="#exampleModal4"></i>
+                                                <i class='bx bxs-trash-alt text-primary-light'></i>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>000</td>
+                                            <td>00xx</td>
+                                            <td>Lorem Ipsum</td>
+                                            <td>XXX</td>
+                                            <td class="icons">
+                                                <i class='bx bxs-edit-alt text-primary-light' data-bs-toggle="modal"
+                                                    data-bs-target="#exampleModal4"></i>
+                                                <i class='bx bxs-trash-alt text-primary-light'></i>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>000</td>
+                                            <td>00xx</td>
+                                            <td>Lorem Ipsum</td>
+                                            <td>XXX</td>
+                                            <td class="icons">
+                                                <i class='bx bxs-edit-alt text-primary-light' data-bs-toggle="modal"
+                                                    data-bs-target="#exampleModal4"></i>
+                                                <i class='bx bxs-trash-alt text-primary-light'></i>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>000</td>
+                                            <td>00xx</td>
+                                            <td>Lorem Ipsum</td>
+                                            <td>XXX</td>
+                                            <td class="icons">
+                                                <i class='bx bxs-edit-alt text-primary-light' data-bs-toggle="modal"
+                                                    data-bs-target="#exampleModal4"></i>
+                                                <i class='bx bxs-trash-alt text-primary-light'></i>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-7">
+                                <div class="d-flex justify-content-between pt-awe-80">
+                                    <nav aria-label="..." class="">
+                                        <ul class="pagination">
+                                            <li class="page-item">
+                                                <span class="page-link">
+                                                    < </span>
+                                            </li>
+                                            <li class="page-item" aria-current="page">
+                                                <span class="page-link">0</span>
+                                            </li>
+                                            <li class="page-item rounded-circle">
+                                                <a class="page-link" href="#">></a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                    <span class="fz-16 text-gray-1">000 vidrarias disponíveis</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <footer class="footer">
+                </footer>
+            </main>
+            <div class="overlay"></div>
+        </div>
+    </div>
+    <!-- partial -->
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>
