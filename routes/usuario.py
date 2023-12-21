@@ -33,8 +33,6 @@ def registrar_usuario():
     if request.method == 'GET':
         return render_template("cadastro.html")
 
-    if request.form['senha'] != request.form['confirme-senha']:
-        return "As senhas devem ser iguais."
     print(request.form.get('tipo-usuario'))
     usuario = Usuario(request.form['matricula'], request.form['nome'], request.form['email'], request.form['senha'], request.form['tipo-usuario'])
     usuario.cadastrar()

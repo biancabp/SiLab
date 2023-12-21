@@ -8,8 +8,7 @@
     <link rel='stylesheet' href='https://unpkg.com/css-pro-layout@1.1.0/dist/css/css-pro-layout.css'>
     <link rel='stylesheet'
         href='https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&amp;display=swap'>
-    <link rel="stylesheet" href="./style.css">
-    <link rel="stylesheet" href="../dist/css/style.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='/dist/css/style.css') }}" />
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
 
@@ -19,7 +18,7 @@
     <nav class="navbar navbar-light bg-primary">
         <div class="container-fluid">
             <a class="navbar-brand pb-awe-14 ps-awe-40 pt-awe-14" href="#">
-                <img src="/dist/image/logo.svg" alt="" width="100" height="auto" class="">
+                <img src="{{ url_for('static', filename='/dist/image/logo.svg') }}" alt="" width="100" height="auto" class="">
             </a>
         </div>
         </div>

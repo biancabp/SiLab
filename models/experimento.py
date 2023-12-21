@@ -33,7 +33,7 @@ class Experimento(db.Model):
     vidrarias = db.relationship('Vidraria', secondary=experimento_vidraria)
     reagentes = db.relationship('Reagente', secondary=experimento_reagente, lazy="joined")
     
-    def __init__(self, nome: str, path_pdf: str = None, equipamentos: list[Equipamento] = [], vidrarias: list[Vidraria] = [], reagentes: list[Reagente, int] = [], reagentes_planejados: list[dict] = {}):
+    def __init__(self, nome: str, path_pdf: str = '', equipamentos: list[Equipamento] = [], vidrarias: list[Vidraria] = [], reagentes: list[Reagente, int] = [], reagentes_planejados: list[dict] = {}):
         for reagente_planejado in reagentes_planejados:
             estado_materia, concentracao = reagente_planejado['estado-materia'], reagente_planejado['concentracao']
             massa, volume = reagente_planejado['massa'], reagente_planejado['volume']

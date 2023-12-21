@@ -8,8 +8,7 @@
     <link rel='stylesheet' href='https://unpkg.com/css-pro-layout@1.1.0/dist/css/css-pro-layout.css'>
     <link rel='stylesheet'
         href='https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&amp;display=swap'>
-    <link rel="stylesheet" href="./style.css">
-    <link rel="stylesheet" href="../dist/css/style.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='/dist/css/style.css') }}" />
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
 
@@ -19,7 +18,7 @@
     <nav class="navbar navbar-light bg-primary">
         <div class="container-fluid">
             <a class="navbar-brand pb-awe-14 ps-awe-40 pt-awe-14" href="#">
-                <img src="/dist/image/logo.svg" alt="" width="100" height="auto" class="">
+                <img src="{{ url_for('static', filename='/dist/image/logo.svg') }}" alt="" width="100" height="auto" class="">
             </a>
         </div>
         </div>
@@ -36,7 +35,7 @@
                     </div>
 
                     <div class="modal-body">
-                        <form>
+                        <form method="POST" action="{{ url_for('reagente.cadastrar_reagente') }}" id="cadastrar-reagente">
                             <div class="d-flex justify-content">
                                 <div class="row">
                                     <div class="mb-3 me-awe-24 d-flex">
@@ -45,7 +44,7 @@
                                                 <label for="recipient-name" class="col-form-label fw-semi-bold text-black-4 fz-16">Reagente:</label>
                                                 <div class=" d-flex justify-content-between modal-input">
                                                     <select class="form-select form-select-sm text-prata-2"
-                                                        aria-label=".form-select-sm example">
+                                                        aria-label=".form-select-sm example" name="">
                                                         <option selected class="text-prata-2">Reagente</option>
                                                         <option value="1">1</option>
                                                         <option value="2">2</option>
@@ -57,30 +56,30 @@
                                                 <label for="recipient-name" class="col-form-label fw-semi-bold text-black-4 fz-16">Fórmula:</label>
                                                 <div class=" d-flex justify-content-between modal-input">
                                                     <select class="form-select form-select-sm text-prata-2"
-                                                        aria-label=".form-select-sm example">
+                                                        aria-label=".form-select-sm example" name="formula-quimica">
                                                         <option selected class="text-prata-2">Fórmula</option>
-                                                        <option value="1">1</option>
-                                                        <option value="2">2</option>
-                                                        <option value="3">3</option>
+                                                        {% for formula in formulas_quimica %}
+                                                            <option value="{{ formula.formula }}">{{ formula.formula }}</option>
+                                                        {% endfor %}
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="pt-awe-14">
                                                 <label for="recipient-name" class="col-form-label fw-semi-bold text-black-4 fz-16">Estado:</label>
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                                    <input class="form-check-input" type="radio" name="estado-materia" id="flexRadioDefault1" value="solido">
                                                     <label class="form-check-label text-prata-2" for="flexRadioDefault1">
                                                       Sólido
                                                     </label>
                                                   </div>
                                                   <div class="form-check pt-awe-12">
-                                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                                                    <input class="form-check-input" type="radio" name="estado-materia" id="flexRadioDefault2" value="liquido" checked>
                                                     <label class="form-check-label text-prata-2" for="flexRadioDefault2">
                                                       Líquido
                                                     </label>
                                                   </div>
                                                   <div class="form-check pt-awe-12">
-                                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                                                    <input class="form-check-input" type="radio" name="estado-materia" value="gasoso" id="flexRadioDefault2" checked>
                                                     <label class="form-check-label text-prata-2" for="flexRadioDefault2">
                                                       Gasoso
                                                     </label>
@@ -91,15 +90,15 @@
                                                 <label for="message-text" class="col-form-label fw-semi-bold text-black-4 fz-16"
                                                     >Validade:</label>
                                                 <div class="d-flex justify-content-between">
-                                                    <input type="text" class="reagentes form-control me-awe-24 text-prata-2 fz-16"
-                                                        id="recipient-name" placeholder="00/00/0000">
+                                                    <input type="date" class="reagentes form-control me-awe-24 text-prata-2 fz-16"
+                                                        id="recipient-name" placeholder="00/00/0000" name="data-validade">
                                                 </div>
                                             </div>
                                             <div class="pt-awe-14">
                                                 <label for="message-text" class="col-form-label fw-semi-bold text-black-4 fz-16"
                                                     >Criação (solução):</label>
                                                 <div class="d-flex justify-content-between">
-                                                    <input type="text" class="reagentes form-control me-awe-24 text-prata-2 fz-16"
+                                                    <input type="date" name="data-criacao" class="reagentes form-control me-awe-24 text-prata-2 fz-16"
                                                         id="recipient-name" placeholder="00/00/0000">
                                                 </div>
                                             </div>
@@ -113,8 +112,8 @@
                                                               <label for="message-text" class="col-form-label fw-semi-bold text-black-4 fz-16"
                                                               >Massa:</label>
                                                               <div class="d-flex justify-content-between massa">
-                                                                <input type="text" class="form-control me-awe-24 text-prata-2 fz-16 pe-awe-11"
-                                                                    id="recipient-name" placeholder="00">
+                                                                <input type="number" name="massa" class="form-control me-awe-24 text-prata-2 fz-16 pe-awe-11"
+                                                                    id="recipient-name" placeholder="00" required>
                                                                     <select class="form-select form-select-sm"
                                                                     aria-label=".form-select-sm example">
                                                                     <option selected>g</option>
@@ -130,8 +129,8 @@
                                                                 <label for="message-text" class="col-form-label fw-semi-bold text-black-4 fz-16"
                                                                 >Volume:</label>
                                                                 <div class="d-flex justify-content-between massa">
-                                                                  <input type="text" class="form-control me-awe-24 text-prata-2 fz-16 pe-awe-11"
-                                                                      id="recipient-name" placeholder="00">
+                                                                  <input type="number" name="volume" class="form-control me-awe-24 text-prata-2 fz-16 pe-awe-11"
+                                                                      id="recipient-name" placeholder="00" required>
                                                                       <select class="form-select form-select-sm"
                                                                       aria-label=".form-select-sm example">
                                                                       <option selected>m³</option>
@@ -147,8 +146,8 @@
                                                                 <label for="message-text" class="col-form-label fw-semi-bold text-black-4 fz-16"
                                                                 >Concentração:</label>
                                                                 <div class="d-flex justify-content-between massa">
-                                                                  <input type="text" class="form-control me-awe-24 text-prata-2 fz-16 pe-awe-11"
-                                                                      id="recipient-name" placeholder="00">
+                                                                  <input type="number" name="concentracao" class="form-control me-awe-24 text-prata-2 fz-16 pe-awe-11"
+                                                                      id="recipient-name" placeholder="00" required>
                                                                       <select class="form-select form-select-sm"
                                                                       aria-label=".form-select-sm example">
                                                                       <option selected>g/m³</option>
@@ -164,8 +163,8 @@
                                                                 <label for="message-text" class="col-form-label fw-semi-bold text-black-4 fz-16"
                                                                 >Local:</label>
                                                                 <div class="d-flex justify-content-between massa">
-                                                                  <input type="text" class="form-control me-awe-24 text-prata-2 fz-16 pe-awe-11"
-                                                                      id="recipient-name" placeholder="XXX">
+                                                                  <input type="text" name="local" class="form-control me-awe-24 text-prata-2 fz-16 pe-awe-11"
+                                                                      id="recipient-name" placeholder="XXX" required>
                                                                       
                                                                 </div>
                                                               </div>
@@ -174,8 +173,8 @@
                                                                 <label for="message-text" class="col-form-label fw-semi-bold text-black-4 fz-16"
                                                                 >Quantidade:</label>
                                                                 <div class="d-flex justify-content-between massa">
-                                                                  <input type="text" class="form-control me-awe-24 text-prata-2 fz-16 pe-awe-11"
-                                                                      id="recipient-name" placeholder="001">
+                                                                  <input type="number" class="form-control me-awe-24 text-prata-2 fz-16 pe-awe-11"
+                                                                      id="recipient-name" placeholder="001" required>
                                                                       
                                                                 </div>
                                                               </div>
@@ -195,13 +194,14 @@
                         <button type="button"
                             class="btn btn-secondary fw-medium border-primary-dark-3 text-primary-dark-3"
                             data-bs-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-primary-light">Salvar</button>
+                        <button type="submit" form="cadastrar-reagente" class="btn btn-primary-light">Salvar</button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="modal fade" id="exampleModal4" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        {% for reagente in reagentes %}
+        <div class="modal fade" id="exampleModal4{{ reagente.id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -211,7 +211,8 @@
                     </div>
 
                     <div class="modal-body">
-                        <form>
+                        <form method="POST" action="{{ url_for('reagente.editar_reagente') }}" id="editar-reagente{{ reagente.id }}">
+                            <input type="hidden" name="id-reagente" value="{{ reagente.id }}">
                             <div class="d-flex justify-content">
                                 <div class="row">
                                     <div class="mb-3 me-awe-24 d-flex">
@@ -232,30 +233,35 @@
                                                 <label for="recipient-name" class="col-form-label fw-semi-bold text-black-4 fz-16">Fórmula:</label>
                                                 <div class=" d-flex justify-content-between modal-input">
                                                     <select class="form-select form-select-sm text-prata-2"
-                                                        aria-label=".form-select-sm example">
+                                                        aria-label=".form-select-sm example" name="formula-quimica">
                                                         <option selected class="text-prata-2">Fórmula</option>
-                                                        <option value="1">1</option>
-                                                        <option value="2">2</option>
-                                                        <option value="3">3</option>
+                                                        {% for formula in formulas_quimica %}
+                                                            {% if reagente.formula_quimica == formula.formula %}
+                                                            <option value="{{ formula.formula }}" selected>{{ formula.formula }}</option>
+                                                            {% else %}
+                                                                <option value="{{ formula.formula }}">{{ formula.formula }}</option>
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                       
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="pt-awe-14">
                                                 <label for="recipient-name" class="col-form-label fw-semi-bold text-black-4 fz-16">Estado:</label>
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                                    <input class="form-check-input" type="radio" name="estado-materia" value="Sólido" id="flexRadioDefault1" {% if reagente.estado_materia == "Sólido" %} checked {% endif %}>
                                                     <label class="form-check-label text-prata-2" for="flexRadioDefault1">
                                                       Sólido
                                                     </label>
                                                   </div>
                                                   <div class="form-check pt-awe-12">
-                                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                                                    <input class="form-check-input" type="radio" name="estado-materia" value="Líquido" id="flexRadioDefault2" {% if reagente.estado_materia == "Líquido" %} checked {% endif %}>
                                                     <label class="form-check-label text-prata-2" for="flexRadioDefault2">
                                                       Líquido
                                                     </label>
                                                   </div>
                                                   <div class="form-check pt-awe-12">
-                                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                                                    <input class="form-check-input" type="radio" name="estado-materia" value="Gasoso" id="flexRadioDefault2" {% if reagente.estado_materia == "Gasoso" %} checked {% endif %}>
                                                     <label class="form-check-label text-prata-2" for="flexRadioDefault2">
                                                       Gasoso
                                                     </label>
@@ -266,16 +272,16 @@
                                                 <label for="message-text" class="col-form-label fw-semi-bold text-black-4 fz-16"
                                                     >Validade:</label>
                                                 <div class="d-flex justify-content-between">
-                                                    <input type="text" class="reagentes form-control me-awe-24 text-prata-2 fz-16"
-                                                        id="recipient-name" placeholder="00/00/0000">
+                                                    <input type="date" name="data-validade" class="reagentes form-control me-awe-24 text-prata-2 fz-16"
+                                                        id="recipient-name" placeholder="00/00/0000" value="{{ reagente.data_validade }}">
                                                 </div>
                                             </div>
                                             <div class="pt-awe-14">
                                                 <label for="message-text" class="col-form-label fw-semi-bold text-black-4 fz-16"
                                                     >Criação (solução):</label>
                                                 <div class="d-flex justify-content-between">
-                                                    <input type="text" class="reagentes form-control me-awe-24 text-prata-2 fz-16"
-                                                        id="recipient-name" placeholder="00/00/0000">
+                                                    <input type="date" name="data-craicao" class="reagentes form-control me-awe-24 text-prata-2 fz-16"
+                                                        id="recipient-name" placeholder="00/00/0000" value="{{ reagente.data_criacao }}">
                                                 </div>
                                             </div>
                                         </div>
@@ -288,8 +294,8 @@
                                                               <label for="message-text" class="col-form-label fw-semi-bold text-black-4 fz-16"
                                                               >Massa:</label>
                                                               <div class="d-flex justify-content-between massa">
-                                                                <input type="text" class="form-control me-awe-24 text-prata-2 fz-16 pe-awe-11"
-                                                                    id="recipient-name" placeholder="00">
+                                                                <input type="number" name="massa" class="form-control me-awe-24 text-prata-2 fz-16 pe-awe-11"
+                                                                    id="recipient-name" placeholder="00" value="{{ reagente.massa }}" required>
                                                                     <select class="form-select form-select-sm"
                                                                     aria-label=".form-select-sm example">
                                                                     <option selected>g</option>
@@ -305,8 +311,8 @@
                                                                 <label for="message-text" class="col-form-label fw-semi-bold text-black-4 fz-16"
                                                                 >Volume:</label>
                                                                 <div class="d-flex justify-content-between massa">
-                                                                  <input type="text" class="form-control me-awe-24 text-prata-2 fz-16 pe-awe-11"
-                                                                      id="recipient-name" placeholder="00">
+                                                                  <input type="number" name="volume" class="form-control me-awe-24 text-prata-2 fz-16 pe-awe-11"
+                                                                      id="recipient-name" placeholder="00" value="{{ reagente.volume }}" required>
                                                                       <select class="form-select form-select-sm"
                                                                       aria-label=".form-select-sm example">
                                                                       <option selected>m³</option>
@@ -322,8 +328,8 @@
                                                                 <label for="message-text" class="col-form-label fw-semi-bold text-black-4 fz-16"
                                                                 >Concentração:</label>
                                                                 <div class="d-flex justify-content-between massa">
-                                                                  <input type="text" class="form-control me-awe-24 text-prata-2 fz-16 pe-awe-11"
-                                                                      id="recipient-name" placeholder="00">
+                                                                  <input type="number" name="concentracao" value="{{ reagente.concentracao }}" class="form-control me-awe-24 text-prata-2 fz-16 pe-awe-11"
+                                                                      id="recipient-name" placeholder="00" required>
                                                                       <select class="form-select form-select-sm"
                                                                       aria-label=".form-select-sm example">
                                                                       <option selected>g/m³</option>
@@ -339,8 +345,8 @@
                                                                 <label for="message-text" class="col-form-label fw-semi-bold text-black-4 fz-16"
                                                                 >Local:</label>
                                                                 <div class="d-flex justify-content-between massa">
-                                                                  <input type="text" class="form-control me-awe-24 text-prata-2 fz-16 pe-awe-11"
-                                                                      id="recipient-name" placeholder="XXX">
+                                                                  <input type="text" name="local" class="form-control me-awe-24 text-prata-2 fz-16 pe-awe-11"
+                                                                      id="recipient-name" placeholder="XXX" value="{{ reagente.local }}" required>
                                                                       
                                                                 </div>
                                                               </div>
@@ -349,7 +355,7 @@
                                                                 <label for="message-text" class="col-form-label fw-semi-bold text-black-4 fz-16"
                                                                 >Quantidade:</label>
                                                                 <div class="d-flex justify-content-between massa">
-                                                                  <input type="text" class="form-control me-awe-24 text-prata-2 fz-16 pe-awe-11"
+                                                                  <input type="number" name="qtd" class="form-control me-awe-24 text-prata-2 fz-16 pe-awe-11"
                                                                       id="recipient-name" placeholder="001">
                                                                       
                                                                 </div>
@@ -370,13 +376,15 @@
                         <button type="button"
                             class="btn btn-secondary fw-medium border-primary-dark-3 text-primary-dark-3"
                             data-bs-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-primary-light">Salvar</button>
+                        <button type="submit" form="editar-reagente{{ reagente.id }}" class="btn btn-primary-light">Salvar</button>
                     </div>
                 </div>
             </div>
         </div>
-
-        <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        {% endfor %}  
+      
+        {% for reagente in reagentes %}
+        <div class="modal fade" id="exampleModal3{{ reagente.id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -400,24 +408,24 @@
                                             <div class="pt-awe-14">
                                                 <label for="recipient-name" class="col-form-label fw-semi-bold text-black-4 fz-16">Fórmula:</label>
                                                 <div class=" d-flex justify-content-between modal-input">
-                                                    <span class="fz-16 text-gray-1">Fórmula</span>
+                                                    <span class="fz-16 text-gray-1">{{ reagente.formula_quimica }}</span>
                                                 </div>
                                             </div>
                                             <div class="pt-awe-14">
                                                 <label for="recipient-name" class="col-form-label fw-semi-bold text-black-4 fz-16">Estado:</label>
-                                                <span class="fz-16 text-gray-1">Estado</span>
+                                                <span class="fz-16 text-gray-1">{{ reagente.estado_materia }}</span>
                                             </div>
 
                                             <div class="pt-awe-24">
                                                 <label for="message-text" class="col-form-label fw-semi-bold text-black-4 fz-16"
                                                     >Validade:</label>
-                                                    <span class="fz-16 text-gray-1">00/00/0000</span>
+                                                    <span class="fz-16 text-gray-1">{{ reagente.data_validade }}</span>
 
                                             </div>
                                             <div class="pt-awe-14">
                                                 <label for="message-text" class="col-form-label fw-semi-bold text-black-4 fz-16"
                                                     >Criação (solução):</label>
-                                                    <span class="fz-16 text-gray-1">00/00/0000</span>
+                                                    <span class="fz-16 text-gray-1">{{ reagente.data_criacao }}</span>
 
                                             </div>
                                         </div>
@@ -430,7 +438,7 @@
                                                               <label for="message-text" class="col-form-label fw-semi-bold text-black-4 fz-16"
                                                               >Massa:</label>
                                                               <div>
-                                                              <span class="fz-16 text-gray-1">00</span>
+                                                              <span class="fz-16 text-gray-1">{{ reagente.massa }}</span>
                                                               <span class="fz-16 text-gray-1 ps-awe-12">g</span>  
                                                               </div>
                                                             </div>
@@ -439,7 +447,7 @@
                                                                 <label for="message-text" class="col-form-label fw-semi-bold text-black-4 fz-16"
                                                                 >Volume:</label>
                                                                 <div>
-                                                                    <span class="fz-16 text-gray-1">00</span>
+                                                                    <span class="fz-16 text-gray-1">{{ reagente.volume }}</span>
                                                                     <span class="fz-16 text-gray-1 ps-awe-12">m³</span>  
                                                                     </div>
                                                               </div>
@@ -448,7 +456,7 @@
                                                                 <label for="message-text" class="col-form-label fw-semi-bold text-black-4 fz-16"
                                                                 >Concentração:</label>
                                                                 <div>
-                                                                    <span class="fz-16 text-gray-1">00</span>
+                                                                    <span class="fz-16 text-gray-1">{{ reagente.concentracao }}</span>
                                                                     <span class="fz-16 text-gray-1 ps-awe-12">g/m³</span>  
                                                                     </div>
                                                               </div>
@@ -457,7 +465,7 @@
                                                                 <label for="message-text" class="col-form-label fw-semi-bold text-black-4 fz-16"
                                                                 >Local:</label>
                                                                 <div>
-                                                                <span class="fz-16 text-gray-1">00</span></div>
+                                                                <span class="fz-16 text-gray-1">{{ reagente.local }}</span></div>
                                                               </div>
 
                                                         </div>
@@ -481,18 +489,18 @@
                 </div>
             </div>
         </div>
-
+        {% endfor %}
     </div>
     <!-- partial:index.partial.html -->
     <div class="layout has-sidebar fixed-sidebar fixed-header">
         <aside id="sidebar" class="sidebar break-point-sm has-bg-image">
             <div class="image-wrapper">
-                <img src="assets/images/sidebar-bg.jpg" alt="sidebar background" />
+                <img src="{{ url_for('static', filename='assets/images/sidebar-bg.jpg') }}" alt="sidebar background" />
             </div>
             <div class="sidebar-layout">
                 <div class="sidebar-header d-flex align-items-center justify-content-center flex-wrap mb-awe-40">
                     <div class="profile justify-content-center">
-                        <img src="/dist/image/profile.svg " class="rounded mx-auto d-block pt-awe-14" alt="">
+                        <img src="{{ url_for('static', filename='/dist/image/profile.svg') }}" class="rounded mx-auto d-block pt-awe-14" alt="">
                         <p class="d-block fw-semi-bold fz-16 text-primary-light-2 text-center pt-awe-24">Nome Sobrenome
                         </p>
                         <p class="d-block fz-16 text-aco text-center">Tutor/Professor </p>
@@ -525,7 +533,7 @@
                             <li>
                                 <a href="#">
                                     <i class='bx bxs-bong fz-24 text-aco'></i>
-                                    <span class="list text-decoration-none">Soluções</span>
+                                    <span class="list text-decoration-none">Experimentos</span>
                                 </a>
                             </li>
                             <li>
@@ -644,156 +652,23 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        {% for reagente in reagentes %}
                                         <tr>
-                                            <td>000</td>
-                                            <td>Lorem Ipsum</td>
-                                            <td>00xx</td>
-                                            <td>00xx</td>
-                                            <td>00xx</td>
-                                            <td>XXX</td>
+                                            <td>{{ reagente.id }}</td>
+                                            <td>{{ reagente.estado_materia }}</td>
+                                            <td>{{ reagente.massa }}</td>
+                                            <td>{{ reagente.volume }}</td>
+                                            <td>{{ reagente.concentracao }}</td>
+                                            <td>{{ reagente.local }}</td>
                                             <td class="icons">
                                                 <i class='bx bx-search text-primary-light' data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModal3"></i>
+                                                    data-bs-target="#exampleModal3{{ reagente.id }}"></i>
                                                 <i class='bx bxs-edit-alt text-primary-light' data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModal4"></i>
+                                                    data-bs-target="#exampleModal4{{ reagente.id }}"></i>
                                                 <i class='bx bxs-trash-alt text-primary-light'></i>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td>000</td>
-                                            <td>Lorem Ipsum</td>
-                                            <td>00xx</td>
-                                            <td>00xx</td>
-                                            <td>00xx</td>
-                                            <td>XXX</td>
-                                            <td class="icons">
-                                                <i class='bx bx-search text-primary-light' data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModal3"></i>
-                                                <i class='bx bxs-edit-alt text-primary-light' data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModal4"></i>
-                                                <i class='bx bxs-trash-alt text-primary-light'></i>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>000</td>
-                                            <td>Lorem Ipsum</td>
-                                            <td>00xx</td>
-                                            <td>00xx</td>
-                                            <td>00xx</td>
-                                            <td>XXX</td>
-                                            <td class="icons">
-                                                <i class='bx bx-search text-primary-light' data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModal3"></i>
-                                                <i class='bx bxs-edit-alt text-primary-light' data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModal4"></i>
-                                                <i class='bx bxs-trash-alt text-primary-light'></i>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>000</td>
-                                            <td>Lorem Ipsum</td>
-                                            <td>00xx</td>
-                                            <td>00xx</td>
-                                            <td>00xx</td>
-                                            <td>XXX</td>
-                                            <td class="icons">
-                                                <i class='bx bx-search text-primary-light' data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModal3"></i>
-                                                <i class='bx bxs-edit-alt text-primary-light' data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModal4"></i>
-                                                <i class='bx bxs-trash-alt text-primary-light'></i>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>000</td>
-                                            <td>Lorem Ipsum</td>
-                                            <td>00xx</td>
-                                            <td>00xx</td>
-                                            <td>00xx</td>
-                                            <td>XXX</td>
-                                            <td class="icons">
-                                                <i class='bx bx-search text-primary-light' data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModal3"></i>
-                                                <i class='bx bxs-edit-alt text-primary-light' data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModal4"></i>
-                                                <i class='bx bxs-trash-alt text-primary-light'></i>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>000</td>
-                                            <td>Lorem Ipsum</td>
-                                            <td>00xx</td>
-                                            <td>00xx</td>
-                                            <td>00xx</td>
-                                            <td>XXX</td>
-                                            <td class="icons">
-                                                <i class='bx bx-search text-primary-light' data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModal3"></i>
-                                                <i class='bx bxs-edit-alt text-primary-light' data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModal4"></i>
-                                                <i class='bx bxs-trash-alt text-primary-light'></i>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>000</td>
-                                            <td>Lorem Ipsum</td>
-                                            <td>00xx</td>
-                                            <td>00xx</td>
-                                            <td>00xx</td>
-                                            <td>XXX</td>
-                                            <td class="icons">
-                                                <i class='bx bx-search text-primary-light' data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModal3"></i>
-                                                <i class='bx bxs-edit-alt text-primary-light' data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModal4"></i>
-                                                <i class='bx bxs-trash-alt text-primary-light'></i>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>000</td>
-                                            <td>Lorem Ipsum</td>
-                                            <td>00xx</td>
-                                            <td>00xx</td>
-                                            <td>00xx</td>
-                                            <td>XXX</td>
-                                            <td class="icons">
-                                                <i class='bx bx-search text-primary-light' data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModal3"></i>
-                                                <i class='bx bxs-edit-alt text-primary-light' data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModal4"></i>
-                                                <i class='bx bxs-trash-alt text-primary-light'></i>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>000</td>
-                                            <td>Lorem Ipsum</td>
-                                            <td>00xx</td>
-                                            <td>00xx</td>
-                                            <td>00xx</td>
-                                            <td>XXX</td>
-                                            <td class="icons">
-                                                <i class='bx bx-search text-primary-light' data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModal3"></i>
-                                                <i class='bx bxs-edit-alt text-primary-light' data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModal4"></i>
-                                                <i class='bx bxs-trash-alt text-primary-light'></i>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>000</td>
-                                            <td>Lorem Ipsum</td>
-                                            <td>00xx</td>
-                                            <td>00xx</td>
-                                            <td>00xx</td>
-                                            <td>XXX</td>
-                                            <td class="icons">
-                                                <i class='bx bx-search text-primary-light' data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModal3"></i>
-                                                <i class='bx bxs-edit-alt text-primary-light' data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModal4"></i>
-                                                <i class='bx bxs-trash-alt text-primary-light'></i>
-                                            </td>
-                                        </tr>
+                                        {% endfor %}
                                     </tbody>
                                 </table>
 

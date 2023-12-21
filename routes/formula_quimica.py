@@ -15,7 +15,7 @@ def formulas_quimica():
 @formula_quimica_blueprint.route('/cadastrar', methods=['POST'])
 @login_required
 def cadastrar_formula_quimica():
-    formula_quimica, nome = request.form.get('formula-quimica'), request.form.get('nome')
+    formula_quimica, nome = request.form.get('formula'), request.form.get('nome')
     FormulaQuimica(formula_quimica, nome).cadastrar()
     return redirect(url_for('formula_quimica.formulas_quimica'))
 

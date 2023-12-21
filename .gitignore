@@ -1,13 +1,9 @@
 node_modules
 yarn.lock
 package-lock.json
-.vscode
 **/__pycache__
 .vscode
 settings.json
 package.json
-node_modules
 migrations
-yarn.lock
-package-lock.json
 .idea

@@ -8,8 +8,7 @@
     <link rel='stylesheet' href='https://unpkg.com/css-pro-layout@1.1.0/dist/css/css-pro-layout.css'>
     <link rel='stylesheet'
         href='https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&amp;display=swap'>
-    <link rel="stylesheet" href="./style.css">
-    <link rel="stylesheet" href="../dist/css/style.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='/dist/css/style.css') }}" />
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
 
@@ -19,7 +18,7 @@
     <nav class="navbar navbar-light bg-primary">
         <div class="container-fluid">
             <a class="navbar-brand pb-awe-14 ps-awe-40 pt-awe-14" href="#">
-                <img src="/dist/image/logo.svg" alt="" width="100" height="auto" class="">
+                <img src="{{ url_for('static', filename='/dist/image/logo.svg') }}" alt="" width="100" height="auto" class="">
             </a>
         </div>
         </div>
@@ -36,7 +35,7 @@
                     </div>
 
                     <div class="modal-body">
-                        <form>
+                        <form method="POST" action="{{ url_for('turma.cadastrar_turma') }}" id="cadastrar-turma">
                             <div class="d-flex justify-content">
                                 <div class="row">
                                     <div class="mb-3 me-awe-24 d-flex">
@@ -45,7 +44,7 @@
                                                 <label for="recipient-name"
                                                     class="col-form-label fw-semi-bold text-black-4 fz-16">Curso:</label>
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                                    <input class="form-check-input" type="radio" name="curso"
                                                         id="flexRadioDefault1">
                                                     <label class="form-check-label text-prata-2"
                                                         for="flexRadioDefault1">
@@ -53,7 +52,7 @@
                                                     </label>
                                                 </div>
                                                 <div class="form-check pt-awe-12">
-                                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                                    <input class="form-check-input" type="radio" name="curso"
                                                         id="flexRadioDefault2" checked>
                                                     <label class="form-check-label text-prata-2"
                                                         for="flexRadioDefault2">
@@ -61,7 +60,7 @@
                                                     </label>
                                                 </div>
                                                 <div class="form-check pt-awe-12">
-                                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                                    <input class="form-check-input" type="radio" name="curso"
                                                         id="flexRadioDefault2" checked>
                                                     <label class="form-check-label text-prata-2"
                                                         for="flexRadioDefault2">
@@ -78,9 +77,9 @@
                                                             <label for="message-text"
                                                                 class="col-form-label fw-semi-bold text-black-4 fz-16">Turma:</label>
                                                             <div class="d-flex justify-content-between">
-                                                                <input type="text"
+                                                                <input type="text" name="codigo"
                                                                     class="form-control form-control-sm me-awe-24 text-prata-2 fz-16"
-                                                                    id="recipient-name" placeholder="0.0000.0X">
+                                                                    id="recipient-name" placeholder="0.0000.0X" required>
                                                             </div>
                                                         </div>
 
@@ -88,9 +87,9 @@
                                                             <label for="message-text"
                                                                 class="col-form-label fw-semi-bold text-black-4 fz-16">Turno:</label>
                                                             <div class="d-flex justify-content-between">
-                                                                <input type="text"
+                                                                <input type="text" name="turno"
                                                                     class="form-control me-awe-24 text-prata-2 fz-16 pe-awe-11"
-                                                                    id="recipient-name" placeholder="Turno">
+                                                                    id="recipient-name" placeholder="Turno" required>
             
                                                             </div>
                                                         </div>
@@ -104,9 +103,9 @@
                                                 <label for="message-text"
                                                     class="col-form-label fw-semi-bold text-black-4 fz-16">Ano:</label>
                                                 <div class="d-flex justify-content-between massa">
-                                                    <input type="text"
+                                                    <input type="number" name="ano"
                                                         class="form-control me-awe-24 text-prata-2 fz-16 pe-awe-11"
-                                                        id="recipient-name" placeholder="0">
+                                                        id="recipient-name" placeholder="0" required>
 
                                                 </div>
                                             </div>
@@ -115,7 +114,7 @@
                                                 <label for="message-text"
                                                     class="col-form-label fw-semi-bold text-black-4 fz-16">Alunos:</label>
                                                 <div class="d-flex justify-content-between massa">
-                                                    <input type="text"
+                                                    <input type="number" name="qtd-alunos"
                                                         class="form-control me-awe-24 text-prata-2 fz-16 pe-awe-11"
                                                         id="recipient-name" placeholder="00">
 
@@ -132,13 +131,14 @@
                         <button type="button"
                             class="btn btn-secondary fw-medium border-primary-dark-3 text-primary-dark-3"
                             data-bs-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-primary-light">Salvar</button>
+                        <button type="submit" class="btn btn-primary-light" form="cadastrar-turma">Salvar</button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        {% for turma in turmas %}
+        <div class="modal fade" id="exampleModal{{ turma.cod }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -148,7 +148,8 @@
                     </div>
 
                     <div class="modal-body">
-                        <form>
+                        <form method="POST" action="{{ url_for('turma.editar_turma') }}" id="editar-turma{{ turma.cod }}">
+                            <input type="hidden" value="{{ turma.cod }}">
                             <div class="d-flex justify-content">
                                 <div class="row">
                                     <div class="mb-3 me-awe-24 d-flex">
@@ -190,7 +191,7 @@
                                                             <label for="message-text"
                                                                 class="col-form-label fw-semi-bold text-black-4 fz-16">Turma:</label>
                                                             <div class="d-flex justify-content-between">
-                                                                <input type="text"
+                                                                <input type="text" name="codigo" value="{{ turma.cod }}"
                                                                     class="form-control form-control-sm me-awe-24 text-prata-2 fz-16"
                                                                     id="recipient-name" placeholder="0.0000.0X">
                                                             </div>
@@ -200,7 +201,7 @@
                                                             <label for="message-text"
                                                                 class="col-form-label fw-semi-bold text-black-4 fz-16">Turno:</label>
                                                             <div class="d-flex justify-content-between">
-                                                                <input type="text"
+                                                                <input type="text" name="turno" value="{{ turma.turno }}"
                                                                     class="form-control me-awe-24 text-prata-2 fz-16 pe-awe-11"
                                                                     id="recipient-name" placeholder="Turno">
             
@@ -216,7 +217,7 @@
                                                 <label for="message-text"
                                                     class="col-form-label fw-semi-bold text-black-4 fz-16">Ano:</label>
                                                 <div class="d-flex justify-content-between massa">
-                                                    <input type="text"
+                                                    <input type="number" value="{{ turma.ano }}"
                                                         class="form-control me-awe-24 text-prata-2 fz-16 pe-awe-11"
                                                         id="recipient-name" placeholder="0">
 
@@ -227,7 +228,7 @@
                                                 <label for="message-text"
                                                     class="col-form-label fw-semi-bold text-black-4 fz-16">Alunos:</label>
                                                 <div class="d-flex justify-content-between massa">
-                                                    <input type="text"
+                                                    <input type="text" name="qtd-alunos" value="{{ turma.qtd_alunos }}"
                                                         class="form-control me-awe-24 text-prata-2 fz-16 pe-awe-11"
                                                         id="recipient-name" placeholder="00">
 
@@ -244,12 +245,12 @@
                         <button type="button"
                             class="btn btn-secondary fw-medium border-primary-dark-3 text-primary-dark-3"
                             data-bs-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-primary-light">Salvar</button>
+                        <button type="submit" form="editar-turma{{ turma.cod }}" class="btn btn-primary-light">Salvar</button>
                     </div>
                 </div>
             </div>
         </div>
-
+        {% endfor %}
 
 
     </div>
@@ -257,12 +258,12 @@
     <div class="layout has-sidebar fixed-sidebar fixed-header">
         <aside id="sidebar" class="sidebar break-point-sm has-bg-image">
             <div class="image-wrapper">
-                <img src="assets/images/sidebar-bg.jpg" alt="sidebar background" />
+                <img src="{{ url_for('static', filename='assets/images/sidebar-bg.jpg') }}" alt="sidebar background" />
             </div>
             <div class="sidebar-layout">
                 <div class="sidebar-header d-flex align-items-center justify-content-center flex-wrap mb-awe-40">
                     <div class="profile justify-content-center">
-                        <img src="/dist/image/profile.svg " class="rounded mx-auto d-block pt-awe-14" alt="">
+                        <img src="{{ url_for('static', filename='/dist/image/profile.svg') }}" class="rounded mx-auto d-block pt-awe-14" alt="">
                         <p class="d-block fw-semi-bold fz-16 text-primary-light-2 text-center pt-awe-24">Nome Sobrenome
                         </p>
                         <p class="d-block fz-16 text-aco text-center">Tutor/Professor </p>
@@ -390,78 +391,20 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                {% for turma in turmas %}
                                                 <tr>
-                                                    <td>0.0000.0M</td>
-                                                    <td>Lorem</td>
-                                                    <td>Lorem</td>
-                                                    <td>0</td>
-                                                    <td>00</td>
+                                                    <td>{{ turma.cod }}</td>
+                                                    <td>{{ turma.curso }}</td>
+                                                    <td>{{ turma.turno }}</td>
+                                                    <td>{{ turma.ano }}</td>
+                                                    <td>{{ turma.qtd_alunos }}</td>
                                                     <td class="icons">
                                                         <i class='bx bxs-edit-alt text-primary-light'
-                                                            data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
+                                                            data-bs-toggle="modal" data-bs-target="#exampleModal{{ turma.cod }}"></i>
                                                         <i class='bx bxs-trash-alt text-primary-light'></i>
                                                     </td>
                                                 </tr>
-                                                <tr>
-                                                    <td>0.0000.0M</td>
-                                                    <td>Lorem</td>
-                                                    <td>Lorem</td>
-                                                    <td>0</td>
-                                                    <td>00</td>
-                                                    <td class="icons">
-                                                        <i class='bx bxs-edit-alt text-primary-light'
-                                                            data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
-                                                        <i class='bx bxs-trash-alt text-primary-light'></i>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>0.0000.0M</td>
-                                                    <td>Lorem</td>
-                                                    <td>Lorem</td>
-                                                    <td>0</td>
-                                                    <td>00</td>
-                                                    <td class="icons">
-                                                        <i class='bx bxs-edit-alt text-primary-light'
-                                                            data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
-                                                        <i class='bx bxs-trash-alt text-primary-light'></i>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>0.0000.0M</td>
-                                                    <td>Lorem</td>
-                                                    <td>Lorem</td>
-                                                    <td>0</td>
-                                                    <td>00</td>
-                                                    <td class="icons">
-                                                        <i class='bx bxs-edit-alt text-primary-light'
-                                                            data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
-                                                        <i class='bx bxs-trash-alt text-primary-light'></i>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>0.0000.0M</td>
-                                                    <td>Lorem</td>
-                                                    <td>Lorem</td>
-                                                    <td>0</td>
-                                                    <td>00</td>
-                                                    <td class="icons">
-                                                        <i class='bx bxs-edit-alt text-primary-light'
-                                                            data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
-                                                        <i class='bx bxs-trash-alt text-primary-light'></i>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>0.0000.0M</td>
-                                                    <td>Lorem</td>
-                                                    <td>Lorem</td>
-                                                    <td>0</td>
-                                                    <td>00</td>
-                                                    <td class="icons">
-                                                        <i class='bx bxs-edit-alt text-primary-light'
-                                                            data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
-                                                        <i class='bx bxs-trash-alt text-primary-light'></i>
-                                                    </td>
-                                                </tr>
+                                                {% endfor %}
                                             </tbody>
                                         </table>
                                     </div>

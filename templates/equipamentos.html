@@ -8,8 +8,7 @@
     <link rel='stylesheet' href='https://unpkg.com/css-pro-layout@1.1.0/dist/css/css-pro-layout.css'>
     <link rel='stylesheet'
         href='https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&amp;display=swap'>
-    <link rel="stylesheet" href="./style.css">
-    <link rel="stylesheet" href="../dist/css/style.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='/dist/css/style.css') }}" />
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
 
@@ -19,7 +18,7 @@
     <nav class="navbar navbar-light bg-primary">
         <div class="container-fluid">
             <a class="navbar-brand pb-awe-14 ps-awe-40 pt-awe-14" href="#">
-                <img src="/dist/image/logo.svg" alt="" width="100" height="auto" class="">
+                <img src="{{ url_for('static', filename='/dist/image/logo.svg') }}" alt="" width="100" height="auto" class="">
             </a>
         </div>
         </div>
@@ -35,7 +34,7 @@
                     </div>
 
                     <div class="modal-body">
-                        <form>
+                        <form method="POST" action="{{ url_for('equipamento.cadastrar_equipamento') }}" id="cadastrar-equipamento">
                             <div class="d-flex justify-content">
                                 <div class="row">
                                     <div class="mb-3 me-awe-24 d-flex">
@@ -44,19 +43,19 @@
                                                 <label for="recipient-name" class="col-form-label fw-semi-bold text-black-4 fz-16">Equipamento:</label>
                                                 <div class=" d-flex justify-content-between modal-input">
                                                     <select class="form-select form-select-sm"
-                                                        aria-label=".form-select-sm example">
+                                                        aria-label=".form-select-sm example" name="tipo-equipamento">
                                                         <option selected>Equipamento</option>
-                                                        <option value="1">Agitador</option>
-                                                        <option value="2">Balão</option>
-                                                        <option value="3">Béquer</option>
+                                                        <option value="Agitador">Agitador</option>
+                                                        <option value="Balão">Balão</option>
+                                                        <option value="Béquer">Béquer</option>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="pt-awe-24">
                                                 <label for="message-text" class="col-form-label fw-semi-bold text-black-4 fz-16"
-                                                    >Quantidade:</label>
+                                                    >Tombo:</label>
                                                 <div class="d-flex justify-content-between">
-                                                    <input type="text" class="form-control me-awe-24"
+                                                    <input type="text" name="tombo" class="form-control me-awe-24"
                                                         id="recipient-name" placeholder="001">
                                                 </div>
                                             </div>
@@ -64,7 +63,7 @@
                                                 <label for="message-text" class="col-form-label fw-semi-bold text-black-4 fz-16"
                                                     >Local:</label>
                                                 <div class="d-flex justify-content-between">
-                                                    <input type="text" class="form-control me-awe-24"
+                                                    <input type="text" name="local" class="form-control me-awe-24"
                                                         id="recipient-name" placeholder="XXX">
                                                 </div>
                                             </div>
@@ -77,7 +76,7 @@
                                                             <label for="message-text" class="col-form-label fw-semi-bold text-black-4 fz-16"
                                                             >Descrição:</label>
                                                             <div class="form-floating">
-                                                                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+                                                                <textarea class="form-control" name="descricao" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
                                                                 <label for="floatingTextarea2">Lorem...</label>
                                                               </div>
                                                         </div>
@@ -96,23 +95,25 @@
                         <button type="button"
                             class="btn btn-secondary fw-medium border-primary-dark-3 text-primary-dark-3"
                             data-bs-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-primary-light">Salvar</button>
+                        <button type="submit" form="cadastrar-equipamento" class="btn btn-primary-light">Salvar</button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="modal fade" id="exampleModal4" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        {% for equipamento in equipamentos %}
+        <div class="modal fade" id="exampleModal4{{ equipamento.tombo }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h1 class="modal-title fz-18 fw-semi-bold text-primary-dark-3" id="exampleModalLabel">Editar
-                            equipamento - 000
+                            equipamento - {{ equipamento.tombo }}
                         </h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form>
+                        <form method="POST" action="{{ url_for('equipamento.editar_equipamento') }}" id="editar-equipamento{{ equipamento.tombo }}">
+                            <input type="hidden" name="tombo-original" value="{{ equipamento.tombo }}">
                             <div class="d-flex justify-content">
                                 <div class="row">
                                     <div class="mb-3 me-awe-24 d-flex">
@@ -121,11 +122,11 @@
                                                 <label for="recipient-name" class="col-form-label fw-semi-bold text-black-4 fz-16">Equipamento:</label>
                                                 <div class=" d-flex justify-content-between modal-input">
                                                     <select class="form-select form-select-sm"
-                                                        aria-label=".form-select-sm example">
+                                                        aria-label=".form-select-sm example" name="tipo-equipamento">
                                                         <option selected>Equipamento</option>
-                                                        <option value="1">Agitador</option>
-                                                        <option value="2">Balão</option>
-                                                        <option value="3">Béquer</option>
+                                                        <option value="Agitador">Agitador</option>
+                                                        <option value="Balão">Balão</option>
+                                                        <option value="Béquer">Béquer</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -134,7 +135,7 @@
                                                     >Local:</label>
                                                 <div class="d-flex justify-content-between">
                                                     <input type="text" class="form-control me-awe-24"
-                                                        id="recipient-name" placeholder="XXX">
+                                                        id="recipient-name" placeholder="XXX" name="local" value="{{ equipamento.local }}">
                                                 </div>
                                             </div>
                                         </div>
@@ -146,7 +147,7 @@
                                                             <label for="message-text" class="col-form-label fw-semi-bold text-black-4 fz-16"
                                                             >Descrição:</label>
                                                             <div class="form-floating">
-                                                                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer porttitor, sem vitae maximus dignissim, ex augue volutpat ligula, feugiat ornare mi magna ac lacus. Lore</textarea>
+                                                                <textarea class="form-control" name="descricao" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px">{{ equipamento.descricao }}</textarea>
                                                                 <label for="floatingTextarea2">Lorem...</label>
                                                               </div>
                                                         </div>
@@ -163,13 +164,15 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-primary-light">Salvar</button>
+                        <button type="submit" form="editar-equipamento{{ equipamento.tombo }}" class="btn btn-primary-light">Salvar</button>
                     </div>
                 </div>
             </div>
         </div>
-
-        <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        {% endfor %}
+      
+        {% for equipamento in equipamentos %}
+        <div class="modal fade" id="exampleModal3{{ equipamento.tombo }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -189,7 +192,7 @@
                                                 <label for="recipient-name" class="col-form-label fw-semi-bold text-black-4 fz-16">Equipamento:</label>
                                                 <div
                                                 class=" d-flex justify-content-between">
-                                                <span class="fz-16">Equipamento</span>
+                                                <span class="fz-16">{{ equipamento.tipo_equipamento }}</span>
                                             </div>
                                             </div>
                                             <div class="pt-awe-24">
@@ -197,7 +200,7 @@
                                                     >Local:</label>
                                                     <div
                                                     class=" d-flex justify-content-between">
-                                                    <span class="fz-16">XXX</span>
+                                                    <span class="fz-16">{{ equipamento.local }}</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -209,7 +212,7 @@
                                                             <label for="message-text" class="col-form-label fw-semi-bold text-black-4 fz-16"
                                                             >Descrição:</label>
                                                             <div class="text-descricao">
-                                                                <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer porttitor, sem vitae maximus dignissim, ex augue volutpat ligula, feugiat ornare mi magna ac lacus. Lore</span>
+                                                                <span>{{ equipamento.descricao }}</span>
                                                               </div>
                                                         </div>
                                                     </div>
@@ -233,18 +236,18 @@
                 </div>
             </div>
         </div>
-
+        {% endfor %}
     </div>
     <!-- partial:index.partial.html -->
     <div class="layout has-sidebar fixed-sidebar fixed-header">
         <aside id="sidebar" class="sidebar break-point-sm has-bg-image">
             <div class="image-wrapper">
-                <img src="assets/images/sidebar-bg.jpg" alt="sidebar background" />
+                <img src="{{ url_for('static', filename='assets/images/sidebar-bg.jpg') }}" alt="sidebar background" />
             </div>
             <div class="sidebar-layout">
                 <div class="sidebar-header d-flex align-items-center justify-content-center flex-wrap mb-awe-40">
                     <div class="profile justify-content-center">
-                        <img src="/dist/image/profile.svg " class="rounded mx-auto d-block pt-awe-14" alt="">
+                        <img src="{{ url_for('static', filename='/dist/image/profile.svg') }}" class="rounded mx-auto d-block pt-awe-14" alt="">
                         <p class="d-block fw-semi-bold fz-16 text-primary-light-2 text-center pt-awe-24">Nome Sobrenome
                         </p>
                         <p class="d-block fz-16 text-aco text-center">Tutor/Professor </p>
@@ -369,90 +372,20 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        {% for equipamento in equipamentos %}
                                         <tr>
-                                            <td>000</td>
-                                            <td>Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum</td>
-                                            <td>XXX</td>
+                                            <td>{{ equipamento.tombo }}</td>
+                                            <td>{{ equipamento.descricao }}</td>
+                                            <td>{{ equipamento.local }}</td>
                                             <td class="icons">
                                                 <i class='bx bx-search text-primary-light' data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModal3"></i>
+                                                    data-bs-target="#exampleModal3{{ equipamento.tombo }}"></i>
                                                 <i class='bx bxs-edit-alt text-primary-light' data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModal4"></i>
+                                                    data-bs-target="#exampleModal4{{ equipamento.tombo }}"></i>
                                                 <i class='bx bxs-trash-alt text-primary-light'></i>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td>000</td>
-                                            <td>Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum</td>
-                                            <td>XXX</td>
-                                            <td class="icons">
-                                                <i class='bx bx-search text-primary-light' data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModal3"></i>
-                                                <i class='bx bxs-edit-alt text-primary-light' data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModal4"></i>
-                                                <i class='bx bxs-trash-alt text-primary-light'></i>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>000</td>
-                                            <td>Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum</td>
-                                            <td>XXX</td>
-                                            <td class="icons">
-                                                <i class='bx bx-search text-primary-light' data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModal3"></i>
-                                                <i class='bx bxs-edit-alt text-primary-light' data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModal4"></i>
-                                                <i class='bx bxs-trash-alt text-primary-light'></i>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>000</td>
-                                            <td>Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum</td>
-                                            <td>XXX</td>
-                                            <td class="icons">
-                                                <i class='bx bx-search text-primary-light' data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModal3"></i>
-                                                <i class='bx bxs-edit-alt text-primary-light' data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModal4"></i>
-                                                <i class='bx bxs-trash-alt text-primary-light'></i>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>000</td>
-                                            <td>Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum</td>
-                                            <td>XXX</td>
-                                            <td class="icons">
-                                                <i class='bx bx-search text-primary-light' data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModal3"></i>
-                                                <i class='bx bxs-edit-alt text-primary-light' data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModal4"></i>
-                                                <i class='bx bxs-trash-alt text-primary-light'></i>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>000</td>
-                                            <td>Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum</td>
-                                            <td>XXX</td>
-                                            <td class="icons">
-                                                <i class='bx bx-search text-primary-light' data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModal3"></i>
-                                                <i class='bx bxs-edit-alt text-primary-light' data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModal4"></i>
-                                                <i class='bx bxs-trash-alt text-primary-light'></i>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>000</td>
-                                            <td>Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum</td>
-                                            <td>XXX</td>
-                                            <td class="icons">
-                                                <i class='bx bx-search text-primary-light' data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModal3"></i>
-                                                <i class='bx bxs-edit-alt text-primary-light' data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModal4"></i>
-                                                <i class='bx bxs-trash-alt text-primary-light'></i>
-                                            </td>
-                                        </tr>
+                                        {% endfor %}
                                     </tbody>
                                 </table>
                                 <div class="d-flex justify-content-between pt-awe-80">

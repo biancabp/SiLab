@@ -16,7 +16,9 @@ def aulas():
         return "Você não tem autorização para acessar esta página."
 
     aulas = Aula.listar()
-    return render_template("aulas.html", aulas=aulas)
+    professores = Usuario.query.filter(Usuario.tipo_usuario == 'Professor').all()
+    turmas = Turma.listar()
+    return render_template("aulas.html", aulas=aulas, professores=professores, turmas=turmas)
 
 
 @aula_blueprint.route('/cadastrar', methods=['POST'])

@@ -13,12 +13,13 @@ from routes.reagente import reagente_blueprint
 from routes.formula_quimica import formula_quimica_blueprint
 from routes.vidraria import vidraria_blueprint
 from routes.uso_diverso_reagente import uso_diverso_reagente_blueprint
+from routes.experimento import experimento_blueprint
 
 # banco
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config["SQLALCHEMY_DATABASE_URI"] = "mysql://root:123456789@localhost:3306/silab"
+app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+pymysql://root:123456789@localhost:3306/silab"
 app.config["SECRET_KEY"] = token_hex()
 
 db.init_app(app)
@@ -34,7 +35,7 @@ app.register_blueprint(formula_quimica_blueprint)
 app.register_blueprint(aula_blueprint)
 app.register_blueprint(vidraria_blueprint)
 app.register_blueprint(uso_diverso_reagente_blueprint)
-
+app.register_blueprint(experimento_blueprint)
 
 @app.route('/', methods=['GET'])
 def index():

@@ -8,8 +8,8 @@
     <link rel='stylesheet' href='https://unpkg.com/css-pro-layout@1.1.0/dist/css/css-pro-layout.css'>
     <link rel='stylesheet'
         href='https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&amp;display=swap'>
-    <link rel="stylesheet" href="./style.css">
-    <link rel="stylesheet" href="../dist/css/style.css" />
+ 
+    <link rel="stylesheet" href="{{ url_for('static', filename='/dist/css/style.css') }}" />
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
 
@@ -19,10 +19,10 @@
     <nav class="navbar navbar-light bg-primary">
         <div class="container-fluid">
             <a class="navbar-brand pb-awe-14 ps-awe-40 pt-awe-14" href="#">
-                <img src="/dist/image/logo.svg" alt="" width="100" height="auto" class="">
+                <img src="{{ url_for('static', filename='/dist/image/logo.svg') }}" alt="" width="100" height="auto" class="">
             </a>
         </div>
-        </div>
+        
     </nav>
 
     <div class="col-md-6">
@@ -36,7 +36,7 @@
                     </div>
 
                     <div class="modal-body">
-                        <form>
+                        <form method="POST" action="{{ url_for('formula_quimica.cadastrar_formula_quimica') }}" id="cadastrar-formula">
                             <div class="d-flex justify-content">
                                 <div class="row">
                                     <div class="mb-3 me-awe-24 d-flex">
@@ -46,7 +46,7 @@
                                                     >Fórmula:</label>
                                                 <div class="d-flex justify-content-between">
                                                     <input type="text" class="form-control text-prata-2 fz-16"
-                                                        id="recipient-name" placeholder="Lorem Ipsum">
+                                                        id="recipient-name" placeholder="Lorem Ipsum" name="formula">
                                                 </div>
                                             </div>
                                             <div class="pt-awe-14">
@@ -54,7 +54,7 @@
                                                     >Nome:</label>
                                                 <div class="d-flex justify-content-between">
                                                     <input type="text" class="form-control text-prata-2 fz-16"
-                                                        id="recipient-name" placeholder="Lorem Ipsum">
+                                                        id="recipient-name" placeholder="Lorem Ipsum" name="nome">
                                                 </div>
                                             </div>
                                         </div>
@@ -62,20 +62,20 @@
                                     </div>
                                 </div>
                             </div>
-
+                            
                         </form>
                     </div>
                     <div class="modal-footer">
                         <button type="button"
                             class="btn btn-secondary fw-medium border-primary-dark-3 text-primary-dark-3"
                             data-bs-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-primary-light">Salvar</button>
+                        <button type="submit" class="btn btn-primary-light" form="cadastrar-formula">Salvar</button>
                     </div>
                 </div>
             </div>
         </div>
-
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        {% for formula in formulas %}
+        <div class="modal fade" id="exampleModal{{ formula.formula }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-sm modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -85,7 +85,8 @@
                     </div>
 
                     <div class="modal-body">
-                        <form>
+                        <form method="POST" action="{{ url_for('formula_quimica.editar_formula_quimica') }}" id="editar-formula{{ formula.formula }}">
+                            <input type="hidden" name="formula-original" value="{{ formula.formula }}">
                             <div class="d-flex justify-content">
                                 <div class="row">
                                     <div class="mb-3 me-awe-24 d-flex">
@@ -95,7 +96,7 @@
                                                     >Fórmula:</label>
                                                 <div class="d-flex justify-content-between">
                                                     <input type="text" class="form-control text-prata-2 fz-16"
-                                                        id="recipient-name" placeholder="Lorem Ipsum">
+                                                        id="recipient-name" placeholder="Lorem Ipsum" name="nova-formula-quimica" value="{{ formula.formula }}">
                                                 </div>
                                             </div>
                                             <div class="pt-awe-14">
@@ -103,7 +104,7 @@
                                                     >Nome:</label>
                                                 <div class="d-flex justify-content-between">
                                                     <input type="text" class="form-control text-prata-2 fz-16"
-                                                        id="recipient-name" placeholder="Lorem Ipsum">
+                                                        id="recipient-name" placeholder="Lorem Ipsum" name="nome" value="{{ formula.nome }}">
                                                 </div>
                                             </div>
                                         </div>
@@ -118,23 +119,23 @@
                         <button type="button"
                             class="btn btn-secondary fw-medium border-primary-dark-3 text-primary-dark-3"
                             data-bs-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-primary-light">Salvar</button>
+                        <button type="submit" class="btn btn-primary-light" form="editar-formula{{ formula.formula }}">Salvar</button>
                     </div>
                 </div>
             </div>
         </div>
-
+        {% endfor %}
     </div>
     <!-- partial:index.partial.html -->
     <div class="layout has-sidebar fixed-sidebar fixed-header">
         <aside id="sidebar" class="sidebar break-point-sm has-bg-image">
             <div class="image-wrapper">
-                <img src="assets/images/sidebar-bg.jpg" alt="sidebar background" />
+                <img src="{{ url_for('static', filename='/assets/images/sidebar-bg.jpg') }}" alt="sidebar background" />
             </div>
             <div class="sidebar-layout">
                 <div class="sidebar-header d-flex align-items-center justify-content-center flex-wrap mb-awe-40">
                     <div class="profile justify-content-center">
-                        <img src="/dist/image/profile.svg " class="rounded mx-auto d-block pt-awe-14" alt="">
+                        <img src="{{ url_for('static', filename='/dist/image/profile.svg') }}" class="rounded mx-auto d-block pt-awe-14" alt="">
                         <p class="d-block fw-semi-bold fz-16 text-primary-light-2 text-center pt-awe-24">Nome Sobrenome
                         </p>
                         <p class="d-block fz-16 text-aco text-center">Tutor/Professor </p>
@@ -167,7 +168,7 @@
                             <li>
                                 <a href="#">
                                     <i class='bx bxs-bong fz-24 text-aco'></i>
-                                    <span class="list text-decoration-none">Soluções</span>
+                                    <span class="list text-decoration-none">Experimentos</span>
                                 </a>
                             </li>
                             <li>
@@ -253,69 +254,17 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        {% for formula in formulas %}
                                         <tr>
-                                            <td>00000</td>
-                                            <td>Lorem Ipsum</td>
+                                            <td>{{ formula.formula }}</td>
+                                            <td>{{ formula.nome }}</td>
                                             <td class="icons">
                                                 <i class='bx bxs-edit-alt text-primary-light' data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModal"></i>
-                                                <i class='bx bxs-trash-alt text-primary-light'></i>
+                                                    data-bs-target="#exampleModal{{ formula.formula }}"></i>
+                                                <i class='bx bxs-trash-alt text-primary-light' ></i>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td>000</td>
-                                            <td>Lorem Ipsum</td>
-                                            <td class="icons">
-                                                <i class='bx bxs-edit-alt text-primary-light' data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModal"></i>
-                                                <i class='bx bxs-trash-alt text-primary-light'></i>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>000</td>
-                                            <td>Lorem Ipsum</td>
-                                            <td class="icons">
-                                                <i class='bx bxs-edit-alt text-primary-light' data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModal"></i>
-                                                <i class='bx bxs-trash-alt text-primary-light'></i>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>000</td>
-                                            <td>Lorem Ipsum</td>
-                                            <td class="icons">
-                                                <i class='bx bxs-edit-alt text-primary-light' data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModal"></i>
-                                                <i class='bx bxs-trash-alt text-primary-light'></i>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>000</td>
-                                            <td>Lorem Ipsum</td>
-                                            <td class="icons">
-                                                <i class='bx bxs-edit-alt text-primary-light' data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModal"></i>
-                                                <i class='bx bxs-trash-alt text-primary-light'></i>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>000</td>
-                                            <td>Lorem Ipsum</td>
-                                            <td class="icons">
-                                                <i class='bx bxs-edit-alt text-primary-light' data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModal"></i>
-                                                <i class='bx bxs-trash-alt text-primary-light'></i>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>000</td>
-                                            <td>Lorem Ipsum</td>
-                                            <td class="icons">
-                                                <i class='bx bxs-edit-alt text-primary-light' data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModal"></i>
-                                                <i class='bx bxs-trash-alt text-primary-light'></i>
-                                            </td>
-                                        </tr>
+                                        {% endfor %}
                                     </tbody>
                                 </table>
                 
