@@ -11,10 +11,14 @@ def experimentos():
     experimentos = Experimento.query.filter(Experimento.ideal_concreto == 'ideal').all()
     return render_template('experimentos.html', experimentos=experimentos)
 
+@experimento_blueprint.route('/adicionar-experimento', methods=['GET'])
+@login_required
+def tela_adicionar_experimento():
+    return render_template('add_experimento.html')
 
 @experimento_blueprint.route('/cadastrar', methods=['POST'])
 @login_required
-def cadastrar_experimento():
+def cadastrar_experimento(): 
     nome, arquivo = request.form.get('nome'), request.files.get('arquivo')
     vidrarias, equipamentos = request.form.get('vidrarias'), request.form.get('equipamentos')
     reagentes, reagentes_planejados = request.form.get('reagentes'), request.form.get('reagentes-planejados')

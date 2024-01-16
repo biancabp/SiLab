@@ -9,7 +9,7 @@ uso_diverso_reagente_blueprint = Blueprint('UsoDiversoReagente', __name__, url_p
 @login_required
 def uso_diverso_reagente():
     usos_diversos_reagentes = UsoDiversoReagente.listar()
-    return render_template('pages/uso_diverso_reagente.html', usos_diversos_reagentes=usos_diversos_reagentes)
+    return render_template('reagentes-usos.html', usos_diversos_reagentes=usos_diversos_reagentes)
 
 
 @uso_diverso_reagente_blueprint.route('/cadastrar', methods=['POST'])
